@@ -68,13 +68,13 @@
         "links": [
             {
                 "label": "Support",
-                "href": "mailto:hi@mintlify.com"
+                "href": "mailto:code@blackbox.ai"
             }
         ],
         "primary": {
             "type": "button",
             "label": "Dashboard",
-            "href": "https://dashboard.mintlify.com"
+            "href": "https://www.blackbox.ai"
         }
     },
     "contextual": {
@@ -83,7 +83,6 @@
             "view",
             "chatgpt",
             "claude",
-            "perplexity",
             "mcp",
             "cursor",
             "vscode"
@@ -92,7 +91,7 @@
     "footer": {
         "socials": {
             "x": "https://x.com/AiBlckbx",
-            "linkedin": "https://www.linkedin.com/company/blackboxtech/"
+            "youtube": "https://www.youtube.com/@blackboxbruiser"
         }
     }
 }
