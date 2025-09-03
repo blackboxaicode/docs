@@ -1,0 +1,321 @@
+---
+title: "Chat Models"
+description: "Explore the AI models available for conversational tasks, text generation, and complex reasoning."
+---
+
+## Overview
+
+Chat models are the foundation of conversational AI. They are designed to understand and generate human-like text, making them perfect for a wide range of applications including chatbots, content creation, summarization, and question-answering systems.
+
+When making a request to the `/v1/chat` endpoint, you must specify one of the following Model IDs.
+
+### Available Chat Models
+
+| Model Name | Context Length | Input Cost ($/M tokens) | Output Cost ($/M tokens) |
+| :--- | :--- | :--- | :--- |
+| Cypher Alpha (free) | 1M tokens | $0.00 | $0.00 |
+| Baidu: ERNIE 4.5 300B A47B | 123K tokens | $0.28 | $1.10 |
+| TheDrummer: Anubis 70B V1.1 | 131K tokens | $0.30 | $0.80 |
+| Inception: Mercury | 32K tokens | $0.25 | $1.00 |
+| Morph: Fast Apply | 32K tokens | $1.20 | $2.70 |
+| Mistral: Mistral Small 3.2 24B (free) | 96K tokens | $0.00 | $0.00 |
+| Mistral: Mistral Small 3.2 24B | 128K tokens | $0.05 | $0.10 |
+| MiniMax: MiniMax M1 | 1M tokens | $0.30 | $1.65 |
+| Google: Gemini 2.5 Flash Lite Preview 06-17 | 1M tokens | $0.10 | $0.40 |
+| Google: Gemini 2.5 Flash | 1M tokens | $0.30 | $2.50 |
+| Google: Gemini 2.5 Pro | 1M tokens | $1.25 | $10.00 |
+| Kimi Dev 72b (free) | 131K tokens | $0.00 | $0.00 |
+| OpenAI: o3 Pro | 200K tokens | $20.00 | $80.00 |
+| xAI: Grok 3 Mini | 131K tokens | $0.30 | $0.50 |
+| xAI: Grok 3 | 131K tokens | $3.00 | $15.00 |
+| Mistral: Magistral Small 2506 | 40K tokens | $0.50 | $1.50 |
+| Mistral: Magistral Medium 2506 | 40K tokens | $2.00 | $5.00 |
+| Mistral: Magistral Medium 2506 (thinking) | 40K tokens | $2.00 | $5.00 |
+| Google: Gemini 2.5 Pro Preview 06-05 | 1M tokens | $1.25 | $10.00 |
+| DeepSeek: R1 Distill Qwen 7B | 131K tokens | $0.10 | $0.20 |
+| DeepSeek: Deepseek R1 0528 Qwen3 8B (free) | 131K tokens | $0.00 | $0.00 |
+| DeepSeek: Deepseek R1 0528 Qwen3 8B | 32K tokens | $0.01 | $0.02 |
+| DeepSeek: R1 0528 (free) | 163K tokens | $0.00 | $0.00 |
+| DeepSeek: R1 0528 | 128K tokens | $0.50 | $2.15 |
+| Sarvam AI: Sarvam-M (free) | 32K tokens | $0.00 | $0.00 |
+| TheDrummer: Valkyrie 49B V1 | 131K tokens | $0.50 | $0.80 |
+| Anthropic: Claude Opus 4 | 200K tokens | $15.00 | $75.00 |
+| Anthropic: Claude Sonnet 4 | 200K tokens | $3.00 | $15.00 |
+| Mistral: Devstral Small (free) | 32K tokens | $0.00 | $0.00 |
+| Mistral: Devstral Small | 128K tokens | $0.06 | $0.12 |
+| Google: Gemma 3n 4B (free) | 8K tokens | $0.00 | $0.00 |
+| Google: Gemma 3n 4B | 32K tokens | $0.02 | $0.04 |
+| Google: Gemini 2.5 Flash Preview 05-20 | 1M tokens | $0.15 | $0.60 |
+| Google: Gemini 2.5 Flash Preview 05-20 (thinking) | 1M tokens | $0.15 | $3.50 |
+| OpenAI: Codex Mini | 200K tokens | $1.50 | $6.00 |
+| Mistral: Mistral Medium 3 | 131K tokens | $0.40 | $2.00 |
+| Google: Gemini 2.5 Pro Preview 05-06 | 1M tokens | $1.25 | $10.00 |
+| Arcee AI: Caller Large | 32K tokens | $0.55 | $0.85 |
+| Arcee AI: Spotlight | 131K tokens | $0.18 | $0.18 |
+| Arcee AI: Maestro Reasoning | 131K tokens | $0.90 | $3.30 |
+| Arcee AI: Virtuoso Large | 131K tokens | $0.75 | $1.20 |
+| Arcee AI: Coder Large | 32K tokens | $0.50 | $0.80 |
+| Arcee AI: Virtuoso Medium V2 | 131K tokens | $0.50 | $0.80 |
+| Arcee AI: Arcee Blitz | 32K tokens | $0.45 | $0.75 |
+| Microsoft: Phi 4 Reasoning Plus | 32K tokens | $0.07 | $0.35 |
+| Inception: Mercury Coder | 32K tokens | $0.25 | $1.00 |
+| OpenGVLab: InternVL3 14B | 12K tokens | $0.20 | $0.40 |
+| OpenGVLab: InternVL3 2B | 12K tokens | $0.05 | $0.10 |
+| DeepSeek: DeepSeek Prover V2 | 131K tokens | $0.50 | $2.18 |
+| Meta: Llama Guard 4 12B | 163K tokens | $0.05 | $0.05 |
+| Qwen: Qwen3 30B A3B (free) | 40K tokens | $0.00 | $0.00 |
+| Qwen: Qwen3 30B A3B | 40K tokens | $0.08 | $0.29 |
+| Qwen: Qwen3 8B (free) | 40K tokens | $0.00 | $0.00 |
+| Qwen: Qwen3 8B | 128K tokens | $0.04 | $0.14 |
+| Qwen: Qwen3 14B (free) | 40K tokens | $0.00 | $0.00 |
+| Qwen: Qwen3 14B | 40K tokens | $0.06 | $0.24 |
+| Qwen: Qwen3 32B (free) | 40K tokens | $0.00 | $0.00 |
+| Qwen: Qwen3 32B | 40K tokens | $0.10 | $0.30 |
+| Qwen: Qwen3 235B A22B (free) | 40K tokens | $0.00 | $0.00 |
+| Qwen: Qwen3 235B A22B | 40K tokens | $0.13 | $0.60 |
+| TNG: DeepSeek R1T Chimera (free) | 163K tokens | $0.00 | $0.00 |
+| THUDM: GLM Z1 Rumination 32B | 32K tokens | $0.24 | $0.24 |
+| Microsoft: MAI DS R1 (free) | 163K tokens | $0.00 | $0.00 |
+| THUDM: GLM Z1 32B (free) | 32K tokens | $0.00 | $0.00 |
+| THUDM: GLM Z1 32B | 32K tokens | $0.24 | $0.24 |
+| THUDM: GLM 4 32B (free) | 32K tokens | $0.00 | $0.00 |
+| THUDM: GLM 4 32B | 32K tokens | $0.24 | $0.24 |
+| Google: Gemini 2.5 Flash Preview 04-17 | 1M tokens | $0.15 | $0.60 |
+| Google: Gemini 2.5 Flash Preview 04-17 (thinking) | 1M tokens | $0.15 | $3.50 |
+| OpenAI: o4 Mini High | 200K tokens | $1.10 | $4.40 |
+| OpenAI: o3 | 200K tokens | $2.00 | $8.00 |
+| OpenAI: o4 Mini | 200K tokens | $1.10 | $4.40 |
+| Shisa AI: Shisa V2 Llama 3.3 70B (free) | 32K tokens | $0.00 | $0.00 |
+| OpenAI: GPT-4.1 | 1M tokens | $2.00 | $8.00 |
+| OpenAI: GPT-4.1 Mini | 1M tokens | $0.40 | $1.60 |
+| OpenAI: GPT-4.1 Nano | 1M tokens | $0.10 | $0.40 |
+| EleutherAI: Llemma 7b | 4K tokens | $0.80 | $1.20 |
+| AlfredPros: CodeLLaMa 7B Instruct Solidity | 4K tokens | $0.80 | $1.20 |
+| ArliAI: QwQ 32B RpR v1 (free) | 32K tokens | $0.00 | $0.00 |
+| Agentica: Deepcoder 14B Preview (free) | 96K tokens | $0.00 | $0.00 |
+| Moonshot AI: Kimi VL A3B Thinking (free) | 131K tokens | $0.00 | $0.00 |
+| xAI: Grok 3 Mini Beta | 131K tokens | $0.30 | $0.50 |
+| xAI: Grok 3 Beta | 131K tokens | $3.00 | $15.00 |
+| NVIDIA: Llama 3.3 Nemotron Super 49B v1 (free) | 131K tokens | $0.00 | $0.00 |
+| NVIDIA: Llama 3.3 Nemotron Super 49B v1 | 131K tokens | $0.13 | $0.40 |
+| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 (free) | 131K tokens | $0.00 | $0.00 |
+| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 | 131K tokens | $0.60 | $1.80 |
+| Meta: Llama 4 Maverick (free) | 128K tokens | $0.00 | $0.00 |
+| Meta: Llama 4 Maverick | 1M tokens | $0.15 | $0.60 |
+| Meta: Llama 4 Scout (free) | 64K tokens | $0.00 | $0.00 |
+| Meta: Llama 4 Scout | 1M tokens | $0.08 | $0.30 |
+| OpenHands LM 32B V0.1 | 16K tokens | $2.60 | $3.40 |
+| DeepSeek: DeepSeek V3 Base (free) | 163K tokens | $0.00 | $0.00 |
+| Typhoon2 70B Instruct | 8K tokens | $0.88 | $0.88 |
+| Google: Gemini 2.5 Pro Experimental | 1M tokens | $0.00 | $0.00 |
+| Qwen: Qwen2.5 VL 32B Instruct (free) | 8K tokens | $0.00 | $0.00 |
+| Qwen: Qwen2.5 VL 32B Instruct | 128K tokens | $0.90 | $0.90 |
+| DeepSeek: DeepSeek V3 0324 (free) | 16K tokens | $0.00 | $0.00 |
+| DeepSeek: DeepSeek V3 0324 | 163K tokens | $0.28 | $0.88 |
+| Qwerky 72B (free) | 32K tokens | $0.00 | $0.00 |
+| OpenAI: o1-pro | 200K tokens | $150.00 | $600.00 |
+| Mistral: Mistral Small 3.1 24B (free) | 96K tokens | $0.00 | $0.00 |
+| Mistral: Mistral Small 3.1 24B | 128K tokens | $0.05 | $0.10 |
+| Google: Gemma 3 4B (free) | 32K tokens | $0.00 | $0.00 |
+| Google: Gemma 3 4B | 131K tokens | $0.02 | $0.04 |
+| AI21: Jamba 1.6 Large | 256K tokens | $2.00 | $8.00 |
+| AI21: Jamba Mini 1.6 | 256K tokens | $0.20 | $0.40 |
+| Google: Gemma 3 12B (free) | 96K tokens | $0.00 | $0.00 |
+| Google: Gemma 3 12B | 131K tokens | $0.05 | $0.10 |
+| Cohere: Command A | 256K tokens | $2.50 | $10.00 |
+| OpenAI: GPT-4o-mini Search Preview | 128K tokens | $0.15 | $0.60 |
+| OpenAI: GPT-4o Search Preview | 128K tokens | $2.50 | $10.00 |
+| Reka: Flash 3 (free) | 32K tokens | $0.00 | $0.00 |
+| Google: Gemma 3 27B (free) | 96K tokens | $0.00 | $0.00 |
+| Google: Gemma 3 27B | 131K tokens | $0.09 | $0.17 |
+| TheDrummer: Anubis Pro 105B V1 | 131K tokens | $0.80 | $1.00 |
+| TheDrummer: Skyfall 36B V2 | 32K tokens | $0.50 | $0.80 |
+| Microsoft: Phi 4 Multimodal Instruct | 131K tokens | $0.05 | $0.10 |
+| Perplexity: Sonar Reasoning Pro | 128K tokens | $2.00 | $8.00 |
+| Perplexity: Sonar Pro | 200K tokens | $3.00 | $15.00 |
+| Perplexity: Sonar Deep Research | 128K tokens | $2.00 | $8.00 |
+| Qwen: QwQ 32B (free) | 131K tokens | $0.00 | $0.00 |
+| Qwen: QwQ 32B | 131K tokens | $0.08 | $0.15 |
+| Nous: DeepHermes 3 Llama 3 8B Preview (free) | 131K tokens | $0.00 | $0.00 |
+| OpenAI: GPT-4.5 (Preview) | 128K tokens | $75.00 | $150.00 |
+| Google: Gemini 2.0 Flash Lite | 1M tokens | $0.08 | $0.30 |
+| Anthropic: Claude 3.7 Sonnet | 200K tokens | $3.00 | $15.00 |
+| Anthropic: Claude 3.7 Sonnet (thinking) | 200K tokens | $3.00 | $15.00 |
+| Anthropic: Claude 3.7 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
+| Perplexity: R1 1776 | 128K tokens | $2.00 | $8.00 |
+| Mistral: Saba | 32K tokens | $0.20 | $0.60 |
+| Dolphin3.0 R1 Mistral 24B (free) | 32K tokens | $0.00 | $0.00 |
+| Dolphin3.0 Mistral 24B (free) | 32K tokens | $0.00 | $0.00 |
+| Llama Guard 3 8B | 131K tokens | $0.02 | $0.06 |
+| OpenAI: o3 Mini High | 200K tokens | $1.10 | $4.40 |
+| DeepSeek: R1 Distill Llama 8B | 32K tokens | $0.04 | $0.04 |
+| Google: Gemini 2.0 Flash | 1M tokens | $0.10 | $0.40 |
+| Qwen: Qwen VL Plus | 7K tokens | $0.21 | $0.63 |
+| AionLabs: Aion-1.0 | 131K tokens | $4.00 | $8.00 |
+| AionLabs: Aion-1.0-Mini | 131K tokens | $0.70 | $1.40 |
+| AionLabs: Aion-RP 1.0 (8B) | 32K tokens | $0.20 | $0.20 |
+| Qwen: Qwen VL Max | 7K tokens | $0.80 | $3.20 |
+| Qwen: Qwen-Turbo | 1M tokens | $0.05 | $0.20 |
+| Qwen: Qwen-Plus | 131K tokens | $0.40 | $1.20 |
+| Qwen: Qwen-Max | 32K tokens | $1.60 | $6.40 |
+| OpenAI: o3 Mini | 200K tokens | $1.10 | $4.40 |
+| DeepSeek: R1 Distill Qwen 1.5B | 131K tokens | $0.18 | $0.18 |
+| Mistral: Mistral Small 3 (free) | 32K tokens | $0.00 | $0.00 |
+| Mistral: Mistral Small 3 | 32K tokens | $0.05 | $0.09 |
+| DeepSeek: R1 Distill Qwen 32B | 131K tokens | $0.08 | $0.15 |
+| DeepSeek: R1 Distill Qwen 14B (free) | 64K tokens | $0.00 | $0.00 |
+| DeepSeek: R1 Distill Qwen 14B | 64K tokens | $0.15 | $0.15 |
+| Perplexity: Sonar Reasoning | 127K tokens | $1.00 | $5.00 |
+| Perplexity: Sonar | 127K tokens | $1.00 | $1.00 |
+| Liquid: LFM 7B | 32K tokens | $0.01 | $0.01 |
+| Liquid: LFM 3B | 32K tokens | $0.02 | $0.02 |
+| DeepSeek: R1 Distill Llama 70B (free) | 8K tokens | $0.00 | $0.00 |
+| DeepSeek: R1 Distill Llama 70B | 131K tokens | $0.10 | $0.40 |
+| DeepSeek: R1 (free) | 163K tokens | $0.00 | $0.00 |
+| DeepSeek: R1 | 128K tokens | $0.45 | $2.15 |
+| MiniMax: MiniMax-01 | 1M tokens | $0.20 | $1.10 |
+| Mistral: Codestral 2501 | 262K tokens | $0.30 | $0.90 |
+| Microsoft: Phi 4 | 16K tokens | $0.07 | $0.14 |
+| DeepSeek: DeepSeek V3 (free) | 163K tokens | $0.00 | $0.00 |
+| DeepSeek: DeepSeek V3 | 163K tokens | $0.38 | $0.89 |
+| Sao10K: Llama 3.3 Euryale 70B | 131K tokens | $0.65 | $0.75 |
+| OpenAI: o1 | 200K tokens | $15.00 | $60.00 |
+| EVA Llama 3.33 70B | 16K tokens | $4.00 | $6.00 |
+| xAI: Grok 2 Vision 1212 | 32K tokens | $2.00 | $10.00 |
+| xAI: Grok 2 1212 | 131K tokens | $2.00 | $10.00 |
+| Cohere: Command R7B (12-2024) | 128K tokens | $0.04 | $0.15 |
+| Google: Gemini 2.0 Flash Experimental (free) | 1M tokens | $0.00 | $0.00 |
+| Meta: Llama 3.3 70B Instruct (free) | 131K tokens | $0.00 | $0.00 |
+| Meta: Llama 3.3 70B Instruct | 131K tokens | $0.04 | $0.12 |
+| Amazon: Nova Lite 1.0 | 300K tokens | $0.06 | $0.24 |
+| Amazon: Nova Micro 1.0 | 128K tokens | $0.04 | $0.14 |
+| Amazon: Nova Pro 1.0 | 300K tokens | $0.80 | $3.20 |
+| Qwen: QwQ 32B Preview | 32K tokens | $0.20 | $0.20 |
+| EVA Qwen2.5 72B | 16K tokens | $4.00 | $6.00 |
+| OpenAI: GPT-4o (2024-11-20) | 128K tokens | $2.50 | $10.00 |
+| Mistral Large 2411 | 131K tokens | $2.00 | $6.00 |
+| Mistral Large 2407 | 131K tokens | $2.00 | $6.00 |
+| Mistral: Pixtral Large 2411 | 131K tokens | $2.00 | $6.00 |
+| xAI: Grok Vision Beta | 8K tokens | $5.00 | $15.00 |
+| Infermatic: Mistral Nemo Inferor 12B | 16K tokens | $0.80 | $1.20 |
+| Qwen2.5 Coder 32B Instruct (free) | 32K tokens | $0.00 | $0.00 |
+| Qwen2.5 Coder 32B Instruct | 32K tokens | $0.06 | $0.15 |
+| SorcererLM 8x22B | 16K tokens | $4.50 | $4.50 |
+| EVA Qwen2.5 32B | 16K tokens | $2.60 | $3.40 |
+| TheDrummer: UnslopNemo 12B | 32K tokens | $0.40 | $0.40 |
+| Anthropic: Claude 3.5 Haiku (self-moderated) | 200K tokens | $0.80 | $4.00 |
+| Anthropic: Claude 3.5 Haiku | 200K tokens | $0.80 | $4.00 |
+| Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated) | 200K tokens | $0.80 | $4.00 |
+| Anthropic: Claude 3.5 Haiku (2024-10-22) | 200K tokens | $0.80 | $4.00 |
+| NeverSleep: Lumimaid v0.2 70B | 16K tokens | $2.50 | $3.00 |
+| Magnum v4 72B | 16K tokens | $2.50 | $3.00 |
+| Anthropic: Claude 3.5 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
+| Anthropic: Claude 3.5 Sonnet | 200K tokens | $3.00 | $15.00 |
+| Mistral: Ministral 8B | 128K tokens | $0.10 | $0.10 |
+| Mistral: Ministral 3B | 131K tokens | $0.04 | $0.04 |
+| Qwen2.5 7B Instruct | 32K tokens | $0.04 | $0.10 |
+| NVIDIA: Llama 3.1 Nemotron 70B Instruct | 131K tokens | $0.12 | $0.30 |
+| Inflection: Inflection 3 Productivity | 8K tokens | $2.50 | $10.00 |
+| Inflection: Inflection 3 Pi | 8K tokens | $2.50 | $10.00 |
+| Google: Gemini 1.5 Flash 8B | 1M tokens | $0.04 | $0.15 |
+| TheDrummer: Rocinante 12B | 32K tokens | $0.20 | $0.50 |
+| Magnum v2 72B | 32K tokens | $3.00 | $3.00 |
+| Liquid: LFM 40B MoE | 32K tokens | $0.15 | $0.15 |
+| Meta: Llama 3.2 3B Instruct | 20K tokens | $0.00 | $0.01 |
+| Meta: Llama 3.2 1B Instruct | 131K tokens | $0.01 | $0.01 |
+| Meta: Llama 3.2 90B Vision Instruct | 131K tokens | $1.20 | $1.20 |
+| Meta: Llama 3.2 11B Vision Instruct (free) | 131K tokens | $0.00 | $0.00 |
+| Meta: Llama 3.2 11B Vision Instruct | 131K tokens | $0.05 | $0.05 |
+| Qwen2.5 72B Instruct (free) | 32K tokens | $0.00 | $0.00 |
+| Qwen2.5 72B Instruct | 32K tokens | $0.12 | $0.39 |
+| NeverSleep: Lumimaid v0.2 8B | 32K tokens | $0.20 | $1.25 |
+| OpenAI: o1-preview | 128K tokens | $15.00 | $60.00 |
+| OpenAI: o1-preview (2024-09-12) | 128K tokens | $15.00 | $60.00 |
+| OpenAI: o1-mini | 128K tokens | $1.10 | $4.40 |
+| OpenAI: o1-mini (2024-09-12) | 128K tokens | $1.10 | $4.40 |
+| Mistral: Pixtral 12B | 32K tokens | $0.10 | $0.10 |
+| Cohere: Command R+ (08-2024) | 128K tokens | $2.50 | $10.00 |
+| Cohere: Command R (08-2024) | 128K tokens | $0.15 | $0.60 |
+| Qwen: Qwen2.5-VL 7B Instruct | 32K tokens | $0.20 | $0.20 |
+| Sao10K: Llama 3.1 Euryale 70B v2.2 | 32K tokens | $0.65 | $0.75 |
+| Microsoft: Phi-3.5 Mini 128K Instruct | 128K tokens | $0.10 | $0.10 |
+| Nous: Hermes 3 70B Instruct | 131K tokens | $0.10 | $0.28 |
+| Nous: Hermes 3 405B Instruct | 131K tokens | $0.70 | $0.80 |
+| OpenAI: ChatGPT-4o | 128K tokens | $5.00 | $15.00 |
+| Sao10K: Llama 3 8B Lunaris | 8K tokens | $0.02 | $0.05 |
+| Aetherwiing: Starcannon 12B | 16K tokens | $0.80 | $1.20 |
+| OpenAI: GPT-4o (2024-08-06) | 128K tokens | $2.50 | $10.00 |
+| Meta: Llama 3.1 405B (base) | 32K tokens | $2.00 | $2.00 |
+| Mistral Nemo 12B Celeste | 16K tokens | $0.80 | $1.20 |
+| Perplexity: Llama 3.1 Sonar 8B Online | 127K tokens | $0.20 | $0.20 |
+| Perplexity: Llama 3.1 Sonar 70B Online | 127K tokens | $1.00 | $1.00 |
+| Meta: Llama 3.1 8B Instruct | 131K tokens | $0.02 | $0.02 |
+| Meta: Llama 3.1 405B Instruct | 32K tokens | $0.80 | $0.80 |
+| Meta: Llama 3.1 70B Instruct | 131K tokens | $0.10 | $0.28 |
+| Mistral: Mistral Nemo (free) | 131K tokens | $0.00 | $0.00 |
+| Mistral: Mistral Nemo | 131K tokens | $0.01 | $0.00 |
+| OpenAI: GPT-4o-mini | 128K tokens | $0.15 | $0.60 |
+| OpenAI: GPT-4o-mini (2024-07-18) | 128K tokens | $0.15 | $0.60 |
+| Google: Gemma 2 27B | 8K tokens | $0.80 | $0.80 |
+| Magnum 72B | 16K tokens | $4.00 | $6.00 |
+| Google: Gemma 2 9B (free) | 8K tokens | $0.00 | $0.00 |
+| Google: Gemma 2 9B | 8K tokens | $0.20 | $0.20 |
+| 01.AI: Yi Large | 32K tokens | $3.00 | $3.00 |
+| Anthropic: Claude 3.5 Sonnet (2024-06-20) (self-moderated) | 200K tokens | $3.00 | $15.00 |
+| Anthropic: Claude 3.5 Sonnet (2024-06-20) | 200K tokens | $3.00 | $15.00 |
+| Sao10k: Llama 3 Euryale 70B v2.1 | 8K tokens | $1.48 | $1.48 |
+| Dolphin 2.9.2 Mixtral 8x22B 🐬 | 16K tokens | $0.90 | $0.90 |
+| Qwen 2 72B Instruct | 32K tokens | $0.90 | $0.90 |
+| Mistral: Mistral 7B Instruct (free) | 32K tokens | $0.00 | $0.00 |
+| Mistral: Mistral 7B Instruct | 32K tokens | $0.03 | $0.05 |
+| NousResearch: Hermes 2 Pro - Llama-3 8B | 131K tokens | $0.03 | $0.04 |
+| Mistral: Mistral 7B Instruct v0.3 | 32K tokens | $0.03 | $0.05 |
+| Microsoft: Phi-3 Mini 128K Instruct | 128K tokens | $0.10 | $0.10 |
+| Microsoft: Phi-3 Medium 128K Instruct | 128K tokens | $1.00 | $1.00 |
+| NeverSleep: Llama 3 Lumimaid 70B | 8K tokens | $4.00 | $6.00 |
+| Google: Gemini 1.5 Flash | 1M tokens | $0.08 | $0.30 |
+| OpenAI: GPT-4o | 128K tokens | $2.50 | $10.00 |
+| OpenAI: GPT-4o (extended) | 128K tokens | $6.00 | $18.00 |
+| Meta: LlamaGuard 2 8B | 8K tokens | $0.20 | $0.20 |
+| OpenAI: GPT-4o (2024-05-13) | 128K tokens | $5.00 | $15.00 |
+| NeverSleep: Llama 3 Lumimaid 8B | 24K tokens | $0.20 | $1.25 |
+| Fimbulvetr 11B v2 | 4K tokens | $0.80 | $1.20 |
+| Meta: Llama 3 8B Instruct | 8K tokens | $0.03 | $0.06 |
+| Meta: Llama 3 70B Instruct | 8K tokens | $0.30 | $0.40 |
+| Mistral: Mixtral 8x22B Instruct | 65K tokens | $0.90 | $0.90 |
+| WizardLM-2 8x22B | 65K tokens | $0.48 | $0.48 |
+| Google: Gemini 1.5 Pro | 2M tokens | $1.25 | $5.00 |
+| OpenAI: GPT-4 Turbo | 128K tokens | $10.00 | $30.00 |
+| Cohere: Command R+ | 128K tokens | $3.00 | $15.00 |
+| Cohere: Command R+ (04-2024) | 128K tokens | $3.00 | $15.00 |
+| Midnight Rose 70B | 4K tokens | $0.80 | $0.80 |
+| Cohere: Command | 4K tokens | $1.00 | $2.00 |
+| Cohere: Command R | 128K tokens | $0.50 | $1.50 |
+| Anthropic: Claude 3 Haiku (self-moderated) | 200K tokens | $0.25 | $1.25 |
+| Anthropic: Claude 3 Haiku | 200K tokens | $0.25 | $1.25 |
+| Anthropic: Claude 3 Opus (self-moderated) | 200K tokens | $15.00 | $75.00 |
+| Anthropic: Claude 3 Opus | 200K tokens | $15.00 | $75.00 |
+| Anthropic: Claude 3 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
+| Anthropic: Claude 3 Sonnet | 200K tokens | $3.00 | $15.00 |
+| Cohere: Command R (03-2024) | 128K tokens | $0.50 | $1.50 |
+| Mistral Large | 128K tokens | $2.00 | $6.00 |
+| OpenAI: GPT-3.5 Turbo (older v0613) | 4K tokens | $1.00 | $2.00 |
+| OpenAI: GPT-4 Turbo Preview | 128K tokens | $10.00 | $30.00 |
+| Nous: Hermes 2 Mixtral 8x7B DPO | 32K tokens | $0.60 | $0.60 |
+| Mistral Small | 32K tokens | $0.20 | $0.60 |
+| Mistral Tiny | 32K tokens | $0.25 | $0.25 |
+| Mistral: Mistral 7B Instruct v0.2 | 32K tokens | $0.20 | $0.20 |
+| Mistral: Mixtral 8x7B Instruct | 32K tokens | $0.08 | $0.24 |
+| Noromaid 20B | 8K tokens | $1.25 | $2.00 |
+| Anthropic: Claude v2.1 (self-moderated) | 200K tokens | $8.00 | $24.00 |
+| Anthropic: Claude v2.1 | 200K tokens | $8.00 | $24.00 |
+| Anthropic: Claude v2 (self-moderated) | 200K tokens | $8.00 | $24.00 |
+| Anthropic: Claude v2.0 | 100K tokens | $8.00 | $24.00 |
+| ReMM SLERP 13B | 4K tokens | $0.80 | $1.20 |
+| MythoMax 13B | 4K tokens | $0.07 | $0.07 |
+| OpenAI: GPT-4 | 8K tokens | $30.00 | $60.00 |
+| OpenAI: GPT-4 (older v0314) | 8K tokens | $30.00 | $60.00 |
+| Meta Llama 3 70B Instruct | 4K tokens | $50.00 | $500.00 |
+| Meta Llama 3 8B Instruct | 4K tokens | $50.00 | $500.00 |
+| Meta Llama 3 8B | 4K tokens | $50.00 | $500.00 |
+| Incredibly Fast Whisper | 4K tokens | $50.00 | $500.00 |

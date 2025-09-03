@@ -1,33 +1,35 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "API Introduction"
+description: "Welcome to the BLACKBOX AI API. Start building powerful applications with our state-of-the-art models."
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Overview
 
-## Welcome
+The BLACKBOX AI API provides programmatic access to our advanced generative models. You can integrate our technology into your own applications to power features like conversational chat, automated content creation, image generation, and much more.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+This documentation will guide you through authenticating, understanding our models, and making your first API calls.
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+## Getting Started
 
-## Authentication
+Follow these steps to start building with the BLACKBOX API.
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
-
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+<CardGroup cols={2}>
+    <Card
+        title="Authentication"
+        href="/api-reference/authentication"
+    >
+        Learn how to get your API key and authenticate your requests.
+    </Card>
+    <Card title="Models" href="/api-reference/models/chat-models">
+        Explore the different models available for chat and image generation.
+    </Card>
+    <Card title="Chat Endpoint" href="/api-reference/endpoint/chat">
+        Generate text-based responses for conversational AI and other tasks.
+    </Card>
+    <Card
+        title="Image Generation"
+        href="/api-reference/image-generation"
+    >
+        Create stunning, unique images from text prompts.
+    </Card>
+</CardGroup>

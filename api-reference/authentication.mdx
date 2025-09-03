@@ -1,0 +1,39 @@
+---
+title: "Authentication"
+description: "Learn how to authenticate your requests to the BLACKBOX API."
+---
+
+All requests to the BLACKBOX API must be authenticated using an API key. Requests made without a valid API key will fail.
+
+## Finding Your API Key
+
+1.  Navigate to the [API Keys section](https://www.blackbox.ai/dashboard/keys) of your BLACKBOX dashboard.
+2.  Your API key will be displayed on this page.
+3.  Click the copy icon to copy the key to your clipboard.
+
+<Info>
+    **Important:** Treat your API key like a password! Do not share it publicly
+    or commit it to version control.
+</Info>
+
+## Making Authenticated Requests
+
+To authenticate your API calls, you must include your API key in the `Authorization` header of your request. The header should be formatted as follows:
+
+`Authorization: Bearer YOUR_API_KEY`
+
+Replace `YOUR_API_KEY` with the key you copied from your dashboard.
+
+### Example
+
+Here is an example of an authenticated request using cURL:
+
+```bash
+curl [https://www.blackbox.ai/api/v1/chat](https://www.blackbox.ai/api/v1/chat) \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -d '{
+        "model": "blackbox-chat",
+        "messages": [{"role": "user", "content": "Hello world"}]
+      }'
+```
