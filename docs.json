@@ -81,8 +81,6 @@
         "options": [
             "copy",
             "view",
-            "chatgpt",
-            "claude",
             "mcp",
             "vscode"
         ]
