@@ -12,8 +12,8 @@ All requests to the BLACKBOX API must be authenticated using an API key. Request
 3. Click the copy icon to copy the key to your clipboard.
 
 <Info>
-  **Important:** Treat your API key like a password\! Do not share it publicly
-  or commit it to version control.
+    **Important:** Treat your API key like a password\! Do not share it publicly
+    or commit it to version control.
 </Info>
 
 ## Making Authenticated Requests
@@ -29,11 +29,16 @@ Replace `YOUR_API_KEY` with the key you copied from your dashboard.
 Here is an example of an authenticated request using cURL:
 
 ```bash
-curl [https://www.blackbox.ai/api/v1/chat](https://www.blackbox.ai/api/v1/chat) \
-  -H "Content-Type: application/json" \
+curl https://www.blackbox.ai/api/v1/chat \
   -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
   -d '{
-        "model": "blackbox-chat",
-        "messages": [{"role": "user", "content": "Hello world"}]
-      }'
+    "model": "blackbox-chat",
+    "messages": [
+      {
+        "role": "user", 
+        "content": "Hello world"
+      }
+    ]
+  }'
 ```
