@@ -38,7 +38,8 @@
                         "group": "API documentation",
                         "pages": [
                             "api-reference/introduction",
-                            "api-reference/authentication"
+                            "api-reference/authentication",
+                            "api-reference/error-handling"
                         ]
                     },
                     {
@@ -51,15 +52,38 @@
                         ]
                     },
                     {
-                        "group": "Endpoint examples",
+                        "group": "BLACKBOXAI API",
+                        
                         "pages": [
-                            "api-reference/endpoint/chat"
+                            {
+                                "group": "Chat",
+                                "pages": [
+                                    "api-reference/chat"
+                                ]
+                            },
+                            {
+                                "group": "Image",
+                                "pages": [
+                                    "api-reference/image"
+                                ]
+                            },
+                            {
+                                "group": "Video",
+                                "pages": [
+                                    "api-reference/video"
+                                ]
+                            }
                         ]
                     }
                 ]
             }
         ]
     },
+    "api": {
+        "playground": {
+            "display": "simple"
+        }
+    },  
     "logo": {
         "light": "/logo/dark-logo.svg",
         "dark": "/logo/light-logo.svg"

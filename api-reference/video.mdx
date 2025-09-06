@@ -1,0 +1,114 @@
+---
+title: "Create Video"
+api: "POST /chat/completions"
+description: "Generate video from text"
+---
+
+This endpoint allows you to generate a high-quality videos based on a descriptive text prompt.
+
+### Tips for Better Results
+
+-   Describe the scene, action, and camera movements
+-   Specify duration and pacing if relevant
+-   Include details about transitions and visual effects
+
+<RequestExample>
+```bash cURL
+curl -X POST https://api.blackbox.ai/chat/completions \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-d '{
+    "model": "blackboxai/google/veo-2",
+    "messages": [
+        {
+            "role": "user",
+            "content": "tesla car moving on a high way"
+        }
+    ]
+}'
+```
+
+```javascript Node.js
+const API_KEY = "YOUR_API_KEY";
+const API_URL = "https://api.blackbox.ai/chat/completions";
+
+const data = {
+    model: "blackboxai/google/veo-2",
+    messages: [
+        {
+            role: "user",
+            content: "tesla car moving on a high way",
+        },
+    ],
+};
+
+const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+API_URL = "https://api.blackbox.ai/chat/completions"
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {API_KEY}"
+}
+
+data = {
+    "model": "blackboxai/google/veo-2",
+    "messages": [
+        {
+            "role": "user",
+            "content": "tesla car moving on a high way"
+        }
+    ]
+}
+
+response = requests.post(API_URL, headers=headers, json=data)
+print(response.json())
+```
+
+</RequestExample>
+
+<ResponseExample>
+```json Response
+{
+  "id":"chatcmpl-1757152743",
+  "created":1757152743,
+  "model":"google/veo-2:0546b4e90d4f215c7fc42c9b8d815df3a7b6e47a754ee94ddb62b3f667fea9a5",
+  "object":"chat.completion",
+  "system_fingerprint":"None",
+  "choices":[
+    {
+      "finish_reason":"stop",
+      "index":0,
+      "message":{
+        "content":"https://replicate.delivery/xezq/6gaMWJQRMt4fJyA4Pbgd6fNyhHTHBLoSzq6fVdkxGjff8bTqC/tmp19truo4m.mp4",
+        "role":"assistant",
+        "tool_calls":"None",
+        "function_call":"None"
+      }
+    }
+  ],
+  "usage":{
+    "completion_tokens":0,
+    "prompt_tokens":0,
+    "total_tokens":0,
+    "completion_tokens_details":"None",
+    "prompt_tokens_details":"None"
+  }
+}
+```
+</ResponseExample>

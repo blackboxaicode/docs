@@ -1,0 +1,114 @@
+---
+title: "Create Image"
+api: "POST /chat/completions"
+description: "Generate images from text"
+---
+
+This endpoint allows you to generate a high-quality image based on a descriptive text prompt.
+
+### Tips for Better Results
+- Be specific and descriptive in your prompts.
+- Include details about style, lighting, composition, and mood.
+- Mention specific artistic styles or artists if desired.
+
+
+<RequestExample>
+```bash cURL
+curl -X POST https://api.blackbox.ai/chat/completions \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-d '{
+    "model": "blackboxai/black-forest-labs/flux-pro",
+    "messages": [
+        {
+            "role": "user",
+            "content": "tesla car"
+        }
+    ]
+}'
+```
+
+```javascript Node.js
+const API_KEY = "YOUR_API_KEY";
+const API_URL = "https://api.blackbox.ai/chat/completions";
+
+const data = {
+    model: "blackboxai/black-forest-labs/flux-pro",
+    messages: [
+        {
+            role: "user",
+            content: "tesla car",
+        },
+    ],
+};
+
+const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+        Authorization: `Bearer ${API_KEY}`,
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+API_URL = "https://api.blackbox.ai/chat/completions"
+
+headers = {
+    "Content-Type": "application/json",
+    "Authorization": f"Bearer {API_KEY}"
+}
+
+data = {
+    "model": "blackboxai/black-forest-labs/flux-pro",
+    "messages": [
+        {
+            "role": "user",
+            "content": "tesla car"
+        }
+    ]
+}
+
+response = requests.post(API_URL, headers=headers, json=data)
+print(response.json())
+```
+</RequestExample>
+
+
+<ResponseExample>
+```json Response
+{
+  "id":"chatcmpl-1757147957",
+  "created":1757147957,
+  "model":"black-forest-labs/flux-pro:1e237aa703bf3a8ab480d5b595563128807af649c50afc0b4f22a9174e90d1d6",
+  "object":"chat.completion",
+  "system_fingerprint":"None",
+  "choices":[
+    {
+      "finish_reason":"stop",
+      "index":0,
+      "message":{
+        "content":"https://replicate.delivery/xezq/ZDBFJ3anae13UKSmAsDC9eUV1zzDI4XY3dehqUBmUl1rp0kqA/tmpo0625f2a.webp",
+        "role":"assistant",
+        "tool_calls":"None",
+        "function_call":"None"
+      }
+    }
+  ],
+  "usage":{
+    "completion_tokens":0,
+    "prompt_tokens":0,
+    "total_tokens":0,
+    "completion_tokens_details":"None",
+    "prompt_tokens_details":"None"
+  }
+}
+```
+</ResponseExample>
