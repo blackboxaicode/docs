@@ -1,6 +1,6 @@
 ---
 title: "Image Generation Models"
-description: "Learn about the AI models available for generating high-quality images from text prompts."
+description: "Explore the AI models available for generating high-quality images from text prompts."
 ---
 
 ## Overview
@@ -9,39 +9,41 @@ Image generation models transform textual descriptions into rich, visual content
 
 To generate an image, you will need to use one of the following Model IDs in your API request.
 
-### Available Image Generation Models
+## Available Image Generation Models
 
-| Model Name | Prompt Length | Cost per image |
-| :--- | :--- | :--- |
-| Flux.1 Dev | 2K chars | $0.0015 |
-| Flux Kontext Pro | 2K chars | $0.04 |
-| Flux Dev | 2K chars | $0.025 |
-| Flux Schnell | 2K chars | $0.003 |
-| Flux 1.1 Pro Ultra | 2K chars | $0.06 |
-| Flux 1.1 Pro | 2K chars | $0.04 |
-| Flux Pro | 2K chars | $0.055 |
-| Hyper Flux 8Step | 2K chars | $0.011 |
-| Sdxl Lightning 4Step | 2K chars | $0.0014 |
-| Codeformer | 2K chars | $0.002 |
-| Real Esrgan | 2K chars | $0.0024 |
-| Real Esrgan A100 | 2K chars | $0.0039 |
-| Llava 13B | 2K chars | $0.00098 |
-| Clarity Upscaler | 2K chars | $0.013 |
-| Sdxl | 2K chars | $0.0036 |
-| Kandinsky 2.2 | 2K chars | $0.12 |
-| Face To Many | 2K chars | $0.0057 |
-| Gfpgan | 2K chars | $0.0022 |
-| Stable Diffusion Inpainting | 2K chars | $0.0018 |
-| Proteus V0.2 | 2K chars | $0.026 |
-| Nsfw_Image_Detection | 2K chars | $0.225 |
-| Blip 2 | 2K chars | $0.0016 |
-| Lama | 2K chars | $0.00035 |
-| Openjourney | 2K chars | $0.047 |
-| Image Tagger | 2K chars | $0.0024 |
-| Grounding Dino | 2K chars | $0.00098 |
-| Text Extract Ocr | 2K chars | $0.0023 |
-| Sdxl Emoji | 2K chars | $0.0078 |
-| Stable Diffusion | 2K chars | $0.00325 |
-| Controlnet Scribble | 2K chars | $0.0068 |
-| Blip | 2K chars | $0.00022 |
-| Gfpgan | 2K chars | $0.00053 |
+| Model Name                  | Model ID                                            | Cost per Image | Prompt Length | Max Images per Request |
+| --------------------------- | --------------------------------------------------- | -------------- | ------------- | ---------------------- |
+| Blip                        | blackboxai/salesforce/blip                          | $0.00022       | 2k chars      | 1                      |
+| Blip 2                      | blackboxai/andreasjansson/blip-2                    | $0.00160       | 2k chars      | 1                      |
+| Clarity Upscaler            | blackboxai/philz1337x/clarity-upscaler              | $0.01300       | 2k chars      | 1                      |
+| Clip Embeddings             | blackboxai/krthr/clip-embeddings                    | $0.00098       | 2k chars      | 1                      |
+| Codeformer                  | blackboxai/sczhou/codeformer                        | $0.00200       | 2k chars      | 1                      |
+| Controlnet Scribble         | blackboxai/jagilley/controlnet-scribble             | $0.00680       | 2k chars      | 1                      |
+| Face To Many                | blackboxai/fofr/face-to-many                        | $0.00570       | 2k chars      | 1                      |
+| Flux 1.1 Pro                | blackboxai/black-forest-labs/flux-1.1-pro           | $0.04000       | 2k chars      | 1                      |
+| Flux 1.1 Pro Ultra          | blackboxai/black-forest-labs/flux-1.1-pro-ultra     | $0.06000       | 2k chars      | 1                      |
+| Flux Dev                    | blackboxai/black-forest-labs/flux-dev               | $0.02500       | 2k chars      | 4                      |
+| Flux Kontext Pro            | blackboxai/black-forest-labs/flux-kontext-pro       | $0.04000       | 2k chars      | 1                      |
+| Flux Pro                    | blackboxai/black-forest-labs/flux-pro               | $0.05500       | 2k chars      | 1                      |
+| Flux Schnell                | blackboxai/black-forest-labs/flux-schnell           | $0.00300       | 2k chars      | 4                      |
+| Flux.1 Dev                  | blackboxai/prunaai/flux.1-dev                       | $0.00150       | 2k chars      | 1                      |
+| Gfpgan                      | blackboxai/tencentarc/gfpgan                        | $0.00220       | 2k chars      | 1                      |
+| Gfpgan                      | blackboxai/xinntao/gfpgan                           | $0.00053       | 2k chars      | 1                      |
+| Grounding Dino              | blackboxai/adirik/grounding-dino                    | $0.00098       | 2k chars      | 1                      |
+| Hyper Flux 8Step            | blackboxai/bytedance/hyper-flux-8step               | $0.01100       | 2k chars      | 4                      |
+| Image Tagger                | blackboxai/pengdaqian2020/image-tagger              | $0.00240       | 2k chars      | 1                      |
+| Kandinsky 2.2               | blackboxai/ai-forever/kandinsky-2.2                 | $0.12000       | 2k chars      | 4                      |
+| Lama                        | blackboxai/allenhooo/lama                           | $0.00035       | 2k chars      | 1                      |
+| Llava 13B                   | blackboxai/yorickvp/llava-13b                       | $0.00098       | 2k chars      | 1                      |
+| Nano Banana                 | blackboxai/google/nano-banana                       | $0.03900       | 2k chars      | 1                      |
+| Nsfw_Image_Detection        | blackboxai/falcons-ai/nsfw_image_detection          | $0.22500       | 2k chars      | 1                      |
+| Openjourney                 | blackboxai/prompthero/openjourney                   | $0.04700       | 2k chars      | 10                     |
+| Proteus V0.2                | blackboxai/datacte/proteus-v0.2                     | $0.02600       | 2k chars      | 4                      |
+| Real Esrgan                 | blackboxai/nightmareai/real-esrgan                  | $0.00240       | 2k chars      | 1                      |
+| Real Esrgan A100            | blackboxai/daanelson/real-esrgan-a100               | $0.00390       | 2k chars      | 1                      |
+| Sdxl                        | blackboxai/stability-ai/sdxl                        | $0.00360       | 2k chars      | 4                      |
+| Sdxl Emoji                  | blackboxai/fofr/sdxl-emoji                          | $0.00780       | 2k chars      | 4                      |
+| Sdxl Lightning 4Step        | blackboxai/bytedance/sdxl-lightning-4step           | $0.00140       | 2k chars      | 4                      |
+| Stable Diffusion            | blackboxai/stability-ai/stable-diffusion            | $0.00325       | 2k chars      | 4                      |
+| Stable Diffusion Inpainting | blackboxai/stability-ai/stable-diffusion-inpainting | $0.00180       | 2k chars      | 4                      |
+| Text Extract Ocr            | blackboxai/abiruyt/text-extract-ocr                 | $0.00230       | 2k chars      | 1                      |
