@@ -72,7 +72,8 @@
                                 "pages": [
                                     "api-reference/video"
                                 ]
-                            }
+                            },
+                            "api-reference/tool-calling"
                         ]
                     }
                 ]
