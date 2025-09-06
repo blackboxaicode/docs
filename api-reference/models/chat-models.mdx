@@ -7,315 +7,323 @@ description: "Explore the AI models available for conversational tasks, text gen
 
 Chat models are the foundation of conversational AI. They are designed to understand and generate human-like text, making them perfect for a wide range of applications including chatbots, content creation, summarization, and question-answering systems.
 
-When making a request to the `/chat/completions` endpoint, you must specify one of the following Model IDs.
+When making a request to the `/chat/completions` endpoint, you must specify one of the following Model IDs. The costs mentioned below are for 1 million tokens.
 
 ### Available Chat Models
-
-| Model Name | Context Length | Input Cost ($/M tokens) | Output Cost ($/M tokens) |
-| :--- | :--- | :--- | :--- |
-| Cypher Alpha (free) | 1M tokens | $0.00 | $0.00 |
-| Baidu: ERNIE 4.5 300B A47B | 123K tokens | $0.28 | $1.10 |
-| TheDrummer: Anubis 70B V1.1 | 131K tokens | $0.30 | $0.80 |
-| Inception: Mercury | 32K tokens | $0.25 | $1.00 |
-| Morph: Fast Apply | 32K tokens | $1.20 | $2.70 |
-| Mistral: Mistral Small 3.2 24B (free) | 96K tokens | $0.00 | $0.00 |
-| Mistral: Mistral Small 3.2 24B | 128K tokens | $0.05 | $0.10 |
-| MiniMax: MiniMax M1 | 1M tokens | $0.30 | $1.65 |
-| Google: Gemini 2.5 Flash Lite Preview 06-17 | 1M tokens | $0.10 | $0.40 |
-| Google: Gemini 2.5 Flash | 1M tokens | $0.30 | $2.50 |
-| Google: Gemini 2.5 Pro | 1M tokens | $1.25 | $10.00 |
-| Kimi Dev 72b (free) | 131K tokens | $0.00 | $0.00 |
-| OpenAI: o3 Pro | 200K tokens | $20.00 | $80.00 |
-| xAI: Grok 3 Mini | 131K tokens | $0.30 | $0.50 |
-| xAI: Grok 3 | 131K tokens | $3.00 | $15.00 |
-| Mistral: Magistral Small 2506 | 40K tokens | $0.50 | $1.50 |
-| Mistral: Magistral Medium 2506 | 40K tokens | $2.00 | $5.00 |
-| Mistral: Magistral Medium 2506 (thinking) | 40K tokens | $2.00 | $5.00 |
-| Google: Gemini 2.5 Pro Preview 06-05 | 1M tokens | $1.25 | $10.00 |
-| DeepSeek: R1 Distill Qwen 7B | 131K tokens | $0.10 | $0.20 |
-| DeepSeek: Deepseek R1 0528 Qwen3 8B (free) | 131K tokens | $0.00 | $0.00 |
-| DeepSeek: Deepseek R1 0528 Qwen3 8B | 32K tokens | $0.01 | $0.02 |
-| DeepSeek: R1 0528 (free) | 163K tokens | $0.00 | $0.00 |
-| DeepSeek: R1 0528 | 128K tokens | $0.50 | $2.15 |
-| Sarvam AI: Sarvam-M (free) | 32K tokens | $0.00 | $0.00 |
-| TheDrummer: Valkyrie 49B V1 | 131K tokens | $0.50 | $0.80 |
-| Anthropic: Claude Opus 4 | 200K tokens | $15.00 | $75.00 |
-| Anthropic: Claude Sonnet 4 | 200K tokens | $3.00 | $15.00 |
-| Mistral: Devstral Small (free) | 32K tokens | $0.00 | $0.00 |
-| Mistral: Devstral Small | 128K tokens | $0.06 | $0.12 |
-| Google: Gemma 3n 4B (free) | 8K tokens | $0.00 | $0.00 |
-| Google: Gemma 3n 4B | 32K tokens | $0.02 | $0.04 |
-| Google: Gemini 2.5 Flash Preview 05-20 | 1M tokens | $0.15 | $0.60 |
-| Google: Gemini 2.5 Flash Preview 05-20 (thinking) | 1M tokens | $0.15 | $3.50 |
-| OpenAI: Codex Mini | 200K tokens | $1.50 | $6.00 |
-| Mistral: Mistral Medium 3 | 131K tokens | $0.40 | $2.00 |
-| Google: Gemini 2.5 Pro Preview 05-06 | 1M tokens | $1.25 | $10.00 |
-| Arcee AI: Caller Large | 32K tokens | $0.55 | $0.85 |
-| Arcee AI: Spotlight | 131K tokens | $0.18 | $0.18 |
-| Arcee AI: Maestro Reasoning | 131K tokens | $0.90 | $3.30 |
-| Arcee AI: Virtuoso Large | 131K tokens | $0.75 | $1.20 |
-| Arcee AI: Coder Large | 32K tokens | $0.50 | $0.80 |
-| Arcee AI: Virtuoso Medium V2 | 131K tokens | $0.50 | $0.80 |
-| Arcee AI: Arcee Blitz | 32K tokens | $0.45 | $0.75 |
-| Microsoft: Phi 4 Reasoning Plus | 32K tokens | $0.07 | $0.35 |
-| Inception: Mercury Coder | 32K tokens | $0.25 | $1.00 |
-| OpenGVLab: InternVL3 14B | 12K tokens | $0.20 | $0.40 |
-| OpenGVLab: InternVL3 2B | 12K tokens | $0.05 | $0.10 |
-| DeepSeek: DeepSeek Prover V2 | 131K tokens | $0.50 | $2.18 |
-| Meta: Llama Guard 4 12B | 163K tokens | $0.05 | $0.05 |
-| Qwen: Qwen3 30B A3B (free) | 40K tokens | $0.00 | $0.00 |
-| Qwen: Qwen3 30B A3B | 40K tokens | $0.08 | $0.29 |
-| Qwen: Qwen3 8B (free) | 40K tokens | $0.00 | $0.00 |
-| Qwen: Qwen3 8B | 128K tokens | $0.04 | $0.14 |
-| Qwen: Qwen3 14B (free) | 40K tokens | $0.00 | $0.00 |
-| Qwen: Qwen3 14B | 40K tokens | $0.06 | $0.24 |
-| Qwen: Qwen3 32B (free) | 40K tokens | $0.00 | $0.00 |
-| Qwen: Qwen3 32B | 40K tokens | $0.10 | $0.30 |
-| Qwen: Qwen3 235B A22B (free) | 40K tokens | $0.00 | $0.00 |
-| Qwen: Qwen3 235B A22B | 40K tokens | $0.13 | $0.60 |
-| TNG: DeepSeek R1T Chimera (free) | 163K tokens | $0.00 | $0.00 |
-| THUDM: GLM Z1 Rumination 32B | 32K tokens | $0.24 | $0.24 |
-| Microsoft: MAI DS R1 (free) | 163K tokens | $0.00 | $0.00 |
-| THUDM: GLM Z1 32B (free) | 32K tokens | $0.00 | $0.00 |
-| THUDM: GLM Z1 32B | 32K tokens | $0.24 | $0.24 |
-| THUDM: GLM 4 32B (free) | 32K tokens | $0.00 | $0.00 |
-| THUDM: GLM 4 32B | 32K tokens | $0.24 | $0.24 |
-| Google: Gemini 2.5 Flash Preview 04-17 | 1M tokens | $0.15 | $0.60 |
-| Google: Gemini 2.5 Flash Preview 04-17 (thinking) | 1M tokens | $0.15 | $3.50 |
-| OpenAI: o4 Mini High | 200K tokens | $1.10 | $4.40 |
-| OpenAI: o3 | 200K tokens | $2.00 | $8.00 |
-| OpenAI: o4 Mini | 200K tokens | $1.10 | $4.40 |
-| Shisa AI: Shisa V2 Llama 3.3 70B (free) | 32K tokens | $0.00 | $0.00 |
-| OpenAI: GPT-4.1 | 1M tokens | $2.00 | $8.00 |
-| OpenAI: GPT-4.1 Mini | 1M tokens | $0.40 | $1.60 |
-| OpenAI: GPT-4.1 Nano | 1M tokens | $0.10 | $0.40 |
-| EleutherAI: Llemma 7b | 4K tokens | $0.80 | $1.20 |
-| AlfredPros: CodeLLaMa 7B Instruct Solidity | 4K tokens | $0.80 | $1.20 |
-| ArliAI: QwQ 32B RpR v1 (free) | 32K tokens | $0.00 | $0.00 |
-| Agentica: Deepcoder 14B Preview (free) | 96K tokens | $0.00 | $0.00 |
-| Moonshot AI: Kimi VL A3B Thinking (free) | 131K tokens | $0.00 | $0.00 |
-| xAI: Grok 3 Mini Beta | 131K tokens | $0.30 | $0.50 |
-| xAI: Grok 3 Beta | 131K tokens | $3.00 | $15.00 |
-| NVIDIA: Llama 3.3 Nemotron Super 49B v1 (free) | 131K tokens | $0.00 | $0.00 |
-| NVIDIA: Llama 3.3 Nemotron Super 49B v1 | 131K tokens | $0.13 | $0.40 |
-| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 (free) | 131K tokens | $0.00 | $0.00 |
-| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 | 131K tokens | $0.60 | $1.80 |
-| Meta: Llama 4 Maverick (free) | 128K tokens | $0.00 | $0.00 |
-| Meta: Llama 4 Maverick | 1M tokens | $0.15 | $0.60 |
-| Meta: Llama 4 Scout (free) | 64K tokens | $0.00 | $0.00 |
-| Meta: Llama 4 Scout | 1M tokens | $0.08 | $0.30 |
-| OpenHands LM 32B V0.1 | 16K tokens | $2.60 | $3.40 |
-| DeepSeek: DeepSeek V3 Base (free) | 163K tokens | $0.00 | $0.00 |
-| Typhoon2 70B Instruct | 8K tokens | $0.88 | $0.88 |
-| Google: Gemini 2.5 Pro Experimental | 1M tokens | $0.00 | $0.00 |
-| Qwen: Qwen2.5 VL 32B Instruct (free) | 8K tokens | $0.00 | $0.00 |
-| Qwen: Qwen2.5 VL 32B Instruct | 128K tokens | $0.90 | $0.90 |
-| DeepSeek: DeepSeek V3 0324 (free) | 16K tokens | $0.00 | $0.00 |
-| DeepSeek: DeepSeek V3 0324 | 163K tokens | $0.28 | $0.88 |
-| Qwerky 72B (free) | 32K tokens | $0.00 | $0.00 |
-| OpenAI: o1-pro | 200K tokens | $150.00 | $600.00 |
-| Mistral: Mistral Small 3.1 24B (free) | 96K tokens | $0.00 | $0.00 |
-| Mistral: Mistral Small 3.1 24B | 128K tokens | $0.05 | $0.10 |
-| Google: Gemma 3 4B (free) | 32K tokens | $0.00 | $0.00 |
-| Google: Gemma 3 4B | 131K tokens | $0.02 | $0.04 |
-| AI21: Jamba 1.6 Large | 256K tokens | $2.00 | $8.00 |
-| AI21: Jamba Mini 1.6 | 256K tokens | $0.20 | $0.40 |
-| Google: Gemma 3 12B (free) | 96K tokens | $0.00 | $0.00 |
-| Google: Gemma 3 12B | 131K tokens | $0.05 | $0.10 |
-| Cohere: Command A | 256K tokens | $2.50 | $10.00 |
-| OpenAI: GPT-4o-mini Search Preview | 128K tokens | $0.15 | $0.60 |
-| OpenAI: GPT-4o Search Preview | 128K tokens | $2.50 | $10.00 |
-| Reka: Flash 3 (free) | 32K tokens | $0.00 | $0.00 |
-| Google: Gemma 3 27B (free) | 96K tokens | $0.00 | $0.00 |
-| Google: Gemma 3 27B | 131K tokens | $0.09 | $0.17 |
-| TheDrummer: Anubis Pro 105B V1 | 131K tokens | $0.80 | $1.00 |
-| TheDrummer: Skyfall 36B V2 | 32K tokens | $0.50 | $0.80 |
-| Microsoft: Phi 4 Multimodal Instruct | 131K tokens | $0.05 | $0.10 |
-| Perplexity: Sonar Reasoning Pro | 128K tokens | $2.00 | $8.00 |
-| Perplexity: Sonar Pro | 200K tokens | $3.00 | $15.00 |
-| Perplexity: Sonar Deep Research | 128K tokens | $2.00 | $8.00 |
-| Qwen: QwQ 32B (free) | 131K tokens | $0.00 | $0.00 |
-| Qwen: QwQ 32B | 131K tokens | $0.08 | $0.15 |
-| Nous: DeepHermes 3 Llama 3 8B Preview (free) | 131K tokens | $0.00 | $0.00 |
-| OpenAI: GPT-4.5 (Preview) | 128K tokens | $75.00 | $150.00 |
-| Google: Gemini 2.0 Flash Lite | 1M tokens | $0.08 | $0.30 |
-| Anthropic: Claude 3.7 Sonnet | 200K tokens | $3.00 | $15.00 |
-| Anthropic: Claude 3.7 Sonnet (thinking) | 200K tokens | $3.00 | $15.00 |
-| Anthropic: Claude 3.7 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
-| Perplexity: R1 1776 | 128K tokens | $2.00 | $8.00 |
-| Mistral: Saba | 32K tokens | $0.20 | $0.60 |
-| Dolphin3.0 R1 Mistral 24B (free) | 32K tokens | $0.00 | $0.00 |
-| Dolphin3.0 Mistral 24B (free) | 32K tokens | $0.00 | $0.00 |
-| Llama Guard 3 8B | 131K tokens | $0.02 | $0.06 |
-| OpenAI: o3 Mini High | 200K tokens | $1.10 | $4.40 |
-| DeepSeek: R1 Distill Llama 8B | 32K tokens | $0.04 | $0.04 |
-| Google: Gemini 2.0 Flash | 1M tokens | $0.10 | $0.40 |
-| Qwen: Qwen VL Plus | 7K tokens | $0.21 | $0.63 |
-| AionLabs: Aion-1.0 | 131K tokens | $4.00 | $8.00 |
-| AionLabs: Aion-1.0-Mini | 131K tokens | $0.70 | $1.40 |
-| AionLabs: Aion-RP 1.0 (8B) | 32K tokens | $0.20 | $0.20 |
-| Qwen: Qwen VL Max | 7K tokens | $0.80 | $3.20 |
-| Qwen: Qwen-Turbo | 1M tokens | $0.05 | $0.20 |
-| Qwen: Qwen-Plus | 131K tokens | $0.40 | $1.20 |
-| Qwen: Qwen-Max | 32K tokens | $1.60 | $6.40 |
-| OpenAI: o3 Mini | 200K tokens | $1.10 | $4.40 |
-| DeepSeek: R1 Distill Qwen 1.5B | 131K tokens | $0.18 | $0.18 |
-| Mistral: Mistral Small 3 (free) | 32K tokens | $0.00 | $0.00 |
-| Mistral: Mistral Small 3 | 32K tokens | $0.05 | $0.09 |
-| DeepSeek: R1 Distill Qwen 32B | 131K tokens | $0.08 | $0.15 |
-| DeepSeek: R1 Distill Qwen 14B (free) | 64K tokens | $0.00 | $0.00 |
-| DeepSeek: R1 Distill Qwen 14B | 64K tokens | $0.15 | $0.15 |
-| Perplexity: Sonar Reasoning | 127K tokens | $1.00 | $5.00 |
-| Perplexity: Sonar | 127K tokens | $1.00 | $1.00 |
-| Liquid: LFM 7B | 32K tokens | $0.01 | $0.01 |
-| Liquid: LFM 3B | 32K tokens | $0.02 | $0.02 |
-| DeepSeek: R1 Distill Llama 70B (free) | 8K tokens | $0.00 | $0.00 |
-| DeepSeek: R1 Distill Llama 70B | 131K tokens | $0.10 | $0.40 |
-| DeepSeek: R1 (free) | 163K tokens | $0.00 | $0.00 |
-| DeepSeek: R1 | 128K tokens | $0.45 | $2.15 |
-| MiniMax: MiniMax-01 | 1M tokens | $0.20 | $1.10 |
-| Mistral: Codestral 2501 | 262K tokens | $0.30 | $0.90 |
-| Microsoft: Phi 4 | 16K tokens | $0.07 | $0.14 |
-| DeepSeek: DeepSeek V3 (free) | 163K tokens | $0.00 | $0.00 |
-| DeepSeek: DeepSeek V3 | 163K tokens | $0.38 | $0.89 |
-| Sao10K: Llama 3.3 Euryale 70B | 131K tokens | $0.65 | $0.75 |
-| OpenAI: o1 | 200K tokens | $15.00 | $60.00 |
-| EVA Llama 3.33 70B | 16K tokens | $4.00 | $6.00 |
-| xAI: Grok 2 Vision 1212 | 32K tokens | $2.00 | $10.00 |
-| xAI: Grok 2 1212 | 131K tokens | $2.00 | $10.00 |
-| Cohere: Command R7B (12-2024) | 128K tokens | $0.04 | $0.15 |
-| Google: Gemini 2.0 Flash Experimental (free) | 1M tokens | $0.00 | $0.00 |
-| Meta: Llama 3.3 70B Instruct (free) | 131K tokens | $0.00 | $0.00 |
-| Meta: Llama 3.3 70B Instruct | 131K tokens | $0.04 | $0.12 |
-| Amazon: Nova Lite 1.0 | 300K tokens | $0.06 | $0.24 |
-| Amazon: Nova Micro 1.0 | 128K tokens | $0.04 | $0.14 |
-| Amazon: Nova Pro 1.0 | 300K tokens | $0.80 | $3.20 |
-| Qwen: QwQ 32B Preview | 32K tokens | $0.20 | $0.20 |
-| EVA Qwen2.5 72B | 16K tokens | $4.00 | $6.00 |
-| OpenAI: GPT-4o (2024-11-20) | 128K tokens | $2.50 | $10.00 |
-| Mistral Large 2411 | 131K tokens | $2.00 | $6.00 |
-| Mistral Large 2407 | 131K tokens | $2.00 | $6.00 |
-| Mistral: Pixtral Large 2411 | 131K tokens | $2.00 | $6.00 |
-| xAI: Grok Vision Beta | 8K tokens | $5.00 | $15.00 |
-| Infermatic: Mistral Nemo Inferor 12B | 16K tokens | $0.80 | $1.20 |
-| Qwen2.5 Coder 32B Instruct (free) | 32K tokens | $0.00 | $0.00 |
-| Qwen2.5 Coder 32B Instruct | 32K tokens | $0.06 | $0.15 |
-| SorcererLM 8x22B | 16K tokens | $4.50 | $4.50 |
-| EVA Qwen2.5 32B | 16K tokens | $2.60 | $3.40 |
-| TheDrummer: UnslopNemo 12B | 32K tokens | $0.40 | $0.40 |
-| Anthropic: Claude 3.5 Haiku (self-moderated) | 200K tokens | $0.80 | $4.00 |
-| Anthropic: Claude 3.5 Haiku | 200K tokens | $0.80 | $4.00 |
-| Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated) | 200K tokens | $0.80 | $4.00 |
-| Anthropic: Claude 3.5 Haiku (2024-10-22) | 200K tokens | $0.80 | $4.00 |
-| NeverSleep: Lumimaid v0.2 70B | 16K tokens | $2.50 | $3.00 |
-| Magnum v4 72B | 16K tokens | $2.50 | $3.00 |
-| Anthropic: Claude 3.5 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
-| Anthropic: Claude 3.5 Sonnet | 200K tokens | $3.00 | $15.00 |
-| Mistral: Ministral 8B | 128K tokens | $0.10 | $0.10 |
-| Mistral: Ministral 3B | 131K tokens | $0.04 | $0.04 |
-| Qwen2.5 7B Instruct | 32K tokens | $0.04 | $0.10 |
-| NVIDIA: Llama 3.1 Nemotron 70B Instruct | 131K tokens | $0.12 | $0.30 |
-| Inflection: Inflection 3 Productivity | 8K tokens | $2.50 | $10.00 |
-| Inflection: Inflection 3 Pi | 8K tokens | $2.50 | $10.00 |
-| Google: Gemini 1.5 Flash 8B | 1M tokens | $0.04 | $0.15 |
-| TheDrummer: Rocinante 12B | 32K tokens | $0.20 | $0.50 |
-| Magnum v2 72B | 32K tokens | $3.00 | $3.00 |
-| Liquid: LFM 40B MoE | 32K tokens | $0.15 | $0.15 |
-| Meta: Llama 3.2 3B Instruct | 20K tokens | $0.00 | $0.01 |
-| Meta: Llama 3.2 1B Instruct | 131K tokens | $0.01 | $0.01 |
-| Meta: Llama 3.2 90B Vision Instruct | 131K tokens | $1.20 | $1.20 |
-| Meta: Llama 3.2 11B Vision Instruct (free) | 131K tokens | $0.00 | $0.00 |
-| Meta: Llama 3.2 11B Vision Instruct | 131K tokens | $0.05 | $0.05 |
-| Qwen2.5 72B Instruct (free) | 32K tokens | $0.00 | $0.00 |
-| Qwen2.5 72B Instruct | 32K tokens | $0.12 | $0.39 |
-| NeverSleep: Lumimaid v0.2 8B | 32K tokens | $0.20 | $1.25 |
-| OpenAI: o1-preview | 128K tokens | $15.00 | $60.00 |
-| OpenAI: o1-preview (2024-09-12) | 128K tokens | $15.00 | $60.00 |
-| OpenAI: o1-mini | 128K tokens | $1.10 | $4.40 |
-| OpenAI: o1-mini (2024-09-12) | 128K tokens | $1.10 | $4.40 |
-| Mistral: Pixtral 12B | 32K tokens | $0.10 | $0.10 |
-| Cohere: Command R+ (08-2024) | 128K tokens | $2.50 | $10.00 |
-| Cohere: Command R (08-2024) | 128K tokens | $0.15 | $0.60 |
-| Qwen: Qwen2.5-VL 7B Instruct | 32K tokens | $0.20 | $0.20 |
-| Sao10K: Llama 3.1 Euryale 70B v2.2 | 32K tokens | $0.65 | $0.75 |
-| Microsoft: Phi-3.5 Mini 128K Instruct | 128K tokens | $0.10 | $0.10 |
-| Nous: Hermes 3 70B Instruct | 131K tokens | $0.10 | $0.28 |
-| Nous: Hermes 3 405B Instruct | 131K tokens | $0.70 | $0.80 |
-| OpenAI: ChatGPT-4o | 128K tokens | $5.00 | $15.00 |
-| Sao10K: Llama 3 8B Lunaris | 8K tokens | $0.02 | $0.05 |
-| Aetherwiing: Starcannon 12B | 16K tokens | $0.80 | $1.20 |
-| OpenAI: GPT-4o (2024-08-06) | 128K tokens | $2.50 | $10.00 |
-| Meta: Llama 3.1 405B (base) | 32K tokens | $2.00 | $2.00 |
-| Mistral Nemo 12B Celeste | 16K tokens | $0.80 | $1.20 |
-| Perplexity: Llama 3.1 Sonar 8B Online | 127K tokens | $0.20 | $0.20 |
-| Perplexity: Llama 3.1 Sonar 70B Online | 127K tokens | $1.00 | $1.00 |
-| Meta: Llama 3.1 8B Instruct | 131K tokens | $0.02 | $0.02 |
-| Meta: Llama 3.1 405B Instruct | 32K tokens | $0.80 | $0.80 |
-| Meta: Llama 3.1 70B Instruct | 131K tokens | $0.10 | $0.28 |
-| Mistral: Mistral Nemo (free) | 131K tokens | $0.00 | $0.00 |
-| Mistral: Mistral Nemo | 131K tokens | $0.01 | $0.00 |
-| OpenAI: GPT-4o-mini | 128K tokens | $0.15 | $0.60 |
-| OpenAI: GPT-4o-mini (2024-07-18) | 128K tokens | $0.15 | $0.60 |
-| Google: Gemma 2 27B | 8K tokens | $0.80 | $0.80 |
-| Magnum 72B | 16K tokens | $4.00 | $6.00 |
-| Google: Gemma 2 9B (free) | 8K tokens | $0.00 | $0.00 |
-| Google: Gemma 2 9B | 8K tokens | $0.20 | $0.20 |
-| 01.AI: Yi Large | 32K tokens | $3.00 | $3.00 |
-| Anthropic: Claude 3.5 Sonnet (2024-06-20) (self-moderated) | 200K tokens | $3.00 | $15.00 |
-| Anthropic: Claude 3.5 Sonnet (2024-06-20) | 200K tokens | $3.00 | $15.00 |
-| Sao10k: Llama 3 Euryale 70B v2.1 | 8K tokens | $1.48 | $1.48 |
-| Dolphin 2.9.2 Mixtral 8x22B 🐬 | 16K tokens | $0.90 | $0.90 |
-| Qwen 2 72B Instruct | 32K tokens | $0.90 | $0.90 |
-| Mistral: Mistral 7B Instruct (free) | 32K tokens | $0.00 | $0.00 |
-| Mistral: Mistral 7B Instruct | 32K tokens | $0.03 | $0.05 |
-| NousResearch: Hermes 2 Pro - Llama-3 8B | 131K tokens | $0.03 | $0.04 |
-| Mistral: Mistral 7B Instruct v0.3 | 32K tokens | $0.03 | $0.05 |
-| Microsoft: Phi-3 Mini 128K Instruct | 128K tokens | $0.10 | $0.10 |
-| Microsoft: Phi-3 Medium 128K Instruct | 128K tokens | $1.00 | $1.00 |
-| NeverSleep: Llama 3 Lumimaid 70B | 8K tokens | $4.00 | $6.00 |
-| Google: Gemini 1.5 Flash | 1M tokens | $0.08 | $0.30 |
-| OpenAI: GPT-4o | 128K tokens | $2.50 | $10.00 |
-| OpenAI: GPT-4o (extended) | 128K tokens | $6.00 | $18.00 |
-| Meta: LlamaGuard 2 8B | 8K tokens | $0.20 | $0.20 |
-| OpenAI: GPT-4o (2024-05-13) | 128K tokens | $5.00 | $15.00 |
-| NeverSleep: Llama 3 Lumimaid 8B | 24K tokens | $0.20 | $1.25 |
-| Fimbulvetr 11B v2 | 4K tokens | $0.80 | $1.20 |
-| Meta: Llama 3 8B Instruct | 8K tokens | $0.03 | $0.06 |
-| Meta: Llama 3 70B Instruct | 8K tokens | $0.30 | $0.40 |
-| Mistral: Mixtral 8x22B Instruct | 65K tokens | $0.90 | $0.90 |
-| WizardLM-2 8x22B | 65K tokens | $0.48 | $0.48 |
-| Google: Gemini 1.5 Pro | 2M tokens | $1.25 | $5.00 |
-| OpenAI: GPT-4 Turbo | 128K tokens | $10.00 | $30.00 |
-| Cohere: Command R+ | 128K tokens | $3.00 | $15.00 |
-| Cohere: Command R+ (04-2024) | 128K tokens | $3.00 | $15.00 |
-| Midnight Rose 70B | 4K tokens | $0.80 | $0.80 |
-| Cohere: Command | 4K tokens | $1.00 | $2.00 |
-| Cohere: Command R | 128K tokens | $0.50 | $1.50 |
-| Anthropic: Claude 3 Haiku (self-moderated) | 200K tokens | $0.25 | $1.25 |
-| Anthropic: Claude 3 Haiku | 200K tokens | $0.25 | $1.25 |
-| Anthropic: Claude 3 Opus (self-moderated) | 200K tokens | $15.00 | $75.00 |
-| Anthropic: Claude 3 Opus | 200K tokens | $15.00 | $75.00 |
-| Anthropic: Claude 3 Sonnet (self-moderated) | 200K tokens | $3.00 | $15.00 |
-| Anthropic: Claude 3 Sonnet | 200K tokens | $3.00 | $15.00 |
-| Cohere: Command R (03-2024) | 128K tokens | $0.50 | $1.50 |
-| Mistral Large | 128K tokens | $2.00 | $6.00 |
-| OpenAI: GPT-3.5 Turbo (older v0613) | 4K tokens | $1.00 | $2.00 |
-| OpenAI: GPT-4 Turbo Preview | 128K tokens | $10.00 | $30.00 |
-| Nous: Hermes 2 Mixtral 8x7B DPO | 32K tokens | $0.60 | $0.60 |
-| Mistral Small | 32K tokens | $0.20 | $0.60 |
-| Mistral Tiny | 32K tokens | $0.25 | $0.25 |
-| Mistral: Mistral 7B Instruct v0.2 | 32K tokens | $0.20 | $0.20 |
-| Mistral: Mixtral 8x7B Instruct | 32K tokens | $0.08 | $0.24 |
-| Noromaid 20B | 8K tokens | $1.25 | $2.00 |
-| Anthropic: Claude v2.1 (self-moderated) | 200K tokens | $8.00 | $24.00 |
-| Anthropic: Claude v2.1 | 200K tokens | $8.00 | $24.00 |
-| Anthropic: Claude v2 (self-moderated) | 200K tokens | $8.00 | $24.00 |
-| Anthropic: Claude v2.0 | 100K tokens | $8.00 | $24.00 |
-| ReMM SLERP 13B | 4K tokens | $0.80 | $1.20 |
-| MythoMax 13B | 4K tokens | $0.07 | $0.07 |
-| OpenAI: GPT-4 | 8K tokens | $30.00 | $60.00 |
-| OpenAI: GPT-4 (older v0314) | 8K tokens | $30.00 | $60.00 |
-| Meta Llama 3 70B Instruct | 4K tokens | $50.00 | $500.00 |
-| Meta Llama 3 8B Instruct | 4K tokens | $50.00 | $500.00 |
-| Meta Llama 3 8B | 4K tokens | $50.00 | $500.00 |
-| Incredibly Fast Whisper | 4K tokens | $50.00 | $500.00 |
+| **Model Name**                                             | **Model ID**                                                    | **Context Length** | **Input Cost** | **Output Cost** |
+|------------------------------------------------------------|-----------------------------------------------------------------|--------------------|-----------------------------|------------------------------|
+| 01.AI: Yi Large                                            | blackboxai/01-ai/yi-large                                       | 32768              | $3.00                       | $3.00                        |
+| AI21: Jamba 1.6 Large                                      | blackboxai/ai21/jamba-1.6-large                                 | 256000             | $2.00                       | $8.00                        |
+| AI21: Jamba Mini 1.6                                       | blackboxai/ai21/jamba-1.6-mini                                  | 256000             | $0.20                       | $0.40                        |
+| Aetherwiing: Starcannon 12B                                | blackboxai/aetherwiing/mn-starcannon-12b                        | 16384              | $0.80                       | $1.20                        |
+| Agentica: Deepcoder 14B Preview (free)                     | blackboxai/agentica-org/deepcoder-14b-preview:free              | 96000              | $0.00                       | $0.00                        |
+| AionLabs: Aion-1.0                                         | blackboxai/aion-labs/aion-1.0                                   | 131072             | $4.00                       | $8.00                        |
+| AionLabs: Aion-1.0-Mini                                    | blackboxai/aion-labs/aion-1.0-mini                              | 131072             | $0.70                       | $1.40                        |
+| AionLabs: Aion-RP 1.0 (8B)                                 | blackboxai/aion-labs/aion-rp-llama-3.1-8b                       | 32768              | $0.20                       | $0.20                        |
+| AlfredPros: CodeLLaMa 7B Instruct Solidity                 | blackboxai/alfredpros/codellama-7b-instruct-solidity            | 4096               | $0.80                       | $1.20                        |
+| Amazon: Nova Lite 1.0                                      | blackboxai/amazon/nova-lite-v1                                  | 300000             | $0.06                       | $0.24                        |
+| Amazon: Nova Micro 1.0                                     | blackboxai/amazon/nova-micro-v1                                 | 128000             | $0.04                       | $0.14                        |
+| Amazon: Nova Pro 1.0                                       | blackboxai/amazon/nova-pro-v1                                   | 300000             | $0.80                       | $3.20                        |
+| Anthropic: Claude 3 Haiku                                  | blackboxai/anthropic/claude-3-haiku                             | 200000             | $0.25                       | $1.25                        |
+| Anthropic: Claude 3 Haiku (self-moderated)                 | blackboxai/anthropic/claude-3-haiku:beta                        | 200000             | $0.25                       | $1.25                        |
+| Anthropic: Claude 3 Opus                                   | blackboxai/anthropic/claude-3-opus                              | 200000             | $15.00                      | $75.00                       |
+| Anthropic: Claude 3 Opus (self-moderated)                  | blackboxai/anthropic/claude-3-opus:beta                         | 200000             | $15.00                      | $75.00                       |
+| Anthropic: Claude 3 Sonnet                                 | blackboxai/anthropic/claude-3-sonnet                            | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3 Sonnet (self-moderated)                | blackboxai/anthropic/claude-3-sonnet:beta                       | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.5 Haiku                                | blackboxai/anthropic/claude-3.5-haiku                           | 200000             | $0.80                       | $4.00                        |
+| Anthropic: Claude 3.5 Haiku (2024-10-22)                   | blackboxai/anthropic/claude-3.5-haiku-20241022                  | 200000             | $0.80                       | $4.00                        |
+| Anthropic: Claude 3.5 Haiku (2024-10-22) (self-moderated)  | blackboxai/anthropic/claude-3.5-haiku-20241022:beta             | 200000             | $0.80                       | $4.00                        |
+| Anthropic: Claude 3.5 Haiku (self-moderated)               | blackboxai/anthropic/claude-3.5-haiku:beta                      | 200000             | $0.80                       | $4.00                        |
+| Anthropic: Claude 3.5 Sonnet                               | blackboxai/anthropic/claude-3.5-sonnet                          | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.5 Sonnet (2024-06-20)                  | blackboxai/anthropic/claude-3.5-sonnet-20240620                 | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.5 Sonnet (2024-06-20) (self-moderated) | blackboxai/anthropic/claude-3.5-sonnet-20240620:beta            | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.5 Sonnet (self-moderated)              | blackboxai/anthropic/claude-3.5-sonnet:beta                     | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.7 Sonnet                               | blackboxai/anthropic/claude-3.7-sonnet                          | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.7 Sonnet (self-moderated)              | blackboxai/anthropic/claude-3.7-sonnet:beta                     | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude 3.7 Sonnet (thinking)                    | blackboxai/anthropic/claude-3.7-sonnet:thinking                 | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude Opus 4                                   | blackboxai/anthropic/claude-opus-4                              | 200000             | $15.00                      | $75.00                       |
+| Anthropic: Claude Sonnet 4                                 | blackboxai/anthropic/claude-sonnet-4                            | 200000             | $3.00                       | $15.00                       |
+| Anthropic: Claude v2                                       | blackboxai/anthropic/claude-2                                   | 200000             | $8.00                       | $24.00                       |
+| Anthropic: Claude v2 (self-moderated)                      | blackboxai/anthropic/claude-2:beta                              | 200000             | $8.00                       | $24.00                       |
+| Anthropic: Claude v2.0                                     | blackboxai/anthropic/claude-2.0                                 | 100000             | $8.00                       | $24.00                       |
+| Anthropic: Claude v2.0 (self-moderated)                    | blackboxai/anthropic/claude-2.0:beta                            | 100000             | $8.00                       | $24.00                       |
+| Anthropic: Claude v2.1                                     | blackboxai/anthropic/claude-2.1                                 | 200000             | $8.00                       | $24.00                       |
+| Anthropic: Claude v2.1 (self-moderated)                    | blackboxai/anthropic/claude-2.1:beta                            | 200000             | $8.00                       | $24.00                       |
+| Arcee AI: Arcee Blitz                                      | blackboxai/arcee-ai/arcee-blitz                                 | 32768              | $0.45                       | $0.75                        |
+| Arcee AI: Caller Large                                     | blackboxai/arcee-ai/caller-large                                | 32768              | $0.55                       | $0.85                        |
+| Arcee AI: Coder Large                                      | blackboxai/arcee-ai/coder-large                                 | 32768              | $0.50                       | $0.80                        |
+| Arcee AI: Maestro Reasoning                                | blackboxai/arcee-ai/maestro-reasoning                           | 131072             | $0.90                       | $3.30                        |
+| Arcee AI: Spotlight                                        | blackboxai/arcee-ai/spotlight                                   | 131072             | $0.18                       | $0.18                        |
+| Arcee AI: Virtuoso Large                                   | blackboxai/arcee-ai/virtuoso-large                              | 131072             | $0.75                       | $1.20                        |
+| Arcee AI: Virtuoso Medium V2                               | blackboxai/arcee-ai/virtuoso-medium-v2                          | 131072             | $0.50                       | $0.80                        |
+| ArliAI: QwQ 32B RpR v1 (free)                              | blackboxai/arliai/qwq-32b-arliai-rpr-v1:free                    | 32768              | $0.00                       | $0.00                        |
+| Auto Router                                                | blackboxai/openrouter/auto                                      | 2000000            | Variable                    | Variable                     |
+| Baidu: ERNIE 4.5 300B A47B                                 | blackboxai/baidu/ernie-4.5-300b-a47b                            | 123000             | $0.28                       | $1.10                        |
+| Cohere: Command                                            | blackboxai/cohere/command                                       | 4096               | $1.00                       | $2.00                        |
+| Cohere: Command A                                          | blackboxai/cohere/command-a                                     | 256000             | $2.50                       | $10.00                       |
+| Cohere: Command R                                          | blackboxai/cohere/command-r                                     | 128000             | $0.50                       | $1.50                        |
+| Cohere: Command R (03-2024)                                | blackboxai/cohere/command-r-03-2024                             | 128000             | $0.50                       | $1.50                        |
+| Cohere: Command R (08-2024)                                | blackboxai/cohere/command-r-08-2024                             | 128000             | $0.15                       | $0.60                        |
+| Cohere: Command R+                                         | blackboxai/cohere/command-r-plus                                | 128000             | $3.00                       | $15.00                       |
+| Cohere: Command R+ (04-2024)                               | blackboxai/cohere/command-r-plus-04-2024                        | 128000             | $3.00                       | $15.00                       |
+| Cohere: Command R+ (08-2024)                               | blackboxai/cohere/command-r-plus-08-2024                        | 128000             | $2.50                       | $10.00                       |
+| Cohere: Command R7B (12-2024)                              | blackboxai/cohere/command-r7b-12-2024                           | 128000             | $0.04                       | $0.15                        |
+| Cypher Alpha (free)                                        | blackboxai/openrouter/cypher-alpha:free                         | 1000000            | $0.00                       | $0.00                        |
+| DeepSeek: DeepSeek Prover V2                               | blackboxai/deepseek/deepseek-prover-v2                          | 131072             | $0.50                       | $2.18                        |
+| DeepSeek: DeepSeek V3                                      | blackboxai/deepseek/deepseek-chat                               | 163840             | $0.38                       | $0.89                        |
+| DeepSeek: DeepSeek V3 (free)                               | blackboxai/deepseek/deepseek-chat:free                          | 163840             | $0.00                       | $0.00                        |
+| DeepSeek: DeepSeek V3 0324                                 | blackboxai/deepseek/deepseek-chat-v3-0324                       | 163840             | $0.28                       | $0.88                        |
+| DeepSeek: DeepSeek V3 0324 (free)                          | blackboxai/deepseek/deepseek-chat-v3-0324:free                  | 16384              | $0.00                       | $0.00                        |
+| DeepSeek: DeepSeek V3 Base (free)                          | blackboxai/deepseek/deepseek-v3-base:free                       | 163840             | $0.00                       | $0.00                        |
+| DeepSeek: Deepseek R1 0528 Qwen3 8B                        | blackboxai/deepseek/deepseek-r1-0528-qwen3-8b                   | 32000              | $0.01                       | $0.02                        |
+| DeepSeek: Deepseek R1 0528 Qwen3 8B (free)                 | blackboxai/deepseek/deepseek-r1-0528-qwen3-8b:free              | 131072             | $0.00                       | $0.00                        |
+| DeepSeek: R1                                               | blackboxai/deepseek/deepseek-r1                                 | 128000             | $0.45                       | $2.15                        |
+| DeepSeek: R1 (free)                                        | blackboxai/deepseek/deepseek-r1:free                            | 163840             | $0.00                       | $0.00                        |
+| DeepSeek: R1 0528                                          | blackboxai/deepseek/deepseek-r1-0528                            | 128000             | $0.50                       | $2.15                        |
+| DeepSeek: R1 0528 (free)                                   | blackboxai/deepseek/deepseek-r1-0528:free                       | 163840             | $0.00                       | $0.00                        |
+| DeepSeek: R1 Distill Llama 70B                             | blackboxai/deepseek/deepseek-r1-distill-llama-70b               | 131072             | $0.10                       | $0.40                        |
+| DeepSeek: R1 Distill Llama 70B (free)                      | blackboxai/deepseek/deepseek-r1-distill-llama-70b:free          | 8192               | $0.00                       | $0.00                        |
+| DeepSeek: R1 Distill Llama 8B                              | blackboxai/deepseek/deepseek-r1-distill-llama-8b                | 32000              | $0.04                       | $0.04                        |
+| DeepSeek: R1 Distill Qwen 1.5B                             | blackboxai/deepseek/deepseek-r1-distill-qwen-1.5b               | 131072             | $0.18                       | $0.18                        |
+| DeepSeek: R1 Distill Qwen 14B                              | blackboxai/deepseek/deepseek-r1-distill-qwen-14b                | 64000              | $0.15                       | $0.15                        |
+| DeepSeek: R1 Distill Qwen 14B (free)                       | blackboxai/deepseek/deepseek-r1-distill-qwen-14b:free           | 64000              | $0.00                       | $0.00                        |
+| DeepSeek: R1 Distill Qwen 32B                              | blackboxai/deepseek/deepseek-r1-distill-qwen-32b                | 131072             | $0.07                       | $0.15                        |
+| DeepSeek: R1 Distill Qwen 7B                               | blackboxai/deepseek/deepseek-r1-distill-qwen-7b                 | 131072             | $0.10                       | $0.20                        |
+| Dolphin 2.9.2 Mixtral 8x22B 🐬                             | blackboxai/cognitivecomputations/dolphin-mixtral-8x22b          | 16000              | $0.90                       | $0.90                        |
+| Dolphin3.0 Mistral 24B (free)                              | blackboxai/cognitivecomputations/dolphin3.0-mistral-24b:free    | 32768              | $0.00                       | $0.00                        |
+| Dolphin3.0 R1 Mistral 24B (free)                           | blackboxai/cognitivecomputations/dolphin3.0-r1-mistral-24b:free | 32768              | $0.00                       | $0.00                        |
+| EVA Llama 3.33 70B                                         | blackboxai/eva-unit-01/eva-llama-3.33-70b                       | 16384              | $4.00                       | $6.00                        |
+| EVA Qwen2.5 32B                                            | blackboxai/eva-unit-01/eva-qwen-2.5-32b                         | 16384              | $2.60                       | $3.40                        |
+| EVA Qwen2.5 72B                                            | blackboxai/eva-unit-01/eva-qwen-2.5-72b                         | 16384              | $4.00                       | $6.00                        |
+| EleutherAI: Llemma 7b                                      | blackboxai/eleutherai/llemma_7b                                 | 4096               | $0.80                       | $1.20                        |
+| Fimbulvetr 11B v2                                          | blackboxai/sao10k/fimbulvetr-11b-v2                             | 4096               | $0.80                       | $1.20                        |
+| Goliath 120B                                               | blackboxai/alpindale/goliath-120b                               | 6144               | $9.00                       | $11.00                       |
+| Google: Gemini 1.5 Flash                                   | blackboxai/google/gemini-flash-1.5                              | 1000000            | $0.07                       | $0.30                        |
+| Google: Gemini 1.5 Flash 8B                                | blackboxai/google/gemini-flash-1.5-8b                           | 1000000            | $0.04                       | $0.15                        |
+| Google: Gemini 1.5 Pro                                     | blackboxai/google/gemini-pro-1.5                                | 2000000            | $1.25                       | $5.00                        |
+| Google: Gemini 2.0 Flash                                   | blackboxai/google/gemini-2.0-flash-001                          | 1048576            | $0.10                       | $0.40                        |
+| Google: Gemini 2.0 Flash Experimental (free)               | blackboxai/google/gemini-2.0-flash-exp:free                     | 1048576            | $0.00                       | $0.00                        |
+| Google: Gemini 2.0 Flash Lite                              | blackboxai/google/gemini-2.0-flash-lite-001                     | 1048576            | $0.07                       | $0.30                        |
+| Google: Gemini 2.5 Flash                                   | blackboxai/google/gemini-2.5-flash                              | 1048576            | $0.30                       | $2.50                        |
+| Google: Gemini 2.5 Flash Lite Preview 06-17                | blackboxai/google/gemini-2.5-flash-lite-preview-06-17           | 1048576            | $0.10                       | $0.40                        |
+| Google: Gemini 2.5 Flash Preview 04-17                     | blackboxai/google/gemini-2.5-flash-preview                      | 1048576            | $0.15                       | $0.60                        |
+| Google: Gemini 2.5 Flash Preview 04-17 (thinking)          | blackboxai/google/gemini-2.5-flash-preview:thinking             | 1048576            | $0.15                       | $3.50                        |
+| Google: Gemini 2.5 Flash Preview 05-20                     | blackboxai/google/gemini-2.5-flash-preview-05-20                | 1048576            | $0.15                       | $0.60                        |
+| Google: Gemini 2.5 Flash Preview 05-20 (thinking)          | blackboxai/google/gemini-2.5-flash-preview-05-20:thinking       | 1048576            | $0.15                       | $3.50                        |
+| Google: Gemini 2.5 Pro                                     | blackboxai/google/gemini-2.5-pro                                | 1048576            | $1.25                       | $10.00                       |
+| Google: Gemini 2.5 Pro Experimental                        | blackboxai/google/gemini-2.5-pro-exp-03-25                      | 1048576            | $0.00                       | $0.00                        |
+| Google: Gemini 2.5 Pro Preview 05-06                       | blackboxai/google/gemini-2.5-pro-preview-05-06                  | 1048576            | $1.25                       | $10.00                       |
+| Google: Gemini 2.5 Pro Preview 06-05                       | blackboxai/google/gemini-2.5-pro-preview                        | 1048576            | $1.25                       | $10.00                       |
+| Google: Gemma 2 27B                                        | blackboxai/google/gemma-2-27b-it                                | 8192               | $0.80                       | $0.80                        |
+| Google: Gemma 2 9B                                         | blackboxai/google/gemma-2-9b-it                                 | 8192               | $0.20                       | $0.20                        |
+| Google: Gemma 2 9B (free)                                  | blackboxai/google/gemma-2-9b-it:free                            | 8192               | $0.00                       | $0.00                        |
+| Google: Gemma 3 12B                                        | blackboxai/google/gemma-3-12b-it                                | 131072             | $0.05                       | $0.10                        |
+| Google: Gemma 3 12B (free)                                 | blackboxai/google/gemma-3-12b-it:free                           | 96000              | $0.00                       | $0.00                        |
+| Google: Gemma 3 27B                                        | blackboxai/google/gemma-3-27b-it                                | 131072             | $0.09                       | $0.17                        |
+| Google: Gemma 3 27B (free)                                 | blackboxai/google/gemma-3-27b-it:free                           | 96000              | $0.00                       | $0.00                        |
+| Google: Gemma 3 4B                                         | blackboxai/google/gemma-3-4b-it                                 | 131072             | $0.02                       | $0.04                        |
+| Google: Gemma 3 4B (free)                                  | blackboxai/google/gemma-3-4b-it:free                            | 32768              | $0.00                       | $0.00                        |
+| Google: Gemma 3n 4B                                        | blackboxai/google/gemma-3n-e4b-it                               | 32768              | $0.02                       | $0.04                        |
+| Google: Gemma 3n 4B (free)                                 | blackboxai/google/gemma-3n-e4b-it:free                          | 8192               | $0.00                       | $0.00                        |
+| Inception: Mercury                                         | blackboxai/inception/mercury                                    | 32000              | $0.25                       | $1.00                        |
+| Inception: Mercury Coder                                   | blackboxai/inception/mercury-coder                              | 32000              | $0.25                       | $1.00                        |
+| Infermatic: Mistral Nemo Inferor 12B                       | blackboxai/infermatic/mn-inferor-12b                            | 16384              | $0.80                       | $1.20                        |
+| Inflection: Inflection 3 Pi                                | blackboxai/inflection/inflection-3-pi                           | 8000               | $2.50                       | $10.00                       |
+| Inflection: Inflection 3 Productivity                      | blackboxai/inflection/inflection-3-productivity                 | 8000               | $2.50                       | $10.00                       |
+| Kimi Dev 72b (free)                                        | blackboxai/moonshotai/kimi-dev-72b:free                         | 131072             | $0.00                       | $0.00                        |
+| Liquid: LFM 3B                                             | blackboxai/liquid/lfm-3b                                        | 32768              | $0.02                       | $0.02                        |
+| Liquid: LFM 40B MoE                                        | blackboxai/liquid/lfm-40b                                       | 32768              | $0.15                       | $0.15                        |
+| Liquid: LFM 7B                                             | blackboxai/liquid/lfm-7b                                        | 32768              | $0.01                       | $0.01                        |
+| Llama Guard 3 8B                                           | blackboxai/meta-llama/llama-guard-3-8b                          | 131072             | $0.02                       | $0.06                        |
+| Magnum 72B                                                 | blackboxai/alpindale/magnum-72b                                 | 16384              | $4.00                       | $6.00                        |
+| Magnum v2 72B                                              | blackboxai/anthracite-org/magnum-v2-72b                         | 32768              | $3.00                       | $3.00                        |
+| Magnum v4 72B                                              | blackboxai/anthracite-org/magnum-v4-72b                         | 16384              | $2.50                       | $3.00                        |
+| Mancer: Weaver (alpha)                                     | blackboxai/mancer/weaver                                        | 8000               | $1.50                       | $1.50                        |
+| Meta: Llama 3 70B Instruct                                 | blackboxai/meta-llama/llama-3-70b-instruct                      | 8192               | $0.30                       | $0.40                        |
+| Meta: Llama 3 8B Instruct                                  | blackboxai/meta-llama/llama-3-8b-instruct                       | 8192               | $0.03                       | $0.06                        |
+| Meta: Llama 3.1 405B (base)                                | blackboxai/meta-llama/llama-3.1-405b                            | 32768              | $2.00                       | $2.00                        |
+| Meta: Llama 3.1 405B Instruct                              | blackboxai/meta-llama/llama-3.1-405b-instruct                   | 32768              | $0.80                       | $0.80                        |
+| Meta: Llama 3.1 70B Instruct                               | blackboxai/meta-llama/llama-3.1-70b-instruct                    | 131072             | $0.10                       | $0.28                        |
+| Meta: Llama 3.1 8B Instruct                                | blackboxai/meta-llama/llama-3.1-8b-instruct                     | 131000             | $0.02                       | $0.02                        |
+| Meta: Llama 3.2 11B Vision Instruct                        | blackboxai/meta-llama/llama-3.2-11b-vision-instruct             | 131072             | $0.05                       | $0.05                        |
+| Meta: Llama 3.2 11B Vision Instruct (free)                 | blackboxai/meta-llama/llama-3.2-11b-vision-instruct:free        | 131072             | $0.00                       | $0.00                        |
+| Meta: Llama 3.2 1B Instruct                                | blackboxai/meta-llama/llama-3.2-1b-instruct                     | 131072             | $0.01                       | $0.01                        |
+| Meta: Llama 3.2 3B Instruct                                | blackboxai/meta-llama/llama-3.2-3b-instruct                     | 20000              | $0.00                       | $0.01                        |
+| Meta: Llama 3.2 90B Vision Instruct                        | blackboxai/meta-llama/llama-3.2-90b-vision-instruct             | 131072             | $1.20                       | $1.20                        |
+| Meta: Llama 3.3 70B Instruct                               | blackboxai/meta-llama/llama-3.3-70b-instruct                    | 131072             | $0.04                       | $0.12                        |
+| Meta: Llama 3.3 70B Instruct (free)                        | blackboxai/meta-llama/llama-3.3-70b-instruct:free               | 131072             | $0.00                       | $0.00                        |
+| Meta: Llama 4 Maverick                                     | blackboxai/meta-llama/llama-4-maverick                          | 1048576            | $0.15                       | $0.60                        |
+| Meta: Llama 4 Maverick (free)                              | blackboxai/meta-llama/llama-4-maverick:free                     | 128000             | $0.00                       | $0.00                        |
+| Meta: Llama 4 Scout                                        | blackboxai/meta-llama/llama-4-scout                             | 1048576            | $0.08                       | $0.30                        |
+| Meta: Llama 4 Scout (free)                                 | blackboxai/meta-llama/llama-4-scout:free                        | 64000              | $0.00                       | $0.00                        |
+| Meta: Llama Guard 4 12B                                    | blackboxai/meta-llama/llama-guard-4-12b                         | 163840             | $0.05                       | $0.05                        |
+| Meta: LlamaGuard 2 8B                                      | blackboxai/meta-llama/llama-guard-2-8b                          | 8192               | $0.20                       | $0.20                        |
+| Microsoft: MAI DS R1 (free)                                | blackboxai/microsoft/mai-ds-r1:free                             | 163840             | $0.00                       | $0.00                        |
+| Microsoft: Phi 4                                           | blackboxai/microsoft/phi-4                                      | 16384              | $0.07                       | $0.14                        |
+| Microsoft: Phi 4 Multimodal Instruct                       | blackboxai/microsoft/phi-4-multimodal-instruct                  | 131072             | $0.05                       | $0.10                        |
+| Microsoft: Phi 4 Reasoning Plus                            | blackboxai/microsoft/phi-4-reasoning-plus                       | 32768              | $0.07                       | $0.35                        |
+| Microsoft: Phi-3 Medium 128K Instruct                      | blackboxai/microsoft/phi-3-medium-128k-instruct                 | 128000             | $1.00                       | $1.00                        |
+| Microsoft: Phi-3 Mini 128K Instruct                        | blackboxai/microsoft/phi-3-mini-128k-instruct                   | 128000             | $0.10                       | $0.10                        |
+| Microsoft: Phi-3.5 Mini 128K Instruct                      | blackboxai/microsoft/phi-3.5-mini-128k-instruct                 | 128000             | $0.10                       | $0.10                        |
+| Midnight Rose 70B                                          | blackboxai/sophosympatheia/midnight-rose-70b                    | 4096               | $0.80                       | $0.80                        |
+| MiniMax: MiniMax M1                                        | blackboxai/minimax/minimax-m1                                   | 1000000            | $0.30                       | $1.65                        |
+| MiniMax: MiniMax-01                                        | blackboxai/minimax/minimax-01                                   | 1000192            | $0.20                       | $1.10                        |
+| Mistral Large                                              | blackboxai/mistralai/mistral-large                              | 128000             | $2.00                       | $6.00                        |
+| Mistral Large 2407                                         | blackboxai/mistralai/mistral-large-2407                         | 131072             | $2.00                       | $6.00                        |
+| Mistral Large 2411                                         | blackboxai/mistralai/mistral-large-2411                         | 131072             | $2.00                       | $6.00                        |
+| Mistral Nemo 12B Celeste                                   | blackboxai/nothingiisreal/mn-celeste-12b                        | 16384              | $0.80                       | $1.20                        |
+| Mistral Small                                              | blackboxai/mistralai/mistral-small                              | 32768              | $0.20                       | $0.60                        |
+| Mistral Tiny                                               | blackboxai/mistralai/mistral-tiny                               | 32768              | $0.25                       | $0.25                        |
+| Mistral: Codestral 2501                                    | blackboxai/mistralai/codestral-2501                             | 262144             | $0.30                       | $0.90                        |
+| Mistral: Devstral Small                                    | blackboxai/mistralai/devstral-small                             | 128000             | $0.06                       | $0.12                        |
+| Mistral: Devstral Small (free)                             | blackboxai/mistralai/devstral-small:free                        | 32768              | $0.00                       | $0.00                        |
+| Mistral: Magistral Medium 2506                             | blackboxai/mistralai/magistral-medium-2506                      | 40960              | $2.00                       | $5.00                        |
+| Mistral: Magistral Medium 2506 (thinking)                  | blackboxai/mistralai/magistral-medium-2506:thinking             | 40960              | $2.00                       | $5.00                        |
+| Mistral: Magistral Small 2506                              | blackboxai/mistralai/magistral-small-2506                       | 40000              | $0.50                       | $1.50                        |
+| Mistral: Ministral 3B                                      | blackboxai/mistralai/ministral-3b                               | 131072             | $0.04                       | $0.04                        |
+| Mistral: Ministral 8B                                      | blackboxai/mistralai/ministral-8b                               | 128000             | $0.10                       | $0.10                        |
+| Mistral: Mistral 7B Instruct                               | blackboxai/mistralai/mistral-7b-instruct                        | 32768              | $0.03                       | $0.05                        |
+| Mistral: Mistral 7B Instruct (free)                        | blackboxai/mistralai/mistral-7b-instruct:free                   | 32768              | $0.00                       | $0.00                        |
+| Mistral: Mistral 7B Instruct v0.1                          | blackboxai/mistralai/mistral-7b-instruct-v0.1                   | 2824               | $0.11                       | $0.19                        |
+| Mistral: Mistral 7B Instruct v0.2                          | blackboxai/mistralai/mistral-7b-instruct-v0.2                   | 32768              | $0.20                       | $0.20                        |
+| Mistral: Mistral 7B Instruct v0.3                          | blackboxai/mistralai/mistral-7b-instruct-v0.3                   | 32768              | $0.03                       | $0.05                        |
+| Mistral: Mistral Medium 3                                  | blackboxai/mistralai/mistral-medium-3                           | 131072             | $0.40                       | $2.00                        |
+| Mistral: Mistral Nemo                                      | blackboxai/mistralai/mistral-nemo                               | 131072             | $0.01                       | $0.00                        |
+| Mistral: Mistral Nemo (free)                               | blackboxai/mistralai/mistral-nemo:free                          | 131072             | $0.00                       | $0.00                        |
+| Mistral: Mistral Small 3                                   | blackboxai/mistralai/mistral-small-24b-instruct-2501            | 32768              | $0.05                       | $0.09                        |
+| Mistral: Mistral Small 3 (free)                            | blackboxai/mistralai/mistral-small-24b-instruct-2501:free       | 32768              | $0.00                       | $0.00                        |
+| Mistral: Mistral Small 3.1 24B                             | blackboxai/mistralai/mistral-small-3.1-24b-instruct             | 128000             | $0.05                       | $0.10                        |
+| Mistral: Mistral Small 3.1 24B (free)                      | blackboxai/mistralai/mistral-small-3.1-24b-instruct:free        | 96000              | $0.00                       | $0.00                        |
+| Mistral: Mistral Small 3.2 24B                             | blackboxai/mistralai/mistral-small-3.2-24b-instruct             | 128000             | $0.05                       | $0.10                        |
+| Mistral: Mistral Small 3.2 24B (free)                      | blackboxai/mistralai/mistral-small-3.2-24b-instruct:free        | 96000              | $0.00                       | $0.00                        |
+| Mistral: Mixtral 8x22B Instruct                            | blackboxai/mistralai/mixtral-8x22b-instruct                     | 65536              | $0.90                       | $0.90                        |
+| Mistral: Mixtral 8x7B Instruct                             | blackboxai/mistralai/mixtral-8x7b-instruct                      | 32768              | $0.08                       | $0.24                        |
+| Mistral: Pixtral 12B                                       | blackboxai/mistralai/pixtral-12b                                | 32768              | $0.10                       | $0.10                        |
+| Mistral: Pixtral Large 2411                                | blackboxai/mistralai/pixtral-large-2411                         | 131072             | $2.00                       | $6.00                        |
+| Mistral: Saba                                              | blackboxai/mistralai/mistral-saba                               | 32768              | $0.20                       | $0.60                        |
+| Moonshot AI: Kimi VL A3B Thinking (free)                   | blackboxai/moonshotai/kimi-vl-a3b-thinking:free                 | 131072             | $0.00                       | $0.00                        |
+| Morph: Fast Apply                                          | blackboxai/morph/morph-v2                                       | 32000              | $1.20                       | $2.70                        |
+| MythoMax 13B                                               | blackboxai/gryphe/mythomax-l2-13b                               | 4096               | $0.07                       | $0.07                        |
+| NVIDIA: Llama 3.1 Nemotron 70B Instruct                    | blackboxai/nvidia/llama-3.1-nemotron-70b-instruct               | 131072             | $0.12                       | $0.30                        |
+| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1                   | blackboxai/nvidia/llama-3.1-nemotron-ultra-253b-v1              | 131072             | $0.60                       | $1.80                        |
+| NVIDIA: Llama 3.1 Nemotron Ultra 253B v1 (free)            | blackboxai/nvidia/llama-3.1-nemotron-ultra-253b-v1:free         | 131072             | $0.00                       | $0.00                        |
+| NVIDIA: Llama 3.3 Nemotron Super 49B v1                    | blackboxai/nvidia/llama-3.3-nemotron-super-49b-v1               | 131072             | $0.13                       | $0.40                        |
+| NVIDIA: Llama 3.3 Nemotron Super 49B v1 (free)             | blackboxai/nvidia/llama-3.3-nemotron-super-49b-v1:free          | 131072             | $0.00                       | $0.00                        |
+| NeverSleep: Llama 3 Lumimaid 70B                           | blackboxai/neversleep/llama-3-lumimaid-70b                      | 8192               | $4.00                       | $6.00                        |
+| NeverSleep: Llama 3 Lumimaid 8B                            | blackboxai/neversleep/llama-3-lumimaid-8b                       | 24576              | $0.20                       | $1.25                        |
+| NeverSleep: Lumimaid v0.2 70B                              | blackboxai/neversleep/llama-3.1-lumimaid-70b                    | 16384              | $2.50                       | $3.00                        |
+| NeverSleep: Lumimaid v0.2 8B                               | blackboxai/neversleep/llama-3.1-lumimaid-8b                     | 32768              | $0.20                       | $1.25                        |
+| Noromaid 20B                                               | blackboxai/neversleep/noromaid-20b                              | 8192               | $1.25                       | $2.00                        |
+| Nous: DeepHermes 3 Llama 3 8B Preview (free)               | blackboxai/nousresearch/deephermes-3-llama-3-8b-preview:free    | 131072             | $0.00                       | $0.00                        |
+| Nous: Hermes 2 Mixtral 8x7B DPO                            | blackboxai/nousresearch/nous-hermes-2-mixtral-8x7b-dpo          | 32768              | $0.60                       | $0.60                        |
+| Nous: Hermes 3 405B Instruct                               | blackboxai/nousresearch/hermes-3-llama-3.1-405b                 | 131072             | $0.70                       | $0.80                        |
+| Nous: Hermes 3 70B Instruct                                | blackboxai/nousresearch/hermes-3-llama-3.1-70b                  | 131072             | $0.10                       | $0.28                        |
+| NousResearch: Hermes 2 Pro - Llama-3 8B                    | blackboxai/nousresearch/hermes-2-pro-llama-3-8b                 | 131072             | $0.02                       | $0.04                        |
+| OpenAI: ChatGPT-4o                                         | blackboxai/openai/chatgpt-4o-latest                             | 128000             | $5.00                       | $15.00                       |
+| OpenAI: Codex Mini                                         | blackboxai/openai/codex-mini                                    | 200000             | $1.50                       | $6.00                        |
+| OpenAI: GPT-3.5 Turbo (older v0613)                        | blackboxai/openai/gpt-3.5-turbo-0613                            | 4095               | $1.00                       | $2.00                        |
+| OpenAI: GPT-3.5 Turbo 16k                                  | blackboxai/openai/gpt-3.5-turbo-16k                             | 16385              | $3.00                       | $4.00                        |
+| OpenAI: GPT-3.5 Turbo Instruct                             | blackboxai/openai/gpt-3.5-turbo-instruct                        | 4095               | $1.50                       | $2.00                        |
+| OpenAI: GPT-4                                              | blackboxai/openai/gpt-4                                         | 8191               | $30.00                      | $60.00                       |
+| OpenAI: GPT-4 (older v0314)                                | blackboxai/openai/gpt-4-0314                                    | 8191               | $30.00                      | $60.00                       |
+| OpenAI: GPT-4 Turbo                                        | blackboxai/openai/gpt-4-turbo                                   | 128000             | $10.00                      | $30.00                       |
+| OpenAI: GPT-4 Turbo (older v1106)                          | blackboxai/openai/gpt-4-1106-preview                            | 128000             | $10.00                      | $30.00                       |
+| OpenAI: GPT-4 Turbo Preview                                | blackboxai/openai/gpt-4-turbo-preview                           | 128000             | $10.00                      | $30.00                       |
+| OpenAI: GPT-4.1                                            | blackboxai/openai/gpt-4.1                                       | 1047576            | $2.00                       | $8.00                        |
+| OpenAI: GPT-4.1 Mini                                       | blackboxai/openai/gpt-4.1-mini                                  | 1047576            | $0.40                       | $1.60                        |
+| OpenAI: GPT-4.1 Nano                                       | blackboxai/openai/gpt-4.1-nano                                  | 1047576            | $0.10                       | $0.40                        |
+| OpenAI: GPT-4.5 (Preview)                                  | blackboxai/openai/gpt-4.5-preview                               | 128000             | $75.00                      | $150.00                      |
+| OpenAI: GPT-4o                                             | blackboxai/openai/gpt-4o                                        | 128000             | $2.50                       | $10.00                       |
+| OpenAI: GPT-4o (2024-05-13)                                | blackboxai/openai/gpt-4o-2024-05-13                             | 128000             | $5.00                       | $15.00                       |
+| OpenAI: GPT-4o (2024-08-06)                                | blackboxai/openai/gpt-4o-2024-08-06                             | 128000             | $2.50                       | $10.00                       |
+| OpenAI: GPT-4o (2024-11-20)                                | blackboxai/openai/gpt-4o-2024-11-20                             | 128000             | $2.50                       | $10.00                       |
+| OpenAI: GPT-4o (extended)                                  | blackboxai/openai/gpt-4o:extended                               | 128000             | $6.00                       | $18.00                       |
+| OpenAI: GPT-4o Search Preview                              | blackboxai/openai/gpt-4o-search-preview                         | 128000             | $2.50                       | $10.00                       |
+| OpenAI: GPT-4o-mini                                        | blackboxai/openai/gpt-4o-mini                                   | 128000             | $0.15                       | $0.60                        |
+| OpenAI: GPT-4o-mini (2024-07-18)                           | blackboxai/openai/gpt-4o-mini-2024-07-18                        | 128000             | $0.15                       | $0.60                        |
+| OpenAI: GPT-4o-mini Search Preview                         | blackboxai/openai/gpt-4o-mini-search-preview                    | 128000             | $0.15                       | $0.60                        |
+| OpenAI: o1                                                 | blackboxai/openai/o1                                            | 200000             | $15.00                      | $60.00                       |
+| OpenAI: o1-mini                                            | blackboxai/openai/o1-mini                                       | 128000             | $1.10                       | $4.40                        |
+| OpenAI: o1-mini (2024-09-12)                               | blackboxai/openai/o1-mini-2024-09-12                            | 128000             | $1.10                       | $4.40                        |
+| OpenAI: o1-preview                                         | blackboxai/openai/o1-preview                                    | 128000             | $15.00                      | $60.00                       |
+| OpenAI: o1-preview (2024-09-12)                            | blackboxai/openai/o1-preview-2024-09-12                         | 128000             | $15.00                      | $60.00                       |
+| OpenAI: o1-pro                                             | blackboxai/openai/o1-pro                                        | 200000             | $150.00                     | $600.00                      |
+| OpenAI: o3                                                 | blackboxai/openai/o3                                            | 200000             | $2.00                       | $8.00                        |
+| OpenAI: o3 Mini                                            | blackboxai/openai/o3-mini                                       | 200000             | $1.10                       | $4.40                        |
+| OpenAI: o3 Mini High                                       | blackboxai/openai/o3-mini-high                                  | 200000             | $1.10                       | $4.40                        |
+| OpenAI: o3 Pro                                             | blackboxai/openai/o3-pro                                        | 200000             | $20.00                      | $80.00                       |
+| OpenAI: o4 Mini                                            | blackboxai/openai/o4-mini                                       | 200000             | $1.10                       | $4.40                        |
+| OpenAI: o4 Mini High                                       | blackboxai/openai/o4-mini-high                                  | 200000             | $1.10                       | $4.40                        |
+| OpenGVLab: InternVL3 14B                                   | blackboxai/opengvlab/internvl3-14b                              | 12288              | $0.20                       | $0.40                        |
+| OpenGVLab: InternVL3 2B                                    | blackboxai/opengvlab/internvl3-2b                               | 12288              | $0.05                       | $0.10                        |
+| OpenHands LM 32B V0.1                                      | blackboxai/all-hands/openhands-lm-32b-v0.1                      | 16384              | $2.60                       | $3.40                        |
+| Perplexity: Llama 3.1 Sonar 70B Online                     | blackboxai/perplexity/llama-3.1-sonar-large-128k-online         | 127072             | $1.00                       | $1.00                        |
+| Perplexity: Llama 3.1 Sonar 8B Online                      | blackboxai/perplexity/llama-3.1-sonar-small-128k-online         | 127072             | $0.20                       | $0.20                        |
+| Perplexity: R1 1776                                        | blackboxai/perplexity/r1-1776                                   | 128000             | $2.00                       | $8.00                        |
+| Perplexity: Sonar                                          | blackboxai/perplexity/sonar                                     | 127072             | $1.00                       | $1.00                        |
+| Perplexity: Sonar Deep Research                            | blackboxai/perplexity/sonar-deep-research                       | 128000             | $2.00                       | $8.00                        |
+| Perplexity: Sonar Pro                                      | blackboxai/perplexity/sonar-pro                                 | 200000             | $3.00                       | $15.00                       |
+| Perplexity: Sonar Reasoning                                | blackboxai/perplexity/sonar-reasoning                           | 127000             | $1.00                       | $5.00                        |
+| Perplexity: Sonar Reasoning Pro                            | blackboxai/perplexity/sonar-reasoning-pro                       | 128000             | $2.00                       | $8.00                        |
+| Pygmalion: Mythalion 13B                                   | blackboxai/pygmalionai/mythalion-13b                            | 4096               | $0.80                       | $1.20                        |
+| Qwen 2 72B Instruct                                        | blackboxai/qwen/qwen-2-72b-instruct                             | 32768              | $0.90                       | $0.90                        |
+| Qwen2.5 72B Instruct                                       | blackboxai/qwen/qwen-2.5-72b-instruct                           | 32768              | $0.12                       | $0.39                        |
+| Qwen2.5 72B Instruct (free)                                | blackboxai/qwen/qwen-2.5-72b-instruct:free                      | 32768              | $0.00                       | $0.00                        |
+| Qwen2.5 7B Instruct                                        | blackboxai/qwen/qwen-2.5-7b-instruct                            | 32768              | $0.04                       | $0.10                        |
+| Qwen2.5 Coder 32B Instruct                                 | blackboxai/qwen/qwen-2.5-coder-32b-instruct                     | 32768              | $0.06                       | $0.15                        |
+| Qwen2.5 Coder 32B Instruct (free)                          | blackboxai/qwen/qwen-2.5-coder-32b-instruct:free                | 32768              | $0.00                       | $0.00                        |
+| Qwen: QwQ 32B                                              | blackboxai/qwen/qwq-32b                                         | 131072             | $0.07                       | $0.15                        |
+| Qwen: QwQ 32B (free)                                       | blackboxai/qwen/qwq-32b:free                                    | 131072             | $0.00                       | $0.00                        |
+| Qwen: QwQ 32B Preview                                      | blackboxai/qwen/qwq-32b-preview                                 | 32768              | $0.20                       | $0.20                        |
+| Qwen: Qwen VL Max                                          | blackboxai/qwen/qwen-vl-max                                     | 7500               | $0.80                       | $3.20                        |
+| Qwen: Qwen VL Plus                                         | blackboxai/qwen/qwen-vl-plus                                    | 7500               | $0.21                       | $0.63                        |
+| Qwen: Qwen-Max                                             | blackboxai/qwen/qwen-max                                        | 32768              | $1.60                       | $6.40                        |
+| Qwen: Qwen-Plus                                            | blackboxai/qwen/qwen-plus                                       | 131072             | $0.40                       | $1.20                        |
+| Qwen: Qwen-Turbo                                           | blackboxai/qwen/qwen-turbo                                      | 1000000            | $0.05                       | $0.20                        |
+| Qwen: Qwen2.5 VL 32B Instruct                              | blackboxai/qwen/qwen2.5-vl-32b-instruct                         | 128000             | $0.90                       | $0.90                        |
+| Qwen: Qwen2.5 VL 32B Instruct (free)                       | blackboxai/qwen/qwen2.5-vl-32b-instruct:free                    | 8192               | $0.00                       | $0.00                        |
+| Qwen: Qwen2.5 VL 72B Instruct                              | blackboxai/qwen/qwen2.5-vl-72b-instruct                         | 32000              | $0.25                       | $0.75                        |
+| Qwen: Qwen2.5 VL 72B Instruct (free)                       | blackboxai/qwen/qwen2.5-vl-72b-instruct:free                    | 131072             | $0.00                       | $0.00                        |
+| Qwen: Qwen2.5-VL 7B Instruct                               | blackboxai/qwen/qwen-2.5-vl-7b-instruct                         | 32768              | $0.20                       | $0.20                        |
+| Qwen: Qwen3 14B                                            | blackboxai/qwen/qwen3-14b                                       | 40960              | $0.06                       | $0.24                        |
+| Qwen: Qwen3 14B (free)                                     | blackboxai/qwen/qwen3-14b:free                                  | 40960              | $0.00                       | $0.00                        |
+| Qwen: Qwen3 235B A22B                                      | blackboxai/qwen/qwen3-235b-a22b                                 | 40960              | $0.13                       | $0.60                        |
+| Qwen: Qwen3 235B A22B (free)                               | blackboxai/qwen/qwen3-235b-a22b:free                            | 40960              | $0.00                       | $0.00                        |
+| Qwen: Qwen3 30B A3B                                        | blackboxai/qwen/qwen3-30b-a3b                                   | 40960              | $0.08                       | $0.29                        |
+| Qwen: Qwen3 30B A3B (free)                                 | blackboxai/qwen/qwen3-30b-a3b:free                              | 40960              | $0.00                       | $0.00                        |
+| Qwen: Qwen3 32B                                            | blackboxai/qwen/qwen3-32b                                       | 40960              | $0.10                       | $0.30                        |
+| Qwen: Qwen3 32B (free)                                     | blackboxai/qwen/qwen3-32b:free                                  | 40960              | $0.00                       | $0.00                        |
+| Qwen: Qwen3 8B                                             | blackboxai/qwen/qwen3-8b                                        | 128000             | $0.04                       | $0.14                        |
+| Qwen: Qwen3 8B (free)                                      | blackboxai/qwen/qwen3-8b:free                                   | 40960              | $0.00                       | $0.00                        |
+| Qwerky 72B (free)                                          | blackboxai/featherless/qwerky-72b:free                          | 32768              | $0.00                       | $0.00                        |
+| ReMM SLERP 13B                                             | blackboxai/undi95/remm-slerp-l2-13b                             | 4096               | $0.80                       | $1.20                        |
+| Reka: Flash 3 (free)                                       | blackboxai/rekaai/reka-flash-3:free                             | 32768              | $0.00                       | $0.00                        |
+| Sao10K: Llama 3 8B Lunaris                                 | blackboxai/sao10k/l3-lunaris-8b                                 | 8192               | $0.02                       | $0.05                        |
+| Sao10K: Llama 3.1 Euryale 70B v2.2                         | blackboxai/sao10k/l3.1-euryale-70b                              | 32768              | $0.65                       | $0.75                        |
+| Sao10K: Llama 3.3 Euryale 70B                              | blackboxai/sao10k/l3.3-euryale-70b                              | 131072             | $0.65                       | $0.75                        |
+| Sao10k: Llama 3 Euryale 70B v2.1                           | blackboxai/sao10k/l3-euryale-70b                                | 8192               | $1.48                       | $1.48                        |
+| Sarvam AI: Sarvam-M (free)                                 | blackboxai/sarvamai/sarvam-m:free                               | 32768              | $0.00                       | $0.00                        |
+| Shisa AI: Shisa V2 Llama 3.3 70B  (free)                   | blackboxai/shisa-ai/shisa-v2-llama3.3-70b:free                  | 32768              | $0.00                       | $0.00                        |
+| SorcererLM 8x22B                                           | blackboxai/raifle/sorcererlm-8x22b                              | 16000              | $4.50                       | $4.50                        |
+| THUDM: GLM 4 32B                                           | blackboxai/thudm/glm-4-32b                                      | 32000              | $0.24                       | $0.24                        |
+| THUDM: GLM 4 32B (free)                                    | blackboxai/thudm/glm-4-32b:free                                 | 32768              | $0.00                       | $0.00                        |
+| THUDM: GLM Z1 32B                                          | blackboxai/thudm/glm-z1-32b                                     | 32000              | $0.24                       | $0.24                        |
+| THUDM: GLM Z1 32B (free)                                   | blackboxai/thudm/glm-z1-32b:free                                | 32768              | $0.00                       | $0.00                        |
+| THUDM: GLM Z1 Rumination 32B                               | blackboxai/thudm/glm-z1-rumination-32b                          | 32000              | $0.24                       | $0.24                        |
+| TNG: DeepSeek R1T Chimera (free)                           | blackboxai/tngtech/deepseek-r1t-chimera:free                    | 163840             | $0.00                       | $0.00                        |
+| TheDrummer: Anubis 70B V1.1                                | blackboxai/thedrummer/anubis-70b-v1.1                           | 131072             | $0.30                       | $0.80                        |
+| TheDrummer: Anubis Pro 105B V1                             | blackboxai/thedrummer/anubis-pro-105b-v1                        | 131072             | $0.80                       | $1.00                        |
+| TheDrummer: Rocinante 12B                                  | blackboxai/thedrummer/rocinante-12b                             | 32768              | $0.20                       | $0.50                        |
+| TheDrummer: Skyfall 36B V2                                 | blackboxai/thedrummer/skyfall-36b-v2                            | 32768              | $0.50                       | $0.80                        |
+| TheDrummer: UnslopNemo 12B                                 | blackboxai/thedrummer/unslopnemo-12b                            | 32768              | $0.40                       | $0.40                        |
+| TheDrummer: Valkyrie 49B V1                                | blackboxai/thedrummer/valkyrie-49b-v1                           | 131072             | $0.50                       | $0.80                        |
+| Toppy M 7B                                                 | blackboxai/undi95/toppy-m-7b                                    | 4096               | $0.80                       | $1.20                        |
+| Typhoon2 70B Instruct                                      | blackboxai/scb10x/llama3.1-typhoon2-70b-instruct                | 8192               | $0.88                       | $0.88                        |
+| WizardLM-2 8x22B                                           | blackboxai/microsoft/wizardlm-2-8x22b                           | 65536              | $0.48                       | $0.48                        |
+| xAI: Grok 2 1212                                           | blackboxai/x-ai/grok-2-1212                                     | 131072             | $2.00                       | $10.00                       |
+| xAI: Grok 2 Vision 1212                                    | blackboxai/x-ai/grok-2-vision-1212                              | 32768              | $2.00                       | $10.00                       |
+| xAI: Grok 3                                                | blackboxai/x-ai/grok-3                                          | 131072             | $3.00                       | $15.00                       |
+| xAI: Grok 3 Beta                                           | blackboxai/x-ai/grok-3-beta                                     | 131072             | $3.00                       | $15.00                       |
+| xAI: Grok 3 Mini                                           | blackboxai/x-ai/grok-3-mini                                     | 131072             | $0.30                       | $0.50                        |
+| xAI: Grok 3 Mini Beta                                      | blackboxai/x-ai/grok-3-mini-beta                                | 131072             | $0.30                       | $0.50                        |
+| xAI: Grok Vision Beta                                      | blackboxai/x-ai/grok-vision-beta                                | 8192               | $5.00                       | $15.00                       |
