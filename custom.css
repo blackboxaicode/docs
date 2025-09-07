@@ -1,0 +1,29 @@
+/* AI-themed animated border enhancement - keeps existing design, just makes border colorful */
+@keyframes ai-border-glow {
+  0% {
+    box-shadow: 0 0 0 1px #0D6EFD, 0 4px 15px rgba(13, 110, 253, 0.2);
+  }
+  20% {
+    box-shadow: 0 0 0 1px #7928ca, 0 4px 15px rgba(121, 40, 202, 0.2);
+  }
+  40% {
+    box-shadow: 0 0 0 1px #0070f3, 0 4px 15px rgba(0, 112, 243, 0.2);
+  }
+  60% {
+    box-shadow: 0 0 0 1px #00d4ff, 0 4px 15px rgba(0, 212, 255, 0.2);
+  }
+  80% {
+    box-shadow: 0 0 0 1px #50e3c2, 0 4px 15px rgba(80, 227, 194, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 1px #0D6EFD, 0 4px 15px rgba(13, 110, 253, 0.2);
+  }
+}
+
+/* Target the actual card structure from Mintlify */
+a.card:hover {
+  animation: ai-border-glow 2.5s ease-in-out infinite !important;
+  transform: translateY(-1px) !important;
+  transition: transform 0.3s ease !important;
+}
+
