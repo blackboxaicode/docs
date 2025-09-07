@@ -43,24 +43,9 @@
                             "api-reference/responses",
                             "api-reference/parameters",
                             "api-reference/errors",
-                            {
-                                "group": "Chat",
-                                "pages": [
-                                    "api-reference/chat"
-                                ]
-                            },
-                            {
-                                "group": "Image",
-                                "pages": [
-                                    "api-reference/image"
-                                ]
-                            },
-                            {
-                                "group": "Video",
-                                "pages": [
-                                    "api-reference/video"
-                                ]
-                            },
+                            "api-reference/chat",
+                            "api-reference/image",
+                            "api-reference/video",
                             "api-reference/tool-calling"
                         ]
                     },
