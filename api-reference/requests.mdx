@@ -1,17 +1,17 @@
 ---
-title: Requests
-description: Learn about requests to BLACKBOXAI API
+title: "Requests"
+description: "Learn about requests to BLACKBOXAI API"
 ---
 
 ## Completions Request Format
 
-Here is the request schema as a TypeScript type. This will be the body of your `POST` request to the `/api/v1/chat/completions` endpoint.
+Here is the request schema as a TypeScript type. This will be the body of your `POST` request to the `/api/chat/completions` endpoint.
 
 For a complete list of parameters, see the [Parameters](/api-reference/parameters).
 
 <CodeGroup>
 
-```typescript title="Request Schema"
+```typescript Request Schema
 // Definitions of subtypes are below
 type Request = {
   // Either "messages" or "prompt" is required
@@ -134,10 +134,10 @@ To use this features, simply include a message with `role: "assistant"` at the e
 
 <CodeGroup>
 
-```typescript title="TypeScript"
+```typescript TypeScript
 const API_KEY = "YOUR_API_KEY";
 
-fetch('https://api.blackbox.ai/api/v1/chat/completions', {
+fetch('https://api.blackbox.ai/api/chat/completions', {
   method: 'POST',
   headers: {
     Authorization: 'Bearer ${API_KEY}',
@@ -154,4 +154,3 @@ fetch('https://api.blackbox.ai/api/v1/chat/completions', {
 ```
 
 </CodeGroup>
-
