@@ -39,22 +39,10 @@
                         "pages": [
                             "api-reference/introduction",
                             "api-reference/authentication",
-                            "api-reference/error-handling"
-                        ]
-                    },
-                    {
-                        "group": "Models",
-                        "pages": [
-                            "api-reference/models/chat-models",
-                            "api-reference/models/image-models",
-                            "api-reference/models/video-models",
-                            "api-reference/models/speech-models"
-                        ]
-                    },
-                    {
-                        "group": "BLACKBOXAI API",
-                        
-                        "pages": [
+                            "api-reference/requests",
+                            "api-reference/responses",
+                            "api-reference/parameters",
+                            "api-reference/errors",
                             {
                                 "group": "Chat",
                                 "pages": [
@@ -74,6 +62,14 @@
                                 ]
                             },
                             "api-reference/tool-calling"
+                        ]
+                    },
+                    {
+                        "group": "Models",
+                        "pages": [
+                            "api-reference/models/chat-models",
+                            "api-reference/models/image-models",
+                            "api-reference/models/video-models"
                         ]
                     }
                 ]

@@ -1,0 +1,141 @@
+---
+title: Responses
+description: Learn about response from BLACKBOXAI API
+---
+
+## Completions Response Format
+
+BLACKBOXAI uses OpenRouter under the hood and it normalizes the schema across models and providers to comply with the [OpenAI Chat API](https://platform.openai.com/docs/api-reference/chat).
+
+This means that `choices` is always an array, even if the model only returns one completion. Each choice will contain a `delta` property if a stream was requested and a `message` property otherwise. This makes it easier to use the same code for all models.
+
+Here's the response schema as a TypeScript type:
+
+```typescript TypeScript
+// Definitions of subtypes are below
+type Response = {
+  id: string;
+  // Depending on whether you set "stream" to "true" and
+  // whether you passed in "messages" or a "prompt", you
+  // will get a different output shape
+  choices: (NonStreamingChoice | StreamingChoice | NonChatChoice)[];
+  created: number; // Unix timestamp
+  model: string;
+  object: 'chat.completion' | 'chat.completion.chunk';
+
+  system_fingerprint?: string; // Only present if the provider supports it
+
+  // Usage data is always returned for non-streaming.
+  // When streaming, you will get one usage object at
+  // the end accompanied by an empty choices array.
+  usage?: ResponseUsage;
+};
+```
+
+```typescript
+// If the provider returns usage, we pass it down
+// as-is. Otherwise, we count using the GPT-4 tokenizer.
+
+type ResponseUsage = {
+  /** Including images and tools if any */
+  prompt_tokens: number;
+  /** The tokens generated */
+  completion_tokens: number;
+  /** Sum of the above two fields */
+  total_tokens: number;
+};
+```
+
+```typescript
+// Subtypes:
+type NonChatChoice = {
+  finish_reason: string | null;
+  text: string;
+  error?: ErrorResponse;
+};
+
+type NonStreamingChoice = {
+  finish_reason: string | null;
+  native_finish_reason: string | null;
+  message: {
+    content: string | null;
+    role: string;
+    tool_calls?: ToolCall[];
+  };
+  error?: ErrorResponse;
+};
+
+type StreamingChoice = {
+  finish_reason: string | null;
+  native_finish_reason: string | null;
+  delta: {
+    content: string | null;
+    role?: string;
+    tool_calls?: ToolCall[];
+  };
+  error?: ErrorResponse;
+};
+
+type ErrorResponse = {
+  code: number; // See "Error Handling" section
+  message: string;
+  metadata?: Record<string, unknown>; // Contains additional error information such as provider details, the raw error message, etc.
+};
+
+type ToolCall = {
+  id: string;
+  type: 'function';
+  function: FunctionCall;
+};
+```
+
+Here's an example:
+
+```json
+{
+  "id":"gen-xxxxxxxxxxxxxx",
+  "created":1757140020,
+  "model":"openai/gpt-4",
+  "object":"chat.completion",
+  "system_fingerprint":"None",
+  "choices":[
+    {
+      "finish_reason":"stop", // Normalized finish_reason
+      "index":0,
+      "message":{
+        // will be "delta" if streaming
+        "content":"The capital of France is Paris.",
+        "role":"assistant",
+        "tool_calls":"None",
+        "function_call":"None"
+      },
+      "provider_specific_fields":{
+        "native_finish_reason":"stop" // The raw finish_reason from the provider
+      }
+    }
+  ],
+  "usage":{
+    "completion_tokens":7,
+    "prompt_tokens":14,
+    "total_tokens":21,
+    "completion_tokens_details":{
+      "accepted_prediction_tokens":"None",
+      "audio_tokens":"None",
+      "reasoning_tokens":0,
+      "rejected_prediction_tokens":"None"
+    },
+    "prompt_tokens_details":{
+      "audio_tokens":0,
+      "cached_tokens":0
+    }
+  },
+  "provider":"OpenAI"
+}
+```
+
+## Finish Reason
+
+OpenRouter normalizes each model's `finish_reason` to one of the following values: `tool_calls`, `stop`, `length`, `content_filter`, `error`.
+
+Some models and providers may have additional finish reasons. The raw finish_reason string returned by the model is available via the `native_finish_reason` property.
+
