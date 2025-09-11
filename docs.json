@@ -81,7 +81,7 @@
         "primary": {
             "type": "button",
             "label": "Dashboard",
-            "href": "https://www.blackbox.ai"
+            "href": "https://www.blackbox.ai/dashboard/credits"
         }
     },
     "contextual": {
