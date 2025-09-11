@@ -74,13 +74,13 @@
     "navbar": {
         "links": [
             {
-                "label": "Support",
-                "href": "mailto:code@blackbox.ai"
+                "label": "API Keys",
+                "href": "https://www.blackbox.ai/dashboard"
             }
         ],
         "primary": {
             "type": "button",
-            "label": "Dashboard",
+            "label": "Credits",
             "href": "https://www.blackbox.ai/dashboard/credits"
         }
     },
