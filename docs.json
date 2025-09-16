@@ -3,9 +3,9 @@
     "theme": "mint",
     "name": "BLACKBOXAI",
     "colors": {
-        "primary": "#0D6EFD",
-        "light": "#3399FF",
-        "dark": "#004C99"
+        "primary": "#000000",
+        "light": "#FFFFFF",
+        "dark": "#000000"
     },
     "favicon": "/favicon.svg",
     "customCSS": "/custom.css",
