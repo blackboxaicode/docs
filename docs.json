@@ -23,12 +23,12 @@
                         "pages": [
                             "/features/web-app",
                             {
-                                "group": "VS Code Extension",
+                                "group": "VS Code Agent",
                                 "pages": [
-                                    "/features/vscode-extension/introduction",
-                                    "/features/vscode-extension/getting-started",
-                                    "/features/vscode-extension/key-features",
-                                    "/features/vscode-extension/best-practices"
+                                    "/features/vscode-agent/introduction",
+                                    "/features/vscode-agent/getting-started",
+                                    "/features/vscode-agent/key-features",
+                                    "/features/vscode-agent/best-practices"
                                 ]
                             },
                             {
