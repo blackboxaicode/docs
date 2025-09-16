@@ -24,14 +24,14 @@
                             "/features/web-app",
                             "/features/vscode-extension",
                             {
-                                "group": "Desktop App",
+                                "group": "Desktop Agent",
                                 "pages": [
-                                    "/features/desktop-app/introduction",
-                                    "/features/desktop-app/getting-started",
-                                    "/features/desktop-app/key-features",
-                                    "/features/desktop-app/lets-build",
-                                    "/features/desktop-app/manage-extensions",
-                                    "/features/desktop-app/end-to-end-encryption"
+                                    "/features/desktop-agent/introduction",
+                                    "/features/desktop-agent/getting-started",
+                                    "/features/desktop-agent/key-features",
+                                    "/features/desktop-agent/lets-build",
+                                    "/features/desktop-agent/manage-extensions",
+                                    "/features/desktop-agent/end-to-end-encryption"
                                 ]
                             },
 							"/features/mobile-app",
