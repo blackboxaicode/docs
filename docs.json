@@ -23,7 +23,17 @@
                         "pages": [
                             "/features/web-app",
                             "/features/vscode-extension",
-							"/features/desktop-app",
+                            {
+                                "group": "Desktop App",
+                                "pages": [
+                                    "/features/desktop-app/introduction",
+                                    "/features/desktop-app/getting-started",
+                                    "/features/desktop-app/key-features",
+                                    "/features/desktop-app/lets-build",
+                                    "/features/desktop-app/manage-extensions",
+                                    "/features/desktop-app/end-to-end-encryption"
+                                ]
+                            },
 							"/features/mobile-app",
 							"/features/robocoder",
 							"/features/autonomous-agent",
