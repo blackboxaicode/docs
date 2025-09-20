@@ -45,7 +45,8 @@
 							"/features/mobile-app",
 							"/features/robocoder",
 							"/features/autonomous-agent",
-							"/features/blackbox-ide"
+							"/features/blackbox-ide",
+                            "/features/blackbox-cli"
                         ]
                     }
                 ]
