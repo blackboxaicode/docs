@@ -11,23 +11,23 @@ BlackBox AI is a comprehensive AI-powered development ecosystem that transforms 
 - BlackBox AI combines the familiar features of modern development environments with advanced AI capabilities. BlackBox AI Agent is a powerful tool capable of understanding complex code bases, performing complex coding tasks with the help of state-of-the-art AI models.
 - The system is designed for professional developers who need reliable, accurate code generation with minimal debugging overhead.
 
-- This document presents a comprehensive comparison based on empirical testing of 10 identical feature addition tasks across different repositories. Our analysis demonstrates how BlackBox AI consistently outperforms GitHub Copilot with 2x faster implementation times, superior code quality, and significantly lower error rates.
+This document presents a comprehensive comparison based on empirical testing of 10 identical feature addition tasks across different repositories. Our analysis demonstrates how BlackBox AI consistently outperforms GitHub Copilot with 2x faster implementation times, superior code quality, and significantly lower error rates.
 
 ## Technical Comparison
 
 ### **Code Quality and Accuracy**
 
 **BlackBox AI:**
-- Advanced prompt engineering ensures best solutions and adherence to best coding practices
+- Advanced prompt engineering ensures best solutions and adherence to coding best practices
 - Built-in testing automatically corrects runtime and compilation errors
 - Implements DRY principles, design patterns, and reuses existing components
 - Structured code analysis reduces hallucinations and integration issues
-- Bigger context size limit for complex tasks.
+- Larger context size limit for complex tasks
 
 **GitHub Copilot:**
 - Generic one-size-fits-all approach may not align with project standards
-- Manual pompting for debugging is required, especially for UI-related runtime issues
-- Limited understanding of existing codebase architecture due to context size limitations.
+- Manual prompting for debugging is required, especially for UI-related runtime issues
+- Limited understanding of existing codebase architecture due to context size limitations
 
 On a given task, while BlackBox makes a clear plan of action for implementation and asks for user feedback, Copilot jumps right into execution causing unwanted side effects.
 
@@ -37,7 +37,7 @@ BlackBox uses its built-in testing capabilities to run and test code it has writ
 
 ![BlackBox automated testing](/images/comparisons/bb_inbuild_testing.png)
 
-### **Context Understanding and Planning**
+### **Context Understanding and Processing**
 
 **BlackBox AI:**
 - Extended context window allows handling of complex multi-file tasks without information loss
@@ -46,15 +46,15 @@ BlackBox uses its built-in testing capabilities to run and test code it has writ
 - Maintains awareness of entire project structure and dependencies
 
 **GitHub Copilot:**
-- Context summarizatio due to context window size limitations may lead to loss critical information in longer tasks
+- Context summarization due to context window size limitations may lead to loss of critical information in longer tasks
 - Focuses primarily on immediate code context rather than project-wide understanding
 - Limited developer control over planned changes
 
-While working on tasks involving multiple large files, Copilot becomes slow, tried reading files in chunks to understand the content, which lead to slow execution and poor context understanding.
+While working on tasks involving multiple large files, Copilot becomes slow, trying to read files in chunks to understand the content, which leads to slow execution and poor context understanding.
 
 ![Copilot Slow File Reading](/images/comparisons/cp_slow_file_reading.png)
 
-Where as the BlackBox's larger context windoe allowed it to read multiple files as a whole in one go, leading it to better understand and perform the given task in a shorter span of time.
+Whereas BlackBox's larger context window allows it to read multiple files as a whole in one go, leading to better understanding and performance of the given task in a shorter span of time.
 
 ![BlackBox Fast File Reading](/images/comparisons/bb_fast_file_reading.png)
 
@@ -64,7 +64,7 @@ Where as the BlackBox's larger context windoe allowed it to read multiple files 
 
 **BlackBox AI:**
 - Maintains performance and accuracy even with extensive modifications
-- Handles multi-file changes effectively while maintaining history of the changes.
+- Handles multi-file changes effectively while maintaining history of the changes
 - Consistent quality across large-scale refactoring tasks
 
 **GitHub Copilot:**
@@ -72,7 +72,7 @@ Where as the BlackBox's larger context windoe allowed it to read multiple files 
 - Struggles with complex multi-file modifications
 - May fail or produce inconsistent results on extensive tasks
 
-Multiple edits in large code files lead Copilot to corrupt the file. It had to manually restore the changes to continue working on it again, wasting valuable time and tokens of the user.
+Multiple edits in large code files lead Copilot to corrupt the file. It has to be manually restored to continue working on it again, wasting valuable time and tokens of the user.
 
 ![Copilot Failing on Big Changes](/images/comparisons/cp_failing_to_handle_big_changes.png)
 
@@ -82,14 +82,14 @@ Multiple edits in large code files lead Copilot to corrupt the file. It had to m
 ### **Code Practices and Quality**
 
 **BlackBox AI:**
-- Produces clean, well-structured code changes for given task
+- Produces clean, well-structured code changes for a given task
 - Maintains consistent code formatting
-- Adheres to established style guidelines followed across the existing project.
+- Adheres to established style guidelines followed across the existing project
 
 **GitHub Copilot:**
-- Prone to use famous options for the solutions rather than the ones used in the code.
-- Prone to install multiple different types of dependencies even if the existing ones can perform the job.
-- Tend to follow most used solution to a problem first, despite it clashing with the existing code.
+- Prone to use popular options for solutions rather than the ones used in the code
+- Prone to install multiple different types of dependencies even if existing ones can perform the job
+- Tends to follow the most used solution to a problem first, despite it clashing with the existing code
 
 
 On a given task to improve the UI experience on mobile devices, Copilot took the approach of making individual changes in the relevant files, whereas BlackBox AI took the approach of using a global.css file to apply the changes globally on all relevant files, which is both easy to verify and maintain for the user.
@@ -136,7 +136,7 @@ For a given task, BlackBox AI finds the optimal way to perform it with minimal c
 Evaluation across 10 identical feature addition tasks showed:
 
 - **2x faster development** with BlackBox AI
-- **Bigger context window** for better solutions, Handling complex tasks and understanding large code bases.
+- **Larger context window** for better solutions, handling complex tasks and understanding large codebases
 - **Superior code quality** with better adherence to established patterns
 - **Significantly reduced error rates** and debugging overhead
 
@@ -154,14 +154,14 @@ Yes, BlackBox AI implements enterprise-grade security with end-to-end encryption
 
 ## Conclusion
 
-BlackBox AI outperforms Copilot across all critical metrics: 2x faster development speed, superior accuracy with built-in error correction, large context without information loss, and significantly fewer bugs through automated testing. The choice is clear for developers seeking professional-grade AI assistance.
+BlackBox AI outperforms Copilot across all critical metrics: 2x faster development speed, superior accuracy with built-in error correction, larger context window without information loss, and significantly fewer bugs through automated testing. The choice is clear for developers seeking professional-grade AI assistance.
 
 ## Experience the Difference
 
 Don't just take our word for it - experience BlackBox AI's superior performance firsthand:
 
 - **[Install VS Code Extension](/features/vscode-agent/getting-started)** - Get started in your current environment
-- **[Try BlackBox AI IDE](/features/blackbox-ide)** - Get started in our dedicated BlackBox AI IDE.
+- **[Try BlackBox AI IDE](/features/blackbox-ide)** - Get started in our dedicated BlackBox AI IDE
 - **[Try BlackBox AI Web App](https://www.blackbox.ai)** - Access full platform capabilities  
 
 ---
