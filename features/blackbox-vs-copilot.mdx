@@ -8,7 +8,7 @@ BlackBox AI is a comprehensive AI-powered development ecosystem that transforms 
 
 ### **What Sets BlackBox AI Apart**
 
-- BlackBox AI combines the familiar features of modern development environments with advanced AI capabilities. BlackBox AI Agent is a poerful tool capable of understanding complex code bases, perform complex coding tasks with the help of state of the art AI models.
+- BlackBox AI combines the familiar features of modern development environments with advanced AI capabilities. BlackBox AI Agent is a powerful tool capable of understanding complex code bases, performing complex coding tasks with the help of state-of-the-art AI models.
 - The system is designed for professional developers who need reliable, accurate code generation with minimal debugging overhead.
 
 - This document presents a comprehensive comparison between GitHub Copilot and BlackBox AI based on empirical testing across identical development tasks. Our analysis demonstrates how BlackBox AI consistently outperforms GitHub Copilot in key areas including development speed, code quality, error rates, and overall developer productivity.
@@ -29,11 +29,11 @@ BlackBox AI is a comprehensive AI-powered development ecosystem that transforms 
 - Manual debugging required, especially for UI-related runtime issues
 - Limited understanding of existing codebase architecture
 
-On a given task while blackbox makes a claer plan of action for implementation and asks for user feedback, copilot jumps right into execution causing unwanted side effects.
+On a given task, while BlackBox makes a clear plan of action for implementation and asks for user feedback, Copilot jumps right into execution causing unwanted side effects.
 
 ![BlackBox Plan Formation](/images/comparisons/bb_planning_for_a_task.png)
 
-BlackBox uses its inbuilt testing capabilities to run and test code it has written and correct itself in case of errros.
+BlackBox uses its built-in testing capabilities to run and test code it has written and correct itself in case of errors.
 
 ![BlackBox automated testing](/images/comparisons/bb_inbuild_testing.png)
 
@@ -50,18 +50,18 @@ BlackBox uses its inbuilt testing capabilities to run and test code it has writt
 - Focuses primarily on immediate code context rather than project-wide understanding
 - Limited developer control over planned changes
 
-While working with multiple large files copilot becomes slow, trying to read file in chunks to understand the content which leads to slow execution and poor context understanding.
+While working with multiple large files, Copilot becomes slow, trying to read files in chunks to understand the content, which leads to slow execution and poor context understanding.
 
 ![Copilot Slow File Reading](/images/comparisons/cp_slow_file_reading.png)
 
-Where as the larger context of BlacBox AI allows it to read multiple files as a whole in one go to better understand and perform the given task in a shorter span of time.
+Whereas the larger context of BlackBox AI allows it to read multiple files as a whole in one go to better understand and perform the given task in a shorter span of time.
 
 ![BlackBox Fast File Reading](/images/comparisons/bb_fast_file_reading.png)
 
 
 
 
-### **Handling Complex and Large code file Changes**
+### **Handling Complex and Large Code File Changes**
 
 **BlackBox AI:**
 - Maintains performance and accuracy even with extensive modifications
@@ -73,7 +73,7 @@ Where as the larger context of BlacBox AI allows it to read multiple files as a 
 - Struggles with complex multi-file modifications
 - May fail or produce inconsistent results on extensive tasks
 
-Multiple edits in large code files lead copilot to corrupt the file. It has to manually restore the file to work on it again, waskign valuable time and tokens of the user. 
+Multiple edits in large code files lead Copilot to corrupt the file. It has to be manually restored to work on it again, wasting valuable time and tokens of the user.
 
 ![Copilot Failing on Big Changes](/images/comparisons/cp_failing_to_handle_big_changes.png)
 
@@ -92,7 +92,7 @@ Multiple edits in large code files lead copilot to corrupt the file. It has to m
 - Less attention to code formatting standards
 - Requires manual cleanup for style consistency
 
-On a given task to improve the UI experience on mobile devices copilot took the approach of making individual changes in the relevant files, where as Blackbox AI took the approach of using global.css file to apply the changes globally on all relevant files which is both easy to verify and maintain for the user.
+On a given task to improve the UI experience on mobile devices, Copilot took the approach of making individual changes in the relevant files, whereas BlackBox AI took the approach of using a global.css file to apply the changes globally on all relevant files, which is both easy to verify and maintain for the user.
 
 | BlackBox AI | GitHub Copilot |
 |-------------|----------------|
@@ -112,7 +112,7 @@ On a given task to improve the UI experience on mobile devices copilot took the 
 - Less precise targeting of modifications
 - Potential for over-engineering solutions
 
-For a given task BlackBox AI finds the optimal way to perform it with as minimal code changes as possible.
+For a given task, BlackBox AI finds the optimal way to perform it with minimal code changes.
 | BlackBox AI | GitHub Copilot |
 |-------------|----------------|
 |![BlackBox Precise Changes](/images/comparisons/bb_changes_for_a_task.png)|![Copilot Extensive Changes](/images/comparisons/cp_changes_for_a_task.png)|
