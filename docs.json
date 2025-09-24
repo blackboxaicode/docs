@@ -47,7 +47,8 @@
 							"/features/autonomous-agent",
 							"/features/blackbox-ide",
                             "/features/blackbox-cli",
-                            "/features/blackbox-vs-copilot"
+                            "/features/blackbox-vs-copilot",
+                            "/features/blackbox-vs-cursor"
                         ]
                     }
                 ]
