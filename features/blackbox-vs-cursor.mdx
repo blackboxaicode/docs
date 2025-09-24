@@ -6,7 +6,7 @@ title: "BLACKBOX AI vs Cursor"
 
 This document presents a comprehensive comparison between BlackBox AI Agent and Cursor, based on empirical testing of 10 identical tasks across different repositories. 
 
-## Summary of the findings.
+## Summary of the Findings
 
 BlackBox AI demonstrated **superior performance in reliability, code quality, and autonomous capabilities** compared to Cursor. While both tools showed similar execution speeds, BlackBox AI achieved a **100% success rate** compared to Cursor's 90% success rate, with **zero manual interventions** required versus Cursor.
 
@@ -44,7 +44,7 @@ BlackBox AI's **larger context window**, **integrated testing capabilities**, **
 - Limited context can lead to inconsistent implementations
 - Often disregards existing UI patterns, creating inconsistent designs
 
-On a given task, while BlackBox makes a clear plan of action for implementation and asks for user feedback.
+On a given task, BlackBox makes a clear plan of action for implementation and asks for user feedback.
 
 ![BlackBox Plan Formation](/images/comparisons/bb_planning_for_a_task.png)
 
@@ -71,7 +71,7 @@ BlackBox's larger context window allows it to read multiple files as a whole in 
 
 ![BlackBox Fast File Reading](/images/comparisons/bb_fast_file_reading.png)
 
-Cursor's context window may fill up after reading a few big files leading to summarization and loss of context, especially when the changes are big.
+Cursor's context window may fill up after reading a few large files, leading to summarization and loss of context, especially when the changes are extensive.
 ![Cursor File Reading](/images/comparisons/cs_reading_files.png)
 ![Cursor Context Window](/images/comparisons/cs_limited_context.png)
 
@@ -108,7 +108,7 @@ BlackBox uses its built-in testing capabilities to run and test code it has writ
 
 ![BlackBox automated testing](/images/comparisons/bb_inbuild_testing.png)
 
-Cursor tries to use the terminal and CURL commands to get the code or rendered page which will not help in robust testing or in debugging a runtime error.
+Cursor tries to use the terminal and CURL commands to get the code or rendered page, which will not help in robust testing or debugging runtime errors.
 
 ![Cursor Command line testing](/images/comparisons/cs_terminal_based_testing.png)
 
@@ -332,7 +332,7 @@ BlackBox AI offers better consistency across team members due to its superior ad
 | **Success Rate** | 100% after correction (but with initial UI issues) | 100% |
 
 **Cursor Issues:**
-- Took long to make initial changes
+- Took a long time to make initial changes
 - UI styling of new page completely off
 - Footer positioned at center of page
 - Required correction prompt
