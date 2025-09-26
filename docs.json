@@ -50,7 +50,9 @@
                                 "group": "BLACKBOX CLI",
                                 "pages": [
                                     "/features/blackbox-cli/introduction",
-                                    "/features/blackbox-cli/getting-started"
+                                    "/features/blackbox-cli/getting-started",
+                                    "/features/blackbox-cli/key-features",
+                                    "/features/blackbox-cli/common-use-cases"
                                 ]
                             },
                             "/features/blackbox-vs-copilot",
