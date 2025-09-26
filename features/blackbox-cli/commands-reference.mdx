@@ -1,0 +1,66 @@
+Complete reference for all BLACKBOX CLI commands and keyboard shortcuts.
+
+## Core Commands
+
+| Command                    | Description                                                    |
+| -------------------------- | -------------------------------------------------------------- |
+| `blackbox configure`       | Configure Blackbox settings                                   |
+| `blackbox info`            | Display Blackbox information                                   |
+| `blackbox mcp`             | Run one of the mcp servers bundled with blackbox              |
+| `blackbox session`         | Start or resume interactive chat sessions [aliases: s]        |
+| `blackbox project`         | Open the last project directory [aliases: p]                  |
+| `blackbox projects`        | List recent project directories [aliases: ps]                 |
+| `blackbox run`             | Execute commands from an instruction file or stdin            |
+| `blackbox recipe`          | Recipe utilities for validation and deeplinking               |
+| `blackbox schedule`        | Manage scheduled jobs [aliases: sched]                        |
+| `blackbox update`          | Update the blackbox CLI version                                |
+| `blackbox bench`           | Evaluate system configuration across a range of practical tasks |
+| `blackbox web`             | Experimental: Start a web server with a chat interface        |
+| `blackbox help`            | Print this message or the help of the given subcommand(s)     |
+
+## Installation Commands
+
+Platform-specific installation commands:
+
+### Unix/Linux/macOS
+```bash
+curl -fsSL https://shell.blackbox.ai/api/scripts/omni-cli/download.sh | bash
+```
+
+### Windows (PowerShell)
+```powershell
+Invoke-WebRequest -Uri "https://shell.blackbox.ai/api/scripts/omni-cli/download.ps1" -OutFile "download.ps1"; .\download.ps1
+```
+
+## Configuration Commands
+
+Set up and manage your BLACKBOX CLI configuration:
+
+```bash
+# Initial configuration
+blackbox configure
+
+```
+
+
+
+## Keyboard Shortcuts
+
+### General Controls
+
+| Shortcut         | Description                        | Context                                                     |
+| :--------------- | :--------------------------------- | :---------------------------------------------------------- |
+| `Ctrl+C`         | Cancel current input or generation | Standard interrupt / Exit BLACKBOX CLI session            |
+| `Ctrl+D`         | Exit BLACKBOX CLI session          | EOF signal                                                  |
+| `Ctrl+L`         | Clear terminal screen              | Keeps conversation history                                  |
+| `Up/Down arrows` | Navigate command history           | Recall previous inputs                                      |                           |
+
+### Multiline Input
+
+| Method           | Shortcut       | Context                           |
+| :--------------- | :------------- | :-------------------------------- |
+| Quick escape     | `\` + `Enter`  | Works in all terminals            |
+| macOS default    | `Option+Enter` | Default on macOS                  |
+| Control sequence | `Ctrl+J`       | Line feed character for multiline |
+| Paste mode       | Paste directly | For code blocks, logs             |
+
