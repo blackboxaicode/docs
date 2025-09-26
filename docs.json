@@ -46,7 +46,6 @@
 							"/features/robocoder",
 							"/features/autonomous-agent",
 							"/features/blackbox-ide",
-                            "/features/blackbox-cli",
                             {
                                 "group": "BLACKBOX CLI",
                                 "pages": [
