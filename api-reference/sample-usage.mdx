@@ -1,0 +1,265 @@
+---
+title: Sample Usage
+description: Examples of using Blackbox AI API for chat, image, and video models
+---
+
+Use Blackbox AI's rich API for Chat, Image, and Video models to directly integrate the power of AI into your applications.
+
+# OpenAI Compatibility
+
+Blackbox AI's API endpoints for chat, images, and video are fully compatible with OpenAI's API.
+
+If you have an application that uses OpenAI's client libraries, you can configure it to point to Blackbox AI's API servers and use our models.
+
+## Configuring OpenAI to use Blackbox AI's API
+
+Pass your Blackbox AI API key to the `api_key` option and set the `base_url` to `https://api.blackbox.ai`:
+
+<CodeGroup>
+  ```python Python
+  import os
+  import openai
+
+  client = openai.OpenAI(
+      api_key=os.environ.get("BLACKBOX_API_KEY"),
+      base_url="https://api.blackbox.ai",
+  )
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from "openai";
+
+  const client = new OpenAI({
+    apiKey: process.env.BLACKBOX_API_KEY,
+    baseURL: "https://api.blackbox.ai",
+  });
+  ```
+</CodeGroup>
+
+You can find your API key in your Blackbox AI account settings.
+
+## Querying a Chat Model
+
+Query one of our [chat models](https://docs.blackbox.ai/api-reference/models/chat-models), like GPT-4:
+
+<CodeGroup>
+  ```python Python
+  import os
+  import openai
+
+  client = openai.OpenAI(
+      api_key=os.environ.get("BLACKBOX_API_KEY"),
+      base_url="https://api.blackbox.ai",
+  )
+
+  response = client.chat.completions.create(
+      model="blackboxai/openai/gpt-4",
+      messages=[
+          {
+              "role": "system",
+              "content": "You are a helpful assistant.",
+          },
+          {
+              "role": "user",
+              "content": "What is the capital of France?",
+          },
+      ],
+  )
+
+  print(response.choices[0].message.content)
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from 'openai';
+
+  const client = new OpenAI({
+    apiKey: process.env.BLACKBOX_API_KEY,
+    baseURL: 'https://api.blackbox.ai',
+  });
+
+  const response = await client.chat.completions.create({
+    model: 'blackboxai/openai/gpt-4',
+    messages: [
+      { role: 'user', content: 'What is the capital of France?' },
+    ],
+  });
+
+  console.log(response.choices[0].message.content);
+  ```
+</CodeGroup>
+
+Output:
+
+```text
+The capital of France is Paris.
+```
+
+## Streaming a Chat Response
+
+Use streaming to receive responses incrementally:
+
+<CodeGroup>
+  ```python Python
+  import os
+  import openai
+
+  client = openai.OpenAI(
+      api_key=os.environ.get("BLACKBOX_API_KEY"),
+      base_url="https://api.blackbox.ai",
+  )
+
+  stream = client.chat.completions.create(
+      model="blackboxai/openai/gpt-4",
+      messages=[
+          {
+              "role": "system",
+              "content": "You are a helpful assistant.",
+          },
+          {"role": "user", "content": "Explain quantum computing briefly"},
+      ],
+      stream=True,
+  )
+
+  for chunk in stream:
+      print(chunk.choices[0].delta.content or "", end="", flush=True)
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from 'openai';
+
+  const client = new OpenAI({
+    apiKey: process.env.BLACKBOX_API_KEY,
+    baseURL: 'https://api.blackbox.ai',
+  });
+
+  async function run() {
+    const stream = await client.chat.completions.create({
+      model: 'blackboxai/openai/gpt-4',
+      messages: [
+        { role: 'system', content: 'You are a helpful assistant' },
+        { role: 'user', content: 'Explain quantum computing briefly' },
+      ],
+      stream: true,
+    });
+
+    for await (const chunk of stream) {
+      process.stdout.write(chunk.choices[0]?.delta?.content || '');
+    }
+  }
+
+  run();
+  ```
+</CodeGroup>
+
+
+## Image Generation
+
+Generate images from text prompts using our image models:
+
+<CodeGroup>
+  ```python Python
+  from openai import OpenAI
+  import os
+
+  client = OpenAI(
+      api_key=os.environ.get("BLACKBOX_API_KEY"),
+      base_url="https://api.blackbox.ai",
+  )
+
+  response = client.chat.completions.create(
+      model="blackboxai/black-forest-labs/flux-pro",
+      messages=[
+          {
+              "role": "user",
+              "content": "A futuristic cityscape at sunset",
+          }
+      ],
+  )
+
+  print(response.choices[0].message.content)  # URL to the generated image
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from 'openai';
+
+  const client = new OpenAI({
+    apiKey: process.env.BLACKBOX_API_KEY,
+    baseURL: 'https://api.blackbox.ai',
+  });
+
+  async function main() {
+    const response = await client.chat.completions.create({
+      model: "blackboxai/black-forest-labs/flux-pro",
+      messages: [
+        { role: "user", content: "A futuristic cityscape at sunset" },
+      ],
+    });
+
+    console.log(response.choices[0].message.content);  // URL to the generated image
+  }
+
+  main();
+  ```
+</CodeGroup>
+
+The response content will be a URL to the generated image.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/image_gen.png" alt="Generated Image" style={{width: '300px'}} />
+</div>
+
+## Video Generation
+
+Generate videos from text prompts using our video models:
+
+<CodeGroup>
+  ```python Python
+  from openai import OpenAI
+  import os
+
+  client = OpenAI(
+      api_key=os.environ.get("BLACKBOX_API_KEY"),
+      base_url="https://api.blackbox.ai",
+  )
+
+  response = client.chat.completions.create(
+      model="blackboxai/google/veo-2",
+      messages=[
+          {
+              "role": "user",
+              "content": "A Tesla car driving on a highway at dusk",
+          }
+      ],
+  )
+
+  print(response.choices[0].message.content)  # URL to the generated video
+  ```
+
+  ```typescript TypeScript
+  import OpenAI from 'openai';
+
+  const client = new OpenAI({
+    apiKey: process.env.BLACKBOX_API_KEY,
+    baseURL: 'https://api.blackbox.ai',
+  });
+
+  async function main() {
+    const response = await client.chat.completions.create({
+      model: "blackboxai/google/veo-2",
+      messages: [
+        { role: "user", content: "A Tesla car driving on a highway at dusk" },
+      ],
+    });
+
+    console.log(response.choices[0].message.content);  // URL to the generated video
+  }
+
+  main();
+  ```
+</CodeGroup>
+
+The response content will be a URL to the generated video.
+
+<div style={{textAlign: 'center'}}>
+  <iframe src="/images/video_gen.mp4" width="560" height="315" frameborder="0" allowfullscreen></iframe>
+</div>

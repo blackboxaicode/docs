@@ -79,7 +79,8 @@
                             "api-reference/chat",
                             "api-reference/image",
                             "api-reference/video",
-                            "api-reference/tool-calling"
+                            "api-reference/tool-calling",
+                            "api-reference/sample-usage"
                         ]
                     },
                     {
