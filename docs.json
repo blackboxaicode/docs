@@ -74,6 +74,7 @@
                             "api-reference/requests",
                             "api-reference/responses",
                             "api-reference/parameters",
+                            "api-reference/prompt-caching",
                             "api-reference/errors",
                             "api-reference/chat",
                             "api-reference/image",
