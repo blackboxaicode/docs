@@ -448,4 +448,69 @@ Suppose you need to understand an existing codebase or learn new concepts.
 
 ***
 
+## Manage concurrent development workflows with Git worktrees
+
+Imagine you need to tackle multiple coding tasks at the same time while keeping each Blackbox CLI instance completely separate for better context of changes and isolation of work.
+
+<Steps>
+  <Step title="What is Git worktrees">
+    Git worktrees let you check out different branches from the same repository into separate folders. Each folder gets its own working directory with independent files, but they all share the same Git history. Check out the [official Git worktree guide](https://git-scm.com/docs/git-worktree) for more details.
+  </Step>
+
+  <Step title="Set up a new worktree">
+    ```bash
+    # Set up a new worktree with a fresh branch
+    git worktree add ../my-new-feature -b enhancement-ui
+
+    # Or set up a worktree for an existing branch
+    git worktree add ../my-app-fix fix-login-issue
+    ```
+
+    This creates a separate folder with an independent copy of your repository.
+  </Step>
+
+  <Step title="Launch Blackbox CLI in each worktree">
+    ```bash
+    # Move to your worktree directory
+    cd ../my-new-feature
+
+    # Start Blackbox CLI in this isolated space
+    blackbox
+    ```
+  </Step>
+
+  <Step title="Launch Blackbox CLI in another worktree">
+    ```bash
+    cd ../my-app-fix
+    blackbox
+    ```
+  </Step>
+
+  <Step title="Oversee your worktrees">
+    ```bash
+    # View all active worktrees
+    git worktree list
+
+    # Clean up a worktree when finished
+    git worktree remove ../my-new-feature
+    ```
+  </Step>
+</Steps>
+
+<Tip>
+  Tips:
+
+  * Each worktree maintains its own file state, ideal for simultaneous Blackbox CLI sessions
+  * Modifications in one worktree don't impact others, ensuring Blackbox instances operate independently
+  * All worktrees access the same Git history and remote repositories
+  * For extended tasks, let Blackbox work in one worktree while you code in another
+  * Choose clear folder names to quickly identify each worktree's purpose
+  * Set up your development environment in each new worktree based on your project's needs, which may involve:
+    * JavaScript projects: Installing dependencies (`npm install`, `yarn install`)
+    * Python projects: Creating virtual environments or using package managers
+    * Other languages: Following your project's standard initialization steps
+</Tip>
+
+***
+
 
