@@ -5,8 +5,211 @@ description: "Start building powerful applications with our state-of-the-art mod
 
 The BLACKBOX AI API provides programmatic access to our advanced generative models. You can integrate our technology into your own applications to power features like conversational chat, automated content creation, image generation, and much more.
 
-This documentation will guide you through authenticating, understanding our models, and making your first API calls.
+This documentation will guide you through authenticating, understanding our models, and making your first API calls. Get started with just a few lines of code using your preferred programming language or framework.
+
+<Tip>
+  New to BLACKBOX AI? Check out our [Authentication guide](/api-reference/authentication) to get your API key and start making requests.
+</Tip>
 
 BLACKBOXAI uses OpenRouter under the hood for managing our vast models and its request and response schemas are very similar to the OpenAI Chat API, with a few small differences. It normalizes the schema across models and providers.
+
+## Quick Start
+
+Get up and running with the BLACKBOX AI API in minutes. The examples below show you how to make your first chat completion request using different approaches.
+
+### Using Direct API Calls
+
+<Tip>
+  You can use our interactive [Chat API documentation](/api-reference/chat) to explore all available parameters and test requests directly.
+</Tip>
+
+<CodeGroup>
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+API_URL = "https://api.blackbox.ai/chat/completions"
+
+headers = {
+  "Authorization": f"Bearer {API_KEY}",
+  "Content-Type": "application/json"
+}
+
+data = {
+    "model": "blackboxai/openai/gpt-4",
+    "messages": [
+        {
+            "role": "user",
+            "content": "What is async and await in JS?"
+        }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 256,
+    "stream": False
+}
+
+response = requests.post(API_URL, headers=headers, json=data)
+print(response.json())
+```
+
+```javascript Node.js
+const API_KEY = "YOUR_API_KEY";
+const API_URL = "https://api.blackbox.ai/chat/completions";
+
+const data = {
+    "model": "blackboxai/openai/gpt-4",
+    "messages": [
+        {
+            "role": "user",
+            "content": "What is async and await in JS?"
+        }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 256,
+    "stream": false
+};
+
+const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+        'Authorization': `Bearer ${API_KEY}`,
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+});
+
+const responseData = await response.json();
+console.log(responseData);
+```
+
+```bash cURL
+curl -X POST https://api.blackbox.ai/chat/completions \
+-H "Authorization: Bearer YOUR_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+    "model": "blackboxai/openai/gpt-4",
+    "messages": [
+        {
+            "role": "user",
+            "content": "What is async and await in JS?"
+        }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 256,
+    "stream": false
+}'
+```
+
+</CodeGroup>
+
+### Using OpenAI-Compatible SDKs
+
+Since BLACKBOX AI is compatible with the OpenAI API format, you can use existing OpenAI SDKs by simply changing the base URL:
+
+<CodeGroup>
+
+```python Python
+from openai import OpenAI
+
+client = OpenAI(
+  base_url="https://api.blackbox.ai",
+  api_key="YOUR_API_KEY",
+)
+
+completion = client.chat.completions.create(
+  model="blackboxai/openai/gpt-4",
+  messages=[
+    {
+      "role": "user",
+      "content": "What is async and await in JS?"
+    }
+  ]
+)
+
+print(completion.choices[0].message.content)
+```
+
+```typescript TypeScript
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  baseURL: 'https://api.blackbox.ai',
+  apiKey: 'YOUR_API_KEY',
+});
+
+async function main() {
+  const completion = await openai.chat.completions.create({
+    model: 'blackboxai/openai/gpt-4',
+    messages: [
+      {
+        role: 'user',
+        content: 'What is async and await in JS?',
+      },
+    ],
+  });
+
+  console.log(completion.choices[0].message.content);
+}
+
+main();
+```
+
+</CodeGroup>
+
+## Key Features
+
+- **Multiple AI Models**: Access to a wide variety of state-of-the-art models including GPT-4, Claude, and more
+- **OpenAI Compatibility**: Use existing OpenAI SDKs and tools with minimal changes
+- **Streaming Support**: Real-time response streaming for better user experience
+- **Tool Calling**: Advanced function calling capabilities for building AI agents
+- **Image Generation**: Create images from text descriptions
+- **Video Generation**: Generate videos from prompts
+
+## Next Steps
+
+Now that you've seen how easy it is to get started, explore these resources to build more advanced applications:
+
+<CardGroup>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Learn how to securely authenticate your requests and manage API keys
+  </Card>
+  
+  <Card title="Chat Completions" icon="code" href="/api-reference/chat">
+    Dive deep into chat completion parameters, streaming, and advanced options
+  </Card>
+
+  <Card title="Available Models" icon="star" href="/api-reference/models/chat-models">
+    Explore all available chat models and their unique capabilities
+  </Card>
+
+  <Card title="Tool Calling" icon="gear" href="/api-reference/tool-calling">
+    Build AI agents that can call functions and use external tools
+  </Card>
+</CardGroup>
+
+## Additional Resources
+
+<CardGroup>
+  <Card title="Image Generation" icon="image" href="/api-reference/image">
+    Create stunning images from text descriptions using AI models
+  </Card>
+
+  <Card title="Video Generation" icon="video" href="/api-reference/video">
+    Generate videos from prompts with our video AI models
+  </Card>
+
+  <Card title="Error Handling" icon="terminal" href="/api-reference/errors">
+    Learn how to handle API errors gracefully in your applications
+  </Card>
+
+  <Card title="API Parameters" icon="download" href="/api-reference/parameters">
+    Master all available parameters for fine-tuning model behavior
+  </Card>
+</CardGroup>
+
+<Tip>
+  Have questions? Check out our comprehensive API reference documentation for detailed information about all endpoints, parameters, and response formats.
+</Tip>
 
 
