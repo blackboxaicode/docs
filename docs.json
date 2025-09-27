@@ -58,7 +58,7 @@
                             },
                             "/features/blackbox-vs-copilot",
                             "/features/blackbox-vs-cursor",
-                            "/features/reference"
+                            "/features/blackbox-cli-vs-claude-code"
                         ]
                     }
                 ]
