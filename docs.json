@@ -55,7 +55,12 @@
                                     "/features/blackbox-cli/common-use-cases",
                                     "/features/blackbox-cli/commands-reference"
                                 ]
-                            },
+                            }
+                        ]
+                    },
+                    {
+                        "group": "Comparisons",
+                        "pages": [
                             "/features/blackbox-vs-copilot",
                             "/features/blackbox-vs-cursor",
                             "/features/blackbox-cli-vs-claude-code"
