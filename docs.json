@@ -44,6 +44,16 @@
                             },
 							"/features/mobile-app",
 							"/features/robocoder",
+                            {
+                                "group": "Robocoder",
+                                "pages": [
+                                    "/features/robocoder/introduction",
+                                    "/features/robocoder/getting-started",
+                                    "/features/robocoder/git-integration",
+                                    "/features/robocoder/key-features",
+                                    "/features/robocoder/best-practices"
+                                ]
+                            },
 							"/features/autonomous-agent",
 							"/features/blackbox-ide",
                             {
