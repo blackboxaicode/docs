@@ -76,6 +76,12 @@
                             "/features/blackbox-cli-vs-claude-code",
                             "/features/code-completions-blackbox-vs-cursor"
                         ]
+                    },
+                    {
+                        "group": "Video Demos",
+                        "pages": [
+                            "/features/web-app-video-demos"
+                        ]
                     }
                 ]
             },
