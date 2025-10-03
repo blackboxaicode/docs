@@ -76,16 +76,6 @@
                             "/features/blackbox-cli-vs-claude-code",
                             "/features/code-completions-blackbox-vs-cursor"
                         ]
-                    },
-                    {
-                        "group": "Demo Videos",
-                        "pages": [
-                            "/features/web-app-video-demos",
-                            "/features/robocoder-video-demos",
-                            "/features/vscode-agent-video-demos",
-                            "/features/blackbox-cli-video-demos",
-                            "/features/desktop-agent-video-demos"
-                        ]
                     }
                 ]
             },
