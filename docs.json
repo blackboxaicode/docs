@@ -78,7 +78,7 @@
                         ]
                     },
                     {
-                        "group": "Video Demos",
+                        "group": "Demo Videos",
                         "pages": [
                             "/features/web-app-video-demos",
                             "/features/robocoder-video-demos",
