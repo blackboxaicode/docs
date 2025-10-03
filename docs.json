@@ -80,7 +80,11 @@
                     {
                         "group": "Video Demos",
                         "pages": [
-                            "/features/web-app-video-demos"
+                            "/features/web-app-video-demos",
+                            "/features/robocoder-video-demos",
+                            "/features/vscode-agent-video-demos",
+                            "/features/blackbox-cli-video-demos",
+                            "/features/desktop-agent-video-demos"
                         ]
                     }
                 ]
