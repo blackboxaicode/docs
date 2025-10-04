@@ -1,0 +1,47 @@
+Robocoder now offers direct integration with Stripe, enabling you to easily add payment processing capabilities to your applications. All payments and processing are securely handled by Stripe, which is seamlessly integrated into your application.
+
+## Key Features
+
+- **Seamless Payment Processing**  
+  Integrate Stripe's powerful payment platform directly within your Robocoder-built apps to handle in-app purchases effortlessly.
+
+- **Secure and Compliant**  
+  All payment handling, security, and compliance requirements are fully managed by Stripe, ensuring a safe and reliable transaction experience.
+
+- **Simplified Monetization**  
+  Easily monetize your applications by enabling users to make purchases without leaving your app environment.
+
+- **Flexible and Scalable**  
+  Leverage Stripe's extensive features and scalability to support your app's growth and evolving payment needs.
+
+## How It Works
+
+When you build and deploy your app with Robocoder, you can now ask the agent to add Stripe integration to manage all aspects of in-app purchases. Stripe handles payment processing, subscription management, fraud prevention, and compliance, allowing you to focus on building great user experiences.
+
+## Getting Started
+
+To add Stripe integration to your app:
+
+1. Simply ask the agent to include the Stripe payment requirement in your .
+
+![Stripe integration](/images/robocoder/robocoder_stripe_integration.png)
+
+2. The agent will prompt you to provide credentials. You must have the following Stripe credentials:
+
+   - **STRIPE_SECRET_KEY**  
+     Go to: Stripe Dashboard → Developers → API keys  
+     Copy your "Secret key" (starts with `sk_test_` or `sk_live_`)  
+     Keep this confidential - it's for server-side only
+
+   - **NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY**  
+     Same location as above (Developers → API keys)  
+     Copy your "Publishable key" (starts with `pk_test_` or `pk_live_`)  
+     This one is safe for client-side use
+
+3. Use Robocoder's natural language interface to define purchase flows and pricing.
+4. Deploy your app with integrated payment capabilities.
+
+That's it you now have an app with payment capabilities integrated right into it via stripe.
+
+![Strpie Example GIF](/images/robocoder/stripe_example.gif)
+
