@@ -1,0 +1,152 @@
+---
+title: "BLACKBOX AI Cloud"
+description: "Leverage the power of Blackbox agents remotely through your browser with Blackbox Cloud, enabling simultaneous task execution, monitoring, and pull request management on any codebase."
+---
+![BLACKBOX Cloud](/images/blackbox-cloud/cloud_home.png)
+
+## Overview
+
+Blackbox Cloud is a remote, browser-based platform that brings the full capabilities of Blackbox agents directly to your workflow. Whether you're working on small fixes or large-scale implementations, Blackbox Cloud allows you to run multiple agents simultaneously, assign tasks to different agent types, and monitor their progress in real-time, all without being tethered to your local device.
+
+Access Blackbox Cloud through your browser to transform how you manage development tasks. Send complex requests to agents that can execute them autonomously in a remote environment, create pull requests, and even perform code reviews. Perfect for individual developers, teams, and organizations managing repositories of any size.  
+
+## Getting Started
+
+To begin using Blackbox Cloud, follow these steps:
+
+1. **Access the Platform**  
+   Navigate to [cloud.blackbox.ai](https://cloud.blackbox.ai) and log in using your Google or GitHub account.  
+   ![Login Options](/images/blackbox-cloud/cloud_login_google_or_git.png)
+
+2. **Connect Your Git Repository**  
+   If you logged in via Google, link your Git repository by clicking the **Connect Git** button located at the top right of the dashboard.  
+   ![Connect Git Repository](/images/blackbox-cloud/cloud_connect_git.png)
+
+3. **Manage API Keys**  
+   Add and manage your API key for the agent via your profile settings accessible from the dashboard. This key authorizes the agent to perform tasks on your behalf. You can get your API key from the [Blackbox API Dashboard](https://www.blackbox.ai/dashboard).  
+   ![Manage API Key](/images/blackbox-cloud/cloud_manage_repo_api_key.png)
+   ![Add API Key](/images/blackbox-cloud/cloud_add_api_key.png)
+
+4. **Select Model and Provider**  
+   Choose your preferred AI model and provider from the available options to power your agents.  
+   ![Select Provider](/images/blackbox-cloud/cloud_select_provider.png)
+   ![Select Model](/images/blackbox-cloud/cloud_select_model.png)
+
+5. **Select a Repository**  
+   Choose the repository you want to work on from your connected Git repositories.  
+   ![Select Git Repository](/images/blackbox-cloud/cloud_git_repo_select.png)
+
+6. **Start Working**  
+   Begin by giving your first prompt to the agent to start working on your selected repository.  
+   ![First Task](/images/blackbox-cloud/cloud_first_task.png)
+
+7. **Run Multiple Tasks Concurrently**  
+   Blackbox Cloud supports running multiple tasks simultaneously using various agents. This allows you to work on different features and bug fixes in parallel, improving productivity and efficiency.  
+   ![Running Multiple Tasks](/images/blackbox-cloud/cloud_run_multi_task.png)
+
+Blackbox Cloud provides a seamless and intuitive interface to manage your AI-powered development agents remotely.
+
+Blackbox will create a new project from scratch, work on existing ones, add features, resolve bugs by creating a separate branch and making the changes on it. It will also create a PR once the changes are done giving the user minimal work and maximum control on what changes are being added to the main branch.
+
+## Task Overview
+
+When you click on a task in Blackbox Cloud, you'll see comprehensive details about its execution and progress:
+
+- **Status**: Current state of the task (running, completed, failed, etc.)
+- **Runtime**: Duration the task has been running or took to complete
+- **Model Details**: Information about the AI model used for the task
+- **Provider Details**: Details about the AI provider powering the agent
+- **Execution History**: Timeline of all actions and steps performed during task execution
+- **Pull Request (PR)**: Link to the automatically generated pull request with changes
+- **Execution Log**: Detailed log of all commands, outputs, and agent activities during execution, showing live steps the agent takes to make changes
+
+![Task Status Overview](/images/blackbox-cloud/clout_task_status.png)
+
+This detailed view provides full transparency into how agents work on your tasks and allows you to review, approve, or modify the generated code before merging.
+
+
+## Key Features
+
+### Multiple Simultaneous Agents
+
+Blackbox Cloud empowers you to run multiple agents concurrently, each dedicated to different tasks within your codebase. This includes:
+
+- **Blackbox CLI Agent**: Provides terminal-native development experience remotely.
+- **Cloud Code Agent**: Optimized for cloud-based code execution and management.
+- **Codeex Agent**: Specialized in code explanation, analysis, and review.
+
+This parallelism accelerates development by allowing simultaneous task execution without bottlenecks.  
+![Running Multiple Tasks](/images/blackbox-cloud/cloud_run_multi_task.png)
+
+### Seamless Task Dispatch and Management
+
+Easily assign tasks of varying complexity directly from your browser:
+
+- **Quick Fixes**: Minor bug fixes or small code changes dispatched instantly.
+- **Complex Implementations**: Long-running feature builds or integrations.
+- **Full-Stack Development**: End-to-end application development tasks.
+
+You can select the preferred agent for each task, ensuring efficient resource utilization and tailored execution.  
+![Task Status](/images/blackbox-cloud/clout_task_status.png)
+
+### Real-Time Execution Monitoring
+
+Stay informed with live updates as agents work:
+
+- **Live Execution View**: Observe agents coding, testing, and iterating in real-time.
+- **Progress Feedback**: Receive continuous status updates on task completion.
+- **Concurrent Task Handling**: Manage multiple ongoing tasks simultaneously.
+
+This transparency allows you to track progress without needing constant supervision.  
+![Execution Log](/images/blackbox-cloud/cloud_execution_log.png)
+
+### Automated Pull Request Workflow
+
+Blackbox Cloud streamlines code integration through automated pull requests:
+
+- **Automatic PR Generation**: Each completed task results in a pull request.
+- **Agent-Driven PR Reviews**: Agents can perform initial code reviews to ensure quality.
+- **Branch Organization**: Systematic branch creation per task and agent for clarity.
+
+This reduces manual overhead and accelerates code review cycles.
+
+### Detailed Task and Activity Tracking
+
+Maintain comprehensive records for all agent activities:
+
+- **Task Duration Metrics**: Track how long each task takes from start to finish.
+- **Timestamp Logging**: Record creation and completion times for accountability.
+- **Model Usage Details**: Identify which AI models powered each task.
+- **Branch and PR Links**: Easy access to branches and pull requests for review.
+
+These insights facilitate better project management and auditing.  
+![Tasks List](/images/blackbox-cloud/cloud_tasks_list.png)
+
+### Universal Remote Access
+
+Work flexibly from any location or device:
+
+- **Browser-Based Platform**: Full functionality accessible via web browsers.
+- **Device Agnostic**: No dependency on your primary development machine.
+- **Asynchronous Task Execution**: Tasks continue running even when offline.
+- **Periodic Status Checks**: Monitor progress at your convenience.
+
+This ensures uninterrupted productivity regardless of your environment.
+
+## Benefits
+
+- **Scalability**: Handle multiple development tasks simultaneously across different projects
+- **Efficiency**: Automate complex coding tasks without constant supervision
+- **Collaboration**: Enable team members to assign and track development work remotely
+- **Quality Assurance**: Built-in code review capabilities ensure consistent standards
+- **Flexibility**: Support for repositories of any size, from small personal projects to large organizational codebases
+
+## Use Cases
+
+- **Feature Development**: Implement new features across multiple services
+- **Integration Tasks**: Add third-party services like Stripe billing systems
+- **Code Maintenance**: Handle refactoring, optimization, and bug fixes
+- **Documentation**: Generate and update project documentation
+- **Testing**: Implement comprehensive test suites and CI/CD pipelines
+
+Blackbox Cloud transforms remote development by providing a centralized hub for AI-powered coding assistance, making it easier than ever to manage complex development workflows and deliver high-quality code consistently.
