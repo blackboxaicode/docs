@@ -67,7 +67,9 @@
                                     "/features/blackbox-cli/commands-reference"
                                 ]
                             },
-                            "features/blackbox-cloud"
+                            "features/blackbox-cloud",
+                            "features/blackbox-logger"
+
                         ]
                     },
                     {

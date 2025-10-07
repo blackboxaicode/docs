@@ -1,0 +1,238 @@
+---
+title: "BLACKBOX AI Logger"
+description: "An AI-powered server log monitoring and error management solution that analyzes millions of logs, detects issues instantly, and notifies engineers via voice for proactive resolution."
+---
+
+## Overview
+
+Blackbox AI Logger is an innovative AI tool designed to revolutionize server log monitoring and error management. Powered by ElevenLabs' advanced speech-to-text and text-to-speech capabilities, it continuously scans millions of server logs to detect and resolve errors in real-time, minimizing downtime and promoting smarter coding practices.
+
+The system provides instant engineer notification upon error detection, automated issue resolution before service disruption, and an interactive voice agent that can explain error contexts, analyze code repositories for root causes, suggest fixes, and even assist with implementation. It's an all-in-one end-to-end solution for proactive server error management.
+
+## Getting Started
+
+Blackbox AI Logger is available as an npm package for easy integration into your projects. Install it via:
+
+```bash
+npm install @blackbox_ai/ai-logs-watcher
+```
+
+### Basic Setup
+
+Import and initialize the logger in your application:
+
+```javascript
+import { Ailogw } from "@blackbox_ai/ai-logs-watcher";
+
+const ailogwatch = new Ailogw({
+    name: "vercel",
+    twilio: {
+        numberFrom: "+xxxxxxxxxx"
+    },
+    events: {
+        async alert({ options, logs, diagnostic, sendSms }) {
+            switch (diagnostic.raw.status) {
+                case "warning":
+                case "normal": {
+                    await sendSms("+xxxxxxxxxx", diagnostic.formatted);
+                    return;
+                }
+                case "critical": {
+                    await sendSms("+xxxxxxxxxx", diagnostic.formatted);
+                    return;
+                }
+            }
+        }
+    }
+});
+```
+
+### Feeding Logs
+
+Feed logs to be analyzed:
+
+```javascript
+// Single log entry
+ailogwatch.feedLog("2024-09-16 ERROR Database connection failed");
+
+// Multiple log entries
+ailogwatch.feedLog([
+    "2024-09-16 10:30:25 INFO Server started",
+    "2024-09-16 10:30:26 WARN High memory usage",
+    "2024-09-16 10:30:27 CRITICAL System overload"
+]);
+```
+
+### Complete Setup with Voice Integration
+
+For full functionality including voice notifications and code analysis, follow these deployment steps:
+
+1. **Deploy the Tools Server**  
+   Deploy the required tools server on a cloud platform (Render, Vercel, etc.).  
+   Repository: [fragola-cloud](https://github.com/blackboxaicode/fragola-cloud)  
+   Follow the README for deployment steps and required environment variables. You'll get a server baseURL (e.g., `https://your-tools-server-url.com`).
+
+2. **Configure ElevenLabs Agents**  
+   Clone the AI-logs-watcher repository and set up your environment:  
+   ```bash
+   git clone https://github.com/blackboxaicode/AI-logs-watcher.git
+   cd AI-logs-watcher
+   cp .env.example .env
+   npm install
+   ```  
+   Run the ElevenLabs configuration script with your tools server baseURL:  
+   ```bash
+   npm run config-elevenlabs <your_tools_server_baseURL>
+   ```  
+   This will output `AILOGW_ALERT_AGENT_ID` and `AILOGW_GITHUB_AGENT_ID`. Add them to your `.env` file.
+
+3. **Run the Demo Server**  
+   Clone the server-demo repository:  
+   ```bash
+   git clone https://github.com/blackboxaicode/server-demo.git
+   cd server-demo
+   cp .env.example .env
+   ```  
+   Add all required environment variables to `server-demo/.env`:  
+   ```
+   AILOGW_TWILIO_ACCOUNT_SID="<your_twilio_account_sid>"
+   AILOGW_TWILIO_AUTH_TOKEN="<your_twilio_auth_token>"
+   AILOGW_NUMBER_TO="<destination_phone_number>"
+   AILOGW_NUMBER_FROM="<twilio_phone_number>"
+   ELEVENLABS_API_KEY="<your_elevenlabs_api_key>"
+   AILOGW_ALERT_AGENT_ID="<your_alert_agent_id>"
+   AILOGW_GITHUB_AGENT_ID="<your_github_agent_id>"
+   BLACKBOX_API_KEY="<your_blackbox_api_key>"
+   AILOGW_LOG=<boolean>
+   ```  
+   Install Bun and start the server:  
+   ```bash
+   bun install
+   bun index.ts
+   ```
+
+   <Note>
+     **Important**: Ensure all environment variables are properly configured. The demo server will simulate database failures and initiate voice calls for testing.
+   </Note>
+
+With these steps completed, Blackbox AI Logger will continuously monitor your server logs, detect anomalies, and provide proactive error resolution through voice-powered notifications and interactive assistance.
+
+## Usage Examples
+
+### Basic Log Monitoring
+
+```javascript
+const watcher = new Ailogw({
+    name: "production-api",
+    twilio: {
+        numberFrom: "+xxxxxxxxxx"
+    },
+    events: {
+        alert: async ({ options, logs, diagnostic, sendSms }) => {
+            if (diagnostic.raw.status === "critical") {
+                await sendSms("+xxxxxxxxxx", diagnostic.formatted);
+            }
+        }
+    }
+});
+
+// Single log entry
+watcher.feedLog("2024-09-16 10:30:25 ERROR Database connection failed");
+
+// Multiple log entries
+watcher.feedLog([
+    "2024-09-16 10:30:25 INFO Server started",
+    "2024-09-16 10:30:26 WARN High memory usage",
+    "2024-09-16 10:30:27 CRITICAL System overload"
+]);
+```
+
+## How It Works
+
+When an error is detected in your server logs, Blackbox AI Logger follows this automated process:
+
+- **Real-Time Scanning**: Continuously analyzes incoming log entries using advanced AI pattern recognition
+- **Error Classification**: Categorizes issues by severity, type, and potential impact
+- **Voice Notification**: Immediately alerts engineers via ElevenLabs-powered voice calls with clear explanations
+- **Context Analysis**: Provides detailed information about when and where the error occurred
+- **Code Repository Investigation**: Searches connected repositories for related code and potential root causes
+- **Fix Suggestions**: Generates actionable recommendations for resolution
+- **Interactive Support**: Allows engineers to ask questions and request help through voice interaction
+
+
+## Key Features
+
+### Continuous Server Monitoring
+
+Blackbox AI Logger provides 24/7 oversight of your server infrastructure:
+
+- **Real-Time Log Analysis**: Processes millions of log entries per minute
+- **Multi-Source Integration**: Supports various logging platforms and custom formats
+- **Pattern Recognition**: Uses AI to identify anomalies and error patterns
+- **Scalable Architecture**: Handles high-volume log streams without performance degradation
+
+### Intelligent Error Detection
+
+Advanced AI algorithms ensure accurate and timely issue identification:
+
+- **Contextual Analysis**: Understands error relationships and dependencies
+- **Severity Assessment**: Prioritizes issues based on potential business impact
+- **False Positive Reduction**: Minimizes unnecessary alerts through machine learning
+- **Predictive Insights**: Identifies potential issues before they cause outages
+
+### Voice-Powered Notifications
+
+ElevenLabs integration enables natural, effective communication:
+
+- **Instant Voice Alerts**: Immediate engineer notification via phone calls
+- **Clear Explanations**: Detailed error context delivered through natural speech
+- **Interactive Conversations**: Engineers can ask questions and request clarification
+- **Multi-Language Support**: Voice notifications in multiple languages
+
+### Code Repository Integration
+
+Deep code analysis for comprehensive error resolution:
+
+- **Root Cause Identification**: Traces errors back to specific code sections
+- **Automated Fix Suggestions**: Generates code patches and implementation guidance
+- **Repository Search**: Scans entire codebases for related issues and patterns
+- **Version Control Integration**: Works with Git for change tracking and PR creation
+
+### Interactive Voice Agent
+
+An AI assistant that provides ongoing support:
+
+- **Question Answering**: Responds to engineer queries about errors and fixes
+- **Implementation Guidance**: Provides step-by-step fix instructions
+- **Code Review Assistance**: Helps validate suggested changes
+- **Learning Adaptation**: Improves recommendations based on feedback and outcomes
+
+### Comprehensive Reporting
+
+Detailed insights for continuous improvement:
+
+- **Error Trend Analysis**: Identifies recurring issues and patterns
+- **Performance Metrics**: Tracks resolution times and system uptime
+- **Audit Logs**: Maintains complete records of all detections and actions
+- **Custom Dashboards**: Visual representations of log health and error statistics
+
+## Benefits
+
+- **Minimized Downtime**: Proactive error detection and resolution prevents service disruptions
+- **Enhanced Efficiency**: Automated analysis reduces manual log review time by up to 90%
+- **Improved Code Quality**: AI-driven insights promote better coding practices
+- **Faster Resolution**: Voice-powered notifications enable immediate response to critical issues
+- **Cost Reduction**: Prevents revenue loss from outages and reduces debugging costs
+- **Scalability**: Handles massive log volumes without additional infrastructure investment
+
+## Use Cases
+
+- **Production Monitoring**: Real-time oversight of live server environments
+- **DevOps Integration**: Automated error handling in CI/CD pipelines
+- **Incident Response**: Rapid identification and resolution of critical system failures
+- **Performance Optimization**: Detection of performance bottlenecks and resource issues
+- **Security Monitoring**: Identification of suspicious activities and potential breaches
+- **Compliance Auditing**: Automated log analysis for regulatory requirements
+- **Microservices Management**: Monitoring distributed systems and service dependencies
+
+Blackbox AI Logger transforms server error management from reactive firefighting to proactive prevention, ensuring your systems remain stable and your team stays focused on innovation rather than maintenance.
