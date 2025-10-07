@@ -1,7 +1,11 @@
 ---
 title: "BLACKBOX AI Logger"
-description: "An AI-powered server log monitoring and error management solution that analyzes millions of logs, detects issues instantly, and notifies engineers via voice for proactive resolution."
+description: "An AI-powered server log monitoring and error management solution that analyzes millions of server logs, detects issues instantly, and notifies engineers via voice-powered notifications using ElevenLabs' advanced speech-to-text and text-to-speech capabilities."
 ---
+
+<div style={{textAlign: 'center'}}>
+  <video src="/videos/ai-logger.mp4" controls></video>
+</div>
 
 ## Overview
 
@@ -22,34 +26,67 @@ npm install @blackbox_ai/ai-logs-watcher
 Import and initialize the logger in your application:
 
 ```javascript
-import { Ailogw } from "@blackbox_ai/ai-logs-watcher";
+import { Ailogw, ElevenLabsVoiceProvider, PrepareCallContext } from "@blackbox_ai/ai-logs-watcher";
+
+const voiceProvider = new ElevenLabsVoiceProvider({
+    credentials: {
+        apiKey: process.env["ELEVENLABS_API_KEY"]!
+    }
+});
 
 const ailogwatch = new Ailogw({
     name: "vercel",
+    log: true,
     twilio: {
-        numberFrom: "+xxxxxxxxxx"
+        numberFrom: process.env["AILOGW_NUMBER_FROM"]   // Using Twilio test number for "from"
+    },
+    voice: voiceProvider,
+    polling: {
+        delay: "1000:ms",
+        tailAmount: 10
     },
     events: {
-        async alert({ options, logs, diagnostic, sendSms }) {
+        async alert({ options, logs, diagnostic, sendSms, voice }) {
+            void options, logs;
+            const numberTo = process.env["AILOGW_NUMBER_TO"]!;
             switch (diagnostic.raw.status) {
                 case "warning":
                 case "normal": {
-                    await sendSms("+xxxxxxxxxx", diagnostic.formatted);
+                    // await sendSms(numberTo, diagnostic.formatted);
                     return;
                 }
                 case "critical": {
-                    await sendSms("+xxxxxxxxxx", diagnostic.formatted);
+                    if (voice && voice instanceof ElevenLabsVoiceProvider) {
+                        const context: PrepareCallContext = {
+                            githubRepositoryUrl: "https://github.com/your-repo/your-project",
+                            namespace: options.name,
+                            "the current nodejs version": "20.0.1",
+                            "the database": "sqlite",
+                            "emergency contact": "Your Name, Title at Company, phone number +xxxxxxxxxx"
+                        };
+                        const call = await voice.prepareCall(diagnostic.formatted, numberTo, context);
+                        console.log(`calling: ${numberTo}`, JSON.stringify(context, null, 2));
+                        await call();
+                        process.exit(0);
+                    }
                     return;
                 }
             }
         }
     }
 });
+
+const logger = ailogwatch.createLogger();
+
+export {
+    ailogwatch,
+    logger
+}
 ```
 
 ### Feeding Logs
 
-Feed logs to be analyzed:
+Feed logs to be analyzed manually or use the logger methods that replace console logging:
 
 ```javascript
 // Single log entry
@@ -61,6 +98,19 @@ ailogwatch.feedLog([
     "2024-09-16 10:30:26 WARN High memory usage",
     "2024-09-16 10:30:27 CRITICAL System overload"
 ]);
+```
+
+The logger also supports console-like methods (`logger.log`, `logger.warn`, `logger.error`) that can be used in place of `console.log`, `console.warn`, `console.error`. These methods accept key-value pairs as additional arguments for structured logging:
+
+```javascript
+// Replace console.log with logger.log
+logger.log("Server started successfully", { port: 3000, environment: "production" });
+
+// Replace console.warn with logger.warn
+logger.warn("High memory usage detected", { memoryUsage: "85%", threshold: "80%" });
+
+// Replace console.error with logger.error (as shown in examples above)
+logger.error("Database connection failed", { error: err.message, retryCount: 3 });
 ```
 
 ### Complete Setup with Voice Integration
@@ -119,28 +169,34 @@ With these steps completed, Blackbox AI Logger will continuously monitor your se
 
 ## Usage Examples
 
-### Basic Log Monitoring
+### Logging Errors
+
+Use the created logger to log errors with different severity levels:
 
 ```javascript
-const watcher = new Ailogw({
-    name: "production-api",
-    twilio: {
-        numberFrom: "+xxxxxxxxxx"
-    },
-    events: {
-        alert: async ({ options, logs, diagnostic, sendSms }) => {
-            if (diagnostic.raw.status === "critical") {
-                await sendSms("+xxxxxxxxxx", diagnostic.formatted);
-            }
-        }
-    }
-});
+// Log an error with additional context
+logger.error({ error: err.message }, 'Failed to create users table');
 
+// Log an error with the full error object
+logger.error({ error: err }, "Failed to recover database connection");
+
+// Log a critical error with status
+logger.error({status: "critical"}, { error: err }, "Failed to initialize database");
+
+// Simple error logging
+logger.error("Attempted to query users but database is not connected");
+```
+
+### Manual Log Feeding
+
+You can also manually feed logs for analysis:
+
+```javascript
 // Single log entry
-watcher.feedLog("2024-09-16 10:30:25 ERROR Database connection failed");
+ailogwatch.feedLog("2024-09-16 10:30:25 ERROR Database connection failed");
 
 // Multiple log entries
-watcher.feedLog([
+ailogwatch.feedLog([
     "2024-09-16 10:30:25 INFO Server started",
     "2024-09-16 10:30:26 WARN High memory usage",
     "2024-09-16 10:30:27 CRITICAL System overload"
@@ -153,7 +209,7 @@ When an error is detected in your server logs, Blackbox AI Logger follows this a
 
 - **Real-Time Scanning**: Continuously analyzes incoming log entries using advanced AI pattern recognition
 - **Error Classification**: Categorizes issues by severity, type, and potential impact
-- **Voice Notification**: Immediately alerts engineers via ElevenLabs-powered voice calls with clear explanations
+- **Voice Notification**: Alerts engineers via ElevenLabs-powered voice calls with clear explanations based on the severity of the issue
 - **Context Analysis**: Provides detailed information about when and where the error occurred
 - **Code Repository Investigation**: Searches connected repositories for related code and potential root causes
 - **Fix Suggestions**: Generates actionable recommendations for resolution
@@ -167,17 +223,15 @@ When an error is detected in your server logs, Blackbox AI Logger follows this a
 Blackbox AI Logger provides 24/7 oversight of your server infrastructure:
 
 - **Real-Time Log Analysis**: Processes millions of log entries per minute
-- **Multi-Source Integration**: Supports various logging platforms and custom formats
 - **Pattern Recognition**: Uses AI to identify anomalies and error patterns
 - **Scalable Architecture**: Handles high-volume log streams without performance degradation
 
 ### Intelligent Error Detection
 
-Advanced AI algorithms ensure accurate and timely issue identification:
+Advanced AI ensures accurate and timely issue identification:
 
 - **Contextual Analysis**: Understands error relationships and dependencies
-- **Severity Assessment**: Prioritizes issues based on potential business impact
-- **False Positive Reduction**: Minimizes unnecessary alerts through machine learning
+- **Severity Assessment**: Prioritizes issues based on user-defined severity levels
 - **Predictive Insights**: Identifies potential issues before they cause outages
 
 ### Voice-Powered Notifications
@@ -187,16 +241,14 @@ ElevenLabs integration enables natural, effective communication:
 - **Instant Voice Alerts**: Immediate engineer notification via phone calls
 - **Clear Explanations**: Detailed error context delivered through natural speech
 - **Interactive Conversations**: Engineers can ask questions and request clarification
-- **Multi-Language Support**: Voice notifications in multiple languages
 
 ### Code Repository Integration
 
 Deep code analysis for comprehensive error resolution:
 
 - **Root Cause Identification**: Traces errors back to specific code sections
-- **Automated Fix Suggestions**: Generates code patches and implementation guidance
+- **Automated Fix Suggestions**: Suggests fixes based on the error and the code repository.
 - **Repository Search**: Scans entire codebases for related issues and patterns
-- **Version Control Integration**: Works with Git for change tracking and PR creation
 
 ### Interactive Voice Agent
 
@@ -204,7 +256,6 @@ An AI assistant that provides ongoing support:
 
 - **Question Answering**: Responds to engineer queries about errors and fixes
 - **Implementation Guidance**: Provides step-by-step fix instructions
-- **Code Review Assistance**: Helps validate suggested changes
 - **Learning Adaptation**: Improves recommendations based on feedback and outcomes
 
 ### Comprehensive Reporting
@@ -214,13 +265,11 @@ Detailed insights for continuous improvement:
 - **Error Trend Analysis**: Identifies recurring issues and patterns
 - **Performance Metrics**: Tracks resolution times and system uptime
 - **Audit Logs**: Maintains complete records of all detections and actions
-- **Custom Dashboards**: Visual representations of log health and error statistics
 
 ## Benefits
 
 - **Minimized Downtime**: Proactive error detection and resolution prevents service disruptions
 - **Enhanced Efficiency**: Automated analysis reduces manual log review time by up to 90%
-- **Improved Code Quality**: AI-driven insights promote better coding practices
 - **Faster Resolution**: Voice-powered notifications enable immediate response to critical issues
 - **Cost Reduction**: Prevents revenue loss from outages and reduces debugging costs
 - **Scalability**: Handles massive log volumes without additional infrastructure investment
