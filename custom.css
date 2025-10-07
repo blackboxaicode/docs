@@ -27,11 +27,4 @@ a.card:hover {
   transition: transform 0.3s ease !important;
 }
 
-picture {
-  margin: 0;
-}
-
-img {
-  margin: 0;
-}
 
