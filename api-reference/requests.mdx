@@ -1,6 +1,6 @@
 ---
 title: "Requests"
-description: "Learn about requests to BLACKBOXAI API"
+description: "Learn about requests to BLACKBOX AI API"
 ---
 
 ## Completions Request Format
@@ -128,7 +128,7 @@ The `response_format` parameter ensures you receive a structured response from t
 
 ## Assistant Prefill
 
-BLACKBOXAI supports asking models to complete a partial response. This can be useful for guiding models to respond in a certain way.
+BLACKBOX AI supports asking models to complete a partial response. This can be useful for guiding models to respond in a certain way.
 
 To use this features, simply include a message with `role: "assistant"` at the end of your `messages` array.
 
@@ -144,7 +144,7 @@ fetch('https://api.blackbox.ai/api/chat/completions', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    model: 'blackboxai/openai/gpt-4o',
+    model: 'BLACKBOX AI/openai/gpt-4o',
     messages: [
       { role: 'user', content: 'What is the meaning of life?' },
       { role: 'assistant', content: "I'm not sure, but my best guess is" },

@@ -1,11 +1,11 @@
 ---
 title: Responses
-description: Learn about response from BLACKBOXAI API
+description: Learn about response from BLACKBOX AI API
 ---
 
 ## Completions Response Format
 
-BLACKBOXAI uses OpenRouter under the hood and it normalizes the schema across models and providers to comply with the [OpenAI Chat API](https://platform.openai.com/docs/api-reference/chat).
+BLACKBOX AI uses OpenRouter under the hood and it normalizes the schema across models and providers to comply with the [OpenAI Chat API](https://platform.openai.com/docs/api-reference/chat).
 
 This means that `choices` is always an array, even if the model only returns one completion. Each choice will contain a `delta` property if a stream was requested and a `message` property otherwise. This makes it easier to use the same code for all models.
 
