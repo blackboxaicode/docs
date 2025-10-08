@@ -1,0 +1,105 @@
+---
+title: "Orchestration"
+description: "Learn how to use Orchestration in the BLACKBOX AI VS Code Agent to run multiple sub-agents in parallel for efficient development of large features."
+---
+
+![VSCode Orchestration](/images/vscode-agent/vscode_agent_orch_agent_create.png)
+
+## Overview
+
+Orchestration is a powerful feature of the BLACKBOX AI VS Code Agent that enables you to run multiple sub-agents simultaneously. This allows for parallel processing of different parts of a larger feature or bug fix, significantly speeding up development workflows. By leveraging the Blackbox CLI, sub-agents operate in their own terminal instances, each handling specific tasks while the BLACKBOX AI VS Code Agent coordinates the overall process.
+
+## How It Works
+
+The Orchestration feature utilizes the Blackbox CLI to spawn multiple sub-agents, each running in a dedicated terminal. The BLACKBOX AI VS Code Agent:
+
+1. Analyzes the overall task and breaks it down into sub-tasks. User can also specify how they wish for the tasks to be separated.
+2. Provides each sub-agent with the necessary context, instructions, and resources.
+
+![VSCode Orchestration](/images/vscode-agent/vscode_agent_orch_task_assign.png)
+
+3. Monitors progress and consolidates results from all sub-agents.
+
+4. Ensures seamless integration of changes across the project.
+
+This approach allows for concurrent execution of tasks that would otherwise be sequential, reducing development time for complex features.
+
+<Note>
+  Orchestration requires Blackbox CLI to be installed and configured on your system. Refer to the [Blackbox CLI Getting Started](/features/blackbox-cli/getting-started) guide for detailed installation and setup instructions.
+</Note>
+
+## Getting Started
+
+To use Orchestration in your VS Code Agent:
+
+1. Ensure you have the BLACKBOX AI VS Code extension installed and configured (see [BLACKBOX AI VS Code Agent](/features/vscode-agent/getting-started)).
+2. Verify that Blackbox CLI is set up on your system (see [Blackbox CLI](/features/blackbox-cli/getting-started)).
+3. When planning to use the orchestration feature , specify that you'd like to use multiple subagents to speed up the task.
+![VSCode Orchestration](/images/vscode-agent/vscode_agent_orch_planning.png)
+
+4. The agent will automatically break down the task and spawn sub-agents as needed.
+
+![VSCode Orchestration](/images/vscode-agent/vscode_agent_orch_agent_create.png)
+
+The BLACKBOX AI VS Code extension will create each subagent and will manage their tasks.
+
+![VSCode Orchestration](/images/vscode-agent/vscode_agent_orch_terminals.png)
+
+
+## Benefits
+
+- **Parallel Processing**: Work on multiple components simultaneously, cutting down overall development time.
+- **Efficient Resource Use**: Optimize time and effort on critical tasks by distributing workload across sub-agents.
+- **Testing Multiple Approaches**: Experiment with different implementations for bug fixes or features without sequential bottlenecks.
+- **Scalability**: Handle large-scale changes that involve multiple files, modules, or services.
+- **Cost-Effective**: Save money by reducing the time spent on manual coordination and testing.
+
+## Use Cases
+
+### Large Feature Implementation
+
+When developing a comprehensive e-commerce platform update involving frontend UI changes, backend API modifications, and database schema updates, Orchestration allows sub-agents to handle each component in parallel:
+
+- Sub-agent 1: Updates React components for the new checkout flow.
+- Sub-agent 2: Modifies Node.js API endpoints for payment processing.
+- Sub-agent 3: Alters database schemas and migration scripts.
+
+The BLACKBOX AI VS Code Agent then integrates all changes and runs comprehensive tests.
+
+### Bug Fix Optimization
+
+For a complex authentication bug affecting multiple services, Orchestration enables testing multiple fix strategies simultaneously:
+
+- Sub-agent A: Implements a token refresh mechanism.
+- Sub-agent B: Updates session management logic.
+- Sub-agent C: Modifies error handling in API responses.
+
+The BLACKBOX AI VS Code Agent evaluates the results and selects the most effective solution.
+
+### Refactoring Large Codebases
+
+When modernizing a legacy application with thousands of lines of code, Orchestration can parallelize refactoring tasks:
+
+- Sub-agent 1: Converts class-based components to functional components in React.
+- Sub-agent 2: Updates API calls to use modern async/await patterns.
+- Sub-agent 3: Implements new TypeScript interfaces and types.
+
+This ensures consistent refactoring across the entire codebase.
+
+
+## Related Documentation
+
+<CardGroup>
+  <Card title="VS Code Agent Introduction" icon="code" href="/features/vscode-agent/introduction">
+    Overview of the BLACKBOX AI VS Code extension
+  </Card>
+  <Card title="Blackbox CLI Introduction" icon="terminal" href="/features/blackbox-cli/introduction">
+    Learn about the command-line interface used for sub-agents
+  </Card>
+  <Card title="VS Code Agent Key Features" icon="star" href="/features/vscode-agent/key-features">
+    Explore all capabilities of the VS Code Agent
+  </Card>
+  <Card title="Best Practices" icon="lightbulb" href="/features/vscode-agent/best-practices">
+    Tips for effective use of Orchestration and other features
+  </Card>
+</CardGroup>
