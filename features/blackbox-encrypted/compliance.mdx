@@ -1,0 +1,627 @@
+---
+title: "Compliance"
+description: "Regulatory compliance and certifications for BlackboxAI Encrypted"
+---
+
+BlackboxAI Encrypted is designed to meet stringent regulatory requirements across industries. This document outlines how our technical controls support compliance with major regulations and standards.
+
+## Overview
+
+Unlike traditional cloud AI services that rely on policies and promises, BlackboxAI Encrypted provides **technical controls** that enable compliance through:
+
+- **Cryptographic Guarantees**: Mathematical proof of data protection
+- **Hardware Attestation**: Verifiable security state
+- **Zero Data Retention**: No persistent storage of sensitive data
+- **Audit Trail**: Cryptographic evidence for compliance verification
+
+## HIPAA (Healthcare)
+
+### Health Insurance Portability and Accountability Act
+
+**Applicability**: Healthcare providers, health plans, healthcare clearinghouses, and their business associates.
+
+### Technical Safeguards
+
+| HIPAA Requirement | BlackboxAI Encrypted Implementation | Status |
+|-------------------|-------------------------------------|--------|
+| **Access Controls** | Cryptographic key-based access, only authorized clients can decrypt | ✅ Compliant |
+| **Audit Controls** | Hardware attestation provides cryptographic audit trail | ✅ Compliant |
+| **Integrity Controls** | ECDSA signatures ensure data integrity | ✅ Compliant |
+| **Transmission Security** | TLS 1.2+ with end-to-end encryption | ✅ Compliant |
+| **Encryption at Rest** | No data at rest (memory-only processing) | ✅ Compliant |
+| **Encryption in Transit** | AES-256-GCM + TLS encryption | ✅ Compliant |
+
+### Administrative Safeguards
+
+**Business Associate Agreement (BAA):**
+- Available for on-premise deployments
+- Infrastructure under your control
+- No PHI access by third parties
+
+**Risk Assessment:**
+- Technical controls eliminate most risks
+- Cryptographic proof of security
+- Regular security updates
+
+**Workforce Training:**
+- Documentation provided
+- Best practices guidance
+- Security awareness materials
+
+### Physical Safeguards
+
+**On-Premise Deployment:**
+- Physical security under your control
+- Your facility's safeguards apply
+- Environmental controls per your standards
+- Access controls per your policies
+
+### HIPAA Compliance Checklist
+
+- [x] End-to-end encryption of PHI
+- [x] Access controls (cryptographic keys)
+- [x] Audit trails (attestation records)
+- [x] Data integrity (digital signatures)
+- [x] Transmission security (TLS + E2E)
+- [x] No unauthorized access (provider cannot decrypt)
+- [x] No data retention (memory-only)
+- [x] Business Associate Agreement available
+- [x] Security incident procedures
+- [x] Breach notification procedures
+
+### Use Case Example
+
+```python
+# HIPAA-compliant patient data analysis
+from blackbox_encrypted import EncryptedClient
+
+client = EncryptedClient(
+    api_key=os.getenv("HOSPITAL_API_KEY"),
+    security_config=SecurityConfig(
+        verify_attestation=True,
+        require_fresh_attestation=True
+    )
+)
+
+# PHI is encrypted before transmission
+response = client.chat(
+    messages=[{
+        "role": "user",
+        "content": "Patient: John Doe, MRN: 123456, DOB: 01/01/1960..."
+    }]
+)
+
+# Attestation record provides audit trail
+audit_log = {
+    "timestamp": response.timestamp,
+    "attestation_verified": response.attestation_verified,
+    "gpu_model": response.attestation.gpu_model,
+    "security_version": response.attestation.security_version
+}
+```
+
+---
+
+## GDPR (European Union)
+
+### General Data Protection Regulation
+
+**Applicability**: Organizations processing personal data of EU residents.
+
+### GDPR Principles
+
+| Principle | BlackboxAI Encrypted Implementation | Status |
+|-----------|-------------------------------------|--------|
+| **Lawfulness, Fairness, Transparency** | Clear documentation of data processing | ✅ Compliant |
+| **Purpose Limitation** | Data used only for AI inference | ✅ Compliant |
+| **Data Minimization** | No persistent storage, minimal processing | ✅ Compliant |
+| **Accuracy** | Data integrity through digital signatures | ✅ Compliant |
+| **Storage Limitation** | Immediate deletion after session | ✅ Compliant |
+| **Integrity and Confidentiality** | End-to-end encryption + attestation | ✅ Compliant |
+| **Accountability** | Audit trails and documentation | ✅ Compliant |
+
+### Data Subject Rights
+
+**Right to Erasure ("Right to be Forgotten"):**
+- ✅ No data retained to erase
+- ✅ Data destroyed immediately after session
+- ✅ No backups or copies
+
+**Right to Data Portability:**
+- ✅ Users control their data
+- ✅ Data never leaves user's control
+- ✅ Easy export from client
+
+**Right to Access:**
+- ✅ Users have complete access to their data
+- ✅ No hidden processing or storage
+
+**Right to Rectification:**
+- ✅ Users control data accuracy
+- ✅ No persistent incorrect data
+
+### Data Protection by Design
+
+BlackboxAI Encrypted implements privacy by design:
+
+- **Encryption by Default**: All data encrypted automatically
+- **Minimal Data Collection**: Only what's necessary for inference
+- **No Profiling**: No user profiling or tracking
+- **Transparent Processing**: Clear documentation of how data is used
+
+### Data Processing Agreement (DPA)
+
+Available for on-premise deployments:
+- Defines data processing terms
+- Specifies security measures
+- Outlines data subject rights
+- Infrastructure under your control
+
+### GDPR Compliance Checklist
+
+- [x] Lawful basis for processing
+- [x] Data minimization
+- [x] Purpose limitation
+- [x] Storage limitation (no retention)
+- [x] Integrity and confidentiality (encryption)
+- [x] Accountability (audit trails)
+- [x] Data protection by design
+- [x] Data protection by default
+- [x] Data Processing Agreement available
+- [x] Data breach notification procedures
+- [x] Data subject rights supported
+
+---
+
+## SOC 2 (Service Organizations)
+
+### Service Organization Control 2
+
+**Status**: Type II audit in progress
+
+### Trust Service Criteria
+
+#### Security
+
+**Common Criteria:**
+- Access controls (cryptographic)
+- Logical and physical access controls
+- System operations (monitoring)
+- Change management (version control)
+- Risk mitigation (multiple layers)
+
+**BlackboxAI Implementation:**
+- ✅ Multi-layer encryption
+- ✅ Hardware attestation
+- ✅ Access logging
+- ✅ Security monitoring
+- ✅ Incident response procedures
+
+#### Availability
+
+**Criteria:**
+- System availability commitments
+- Recovery procedures
+- Monitoring and incident response
+
+**BlackboxAI Implementation:**
+- ✅ High availability architecture
+- ✅ Redundant infrastructure support
+- ✅ Failover capabilities
+- ✅ Monitoring and alerting
+
+#### Processing Integrity
+
+**Criteria:**
+- System processing completeness
+- Accuracy and timeliness
+- Authorization of processing
+
+**BlackboxAI Implementation:**
+- ✅ Digital signatures for integrity
+- ✅ Attestation verification
+- ✅ Error detection and handling
+- ✅ Processing validation
+
+#### Confidentiality
+
+**Criteria:**
+- Protection of confidential information
+- Disposal of confidential information
+- Confidentiality commitments
+
+**BlackboxAI Implementation:**
+- ✅ End-to-end encryption
+- ✅ Immediate data destruction
+- ✅ No data retention
+- ✅ Cryptographic guarantees
+
+#### Privacy
+
+**Criteria:**
+- Notice and communication
+- Choice and consent
+- Collection and retention
+- Access and correction
+- Disclosure to third parties
+
+**BlackboxAI Implementation:**
+- ✅ Clear privacy documentation
+- ✅ User control over data
+- ✅ Minimal collection
+- ✅ No third-party disclosure
+- ✅ User access to data
+
+---
+
+## ISO 27001
+
+### Information Security Management
+
+**Status**: Certification planned for 2025
+
+### Control Objectives
+
+| Control Area | Implementation | Status |
+|--------------|----------------|--------|
+| **Information Security Policies** | Documented security policies | ✅ Implemented |
+| **Organization of Information Security** | Security roles and responsibilities | ✅ Implemented |
+| **Human Resource Security** | Background checks, training | ✅ Implemented |
+| **Asset Management** | Asset inventory and classification | ✅ Implemented |
+| **Access Control** | Cryptographic access controls | ✅ Implemented |
+| **Cryptography** | AES-256, ECDH, ECDSA | ✅ Implemented |
+| **Physical Security** | Data center controls | ✅ Implemented |
+| **Operations Security** | Change management, monitoring | ✅ Implemented |
+| **Communications Security** | Network security, TLS | ✅ Implemented |
+| **System Development** | Secure development lifecycle | ✅ Implemented |
+| **Supplier Relationships** | Vendor security assessment | ✅ Implemented |
+| **Incident Management** | Incident response procedures | ✅ Implemented |
+| **Business Continuity** | Backup and recovery | ✅ Implemented |
+| **Compliance** | Legal and regulatory compliance | ✅ Implemented |
+
+---
+
+## Financial Regulations
+
+### GLBA (Gramm-Leach-Bliley Act)
+
+**Applicability**: Financial institutions
+
+**Requirements:**
+- Safeguards Rule: Protect customer information
+- Privacy Rule: Disclose information sharing practices
+- Pretexting Protection: Prevent unauthorized access
+
+**BlackboxAI Compliance:**
+- ✅ Technical safeguards (encryption)
+- ✅ No information sharing (provider cannot access)
+- ✅ Access controls (cryptographic)
+- ✅ Audit trails (attestation)
+
+### PCI DSS (Payment Card Industry)
+
+**Applicability**: Organizations handling credit card data
+
+**Key Requirements:**
+- Encrypt transmission of cardholder data
+- Protect stored cardholder data
+- Maintain secure systems
+- Implement access controls
+
+**BlackboxAI Compliance:**
+- ✅ End-to-end encryption
+- ✅ No data storage (memory-only)
+- ✅ Secure infrastructure
+- ✅ Cryptographic access controls
+
+### SEC Regulations
+
+**Applicability**: Investment advisers, broker-dealers
+
+**Requirements:**
+- Safeguards Rule (Regulation S-P)
+- Cybersecurity disclosure requirements
+- Data protection
+
+**BlackboxAI Compliance:**
+- ✅ Technical safeguards
+- ✅ Incident response procedures
+- ✅ Audit trails
+- ✅ No data retention
+
+---
+
+## Government & Defense
+
+### FedRAMP (Federal Risk and Authorization Management Program)
+
+**Status**: Planned for government deployments
+
+**Requirements:**
+- NIST 800-53 controls
+- Continuous monitoring
+- Incident response
+- Security assessment
+
+**BlackboxAI Readiness:**
+- ✅ Strong cryptographic controls
+- ✅ Monitoring capabilities
+- ✅ Incident procedures
+- ✅ Security documentation
+
+### ITAR (International Traffic in Arms Regulations)
+
+**Applicability**: Defense-related data
+
+**Requirements:**
+- Data must remain in US
+- Access controls
+- Audit trails
+- Physical security
+
+**BlackboxAI Compliance:**
+- ✅ On-premise deployment option
+- ✅ Air-gapped deployment support
+- ✅ Cryptographic access controls
+- ✅ Comprehensive audit trails
+
+### CMMC (Cybersecurity Maturity Model Certification)
+
+**Applicability**: Defense contractors
+
+**Levels:**
+- Level 1: Basic cyber hygiene
+- Level 2: Intermediate cyber hygiene
+- Level 3: Good cyber hygiene
+- Level 4: Proactive
+- Level 5: Advanced/Progressive
+
+**BlackboxAI Capabilities:**
+- ✅ Meets Level 3 requirements
+- ✅ Strong encryption (Level 4)
+- ✅ Advanced monitoring (Level 5)
+
+---
+
+## Industry-Specific Compliance
+
+### FERPA (Education)
+
+**Family Educational Rights and Privacy Act**
+
+**Requirements:**
+- Protect student education records
+- Limit disclosure
+- Provide access rights
+
+**BlackboxAI Compliance:**
+- ✅ Student data encrypted
+- ✅ No unauthorized disclosure
+- ✅ User controls access
+
+### COPPA (Children's Privacy)
+
+**Children's Online Privacy Protection Act**
+
+**Requirements:**
+- Parental consent
+- Data minimization
+- Security safeguards
+
+**BlackboxAI Compliance:**
+- ✅ No data collection
+- ✅ Minimal processing
+- ✅ Strong security
+
+### CCPA/CPRA (California)
+
+**California Consumer Privacy Act / Privacy Rights Act**
+
+**Requirements:**
+- Right to know
+- Right to delete
+- Right to opt-out
+- Data security
+
+**BlackboxAI Compliance:**
+- ✅ Transparent processing
+- ✅ No data to delete (not retained)
+- ✅ No data selling
+- ✅ Strong security measures
+
+---
+
+## Compliance Documentation
+
+### Available Documentation
+
+**For Auditors:**
+- Security architecture documentation
+- Cryptographic specifications
+- Attestation verification procedures
+- Incident response plans
+- Data flow diagrams
+
+**For Compliance Officers:**
+- Compliance mapping documents
+- Risk assessments
+- Control descriptions
+- Audit trails
+
+**For Legal Teams:**
+- Data Processing Agreements
+- Business Associate Agreements
+- Terms of Service
+- Privacy Policy
+
+### Audit Support
+
+**We Provide:**
+- Technical documentation
+- Attestation records
+- Security certifications
+- Compliance mappings
+
+**You Maintain:**
+- Usage policies
+- Access controls
+- User training
+- Incident response
+
+---
+
+## Compliance Best Practices
+
+### 1. Document Everything
+
+```python
+# Log attestation for audit trail
+attestation = client.last_attestation
+audit_log = {
+    "timestamp": datetime.now(),
+    "user": current_user,
+    "attestation_verified": attestation.verified,
+    "gpu_model": attestation.gpu_model,
+    "security_version": attestation.security_version,
+    "session_id": client.session_id
+}
+save_audit_log(audit_log)
+```
+
+### 2. Verify Attestation
+
+```python
+# Always verify before processing sensitive data
+if not client.verify_attestation():
+    raise SecurityError("Attestation failed - do not process sensitive data")
+```
+
+### 3. Implement Access Controls
+
+```python
+# Use role-based access control
+if not user.has_permission("use_encrypted_ai"):
+    raise PermissionError("User not authorized")
+```
+
+### 4. Monitor Usage
+
+```python
+# Track usage for compliance reporting
+usage_metrics = {
+    "user": current_user,
+    "timestamp": datetime.now(),
+    "data_type": "PHI",  # or "PII", "Financial", etc.
+    "purpose": "Clinical decision support",
+    "attestation_verified": True
+}
+log_usage(usage_metrics)
+```
+
+### 5. Regular Reviews
+
+- Review access logs monthly
+- Audit attestation records
+- Update security policies
+- Train users on compliance
+
+---
+
+## Certification Roadmap
+
+### Current Status (2025)
+
+- ✅ HIPAA: Technical controls implemented
+- ✅ GDPR: Compliant architecture
+- 🔄 SOC 2 Type II: Audit in progress
+- 📅 ISO 27001: Planned for Q2 2025
+- 📅 FedRAMP: Planned for government deployments
+
+### Upcoming Certifications
+
+**Q2 2025:**
+- SOC 2 Type II completion
+- ISO 27001 certification
+
+**Q3 2025:**
+- HITRUST CSF certification
+- PCI DSS validation
+
+**Q4 2025:**
+- FedRAMP authorization
+- StateRAMP certification
+
+---
+
+## Compliance FAQs
+
+### Can I use BlackboxAI Encrypted for HIPAA-covered data?
+
+Yes. The technical controls meet HIPAA requirements. Business Associate Agreements (BAA) are available for on-premise deployments as needed.
+
+### Is BlackboxAI Encrypted GDPR compliant?
+
+Yes. The architecture implements privacy by design, data minimization, and immediate deletion—core GDPR principles.
+
+### Do you have SOC 2 certification?
+
+Type II audit is in progress. Expected completion Q2 2025.
+
+### Can I get a copy of your security certifications?
+
+Yes. Contact compliance@blackbox.ai for current certifications and audit reports.
+
+### How do I demonstrate compliance to my auditors?
+
+We provide:
+- Technical documentation
+- Attestation records
+- Security architecture diagrams
+- Compliance mapping documents
+- Audit support
+
+### What about data residency requirements?
+
+**On-Premise Deployment:** Complete control over data location and processing within your infrastructure.
+
+### Can I use this in an air-gapped environment?
+
+Yes. On-premise deployment supports air-gapped environments for maximum security.
+
+---
+
+## Getting Compliance Support
+
+### Resources
+
+<CardGroup cols={2}>
+  <Card title="Security Architecture" icon="shield" href="/features/blackbox-encrypted/security-architecture">
+    Technical security details
+  </Card>
+  <Card title="Deployment Guide" icon="server" href="/features/blackbox-encrypted/self-hosted-deployment">
+    On-premise deployment guide
+  </Card>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry-specific examples
+  </Card>
+  <Card title="FAQ" icon="question-circle" href="/features/blackbox-encrypted/faq">
+    Common questions
+  </Card>
+</CardGroup>
+
+### Contact
+
+**Compliance Questions:**
+- Email: compliance@blackbox.ai
+- Documentation: docs.blackbox.ai
+- Support: support@blackbox.ai
+
+**Enterprise Compliance Support:**
+- Dedicated compliance team
+- Custom documentation
+- Audit assistance
+- Regulatory guidance
+
+---
+
+**Need compliance documentation for your auditors?** Contact our compliance team for detailed technical documentation and audit support materials.

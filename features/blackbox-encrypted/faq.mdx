@@ -1,0 +1,546 @@
+---
+title: "FAQ"
+description: "Frequently asked questions about BlackboxAI Encrypted"
+---
+
+Common questions about BlackboxAI Encrypted's security, deployment, and usage.
+
+## General Questions
+
+### What is BlackboxAI Encrypted?
+
+BlackboxAI Encrypted is an enterprise-grade confidential AI inference service that provides end-to-end encryption and hardware-based attestation. It ensures that only you and the AI model can access your conversations—not the cloud provider, not system administrators, and not any third party.
+
+### How is this different from regular cloud AI services?
+
+**Traditional Cloud AI:**
+- Trust-based security (policies and promises)
+- Provider can access your data
+- Data may be logged or retained
+- No cryptographic guarantees
+
+**BlackboxAI Encrypted:**
+- Cryptographic security (mathematical proof)
+- Provider cannot access your data
+- No data retention (memory-only)
+- Hardware attestation provides verification
+
+### Is this really secure, or just marketing?
+
+The security is based on mathematics (cryptography) and hardware (confidential computing), not marketing claims. The implementation is open source and auditable. Independent security researchers can verify the claims. We provide cryptographic proof, not promises.
+
+---
+
+## Security Questions
+
+### Can anyone access my data during processing?
+
+**No.** Your data is encrypted on your device before transmission and can only be decrypted inside the secure GPU environment. Data is only accessible within the secure GPU during processing—no external access is possible, even with full system access.
+
+### How do I know the system is actually secure?
+
+Before each session, you receive **hardware attestation**—cryptographic proof that:
+- The GPU is genuine NVIDIA H100 hardware
+- The firmware is unmodified
+- Confidential computing is active
+- The environment is isolated and secure
+
+This isn't trust—it's verifiable proof signed by hardware keys that cannot be forged.
+
+### What if someone hacks the server?
+
+Even with complete server access, attackers would only obtain encrypted data. Without your encryption keys (which never leave your device or the secure GPU), the data is unreadable. Additionally:
+- Keys are ephemeral (destroyed after each session)
+- No persistent data to steal
+- Hardware isolation prevents memory access
+- Tampering is detected by attestation
+
+### Can the government access my data?
+
+With on-premise deployment, you control the infrastructure. Data is only accessible within the secure GPU environment during processing. Your encryption keys never leave your device or the secure GPU environment, and no plaintext data is retained.
+
+### What about insider threats?
+
+With on-premise deployment, you control access to your infrastructure. Additionally:
+- Data is encrypted end-to-end
+- Data only accessible in secure GPU environment
+- Hardware isolation prevents unauthorized access
+- Attestation would detect tampering
+
+### Is my conversation history stored?
+
+**No.** Conversations exist only in encrypted memory during your session and are destroyed immediately after. There are no logs, backups, or copies of your conversations.
+
+### What encryption algorithms do you use?
+
+- **Symmetric Encryption**: AES-256-GCM (military-grade)
+- **Key Exchange**: ECDH with SECP384R1 curve
+- **Digital Signatures**: ECDSA with SHA-256
+- **Transport**: TLS 1.2+ with forward secrecy
+
+All algorithms are industry-standard, peer-reviewed, and NIST-approved.
+
+### What is hardware attestation?
+
+Hardware attestation is cryptographic proof from the GPU itself that:
+1. It's genuine NVIDIA H100 hardware
+2. The firmware is unmodified
+3. Confidential computing is enabled
+4. The environment is secure
+
+The attestation is signed with keys burned into the GPU chip during manufacturing—these keys cannot be extracted or forged.
+
+### Can you explain "confidential computing"?
+
+Confidential computing uses hardware features to:
+- Encrypt GPU memory
+- Isolate workloads from the host system
+- Prevent unauthorized access
+- Provide cryptographic attestation
+
+Even the cloud provider cannot access data in confidential computing environments.
+
+---
+
+## Deployment Questions
+
+### What deployment options are available?
+
+BlackboxAI Encrypted is designed for **self-hosted, on-premise deployment only**. This provides:
+- Deployment on your own infrastructure
+- Data sovereignty within your environment
+- Ability to deploy in air-gapped environments
+- Custom configurations for your specific needs
+- No external dependencies
+
+[View deployment guide →](/features/blackbox-encrypted/self-hosted-deployment)
+
+### Can I deploy in an air-gapped environment?
+
+Yes. Self-hosted deployment supports completely air-gapped environments with no internet connectivity. This is ideal for:
+- Government and defense
+- Critical infrastructure
+- Highly sensitive environments
+- Maximum security requirements
+
+### What hardware do I need for self-hosted deployment?
+
+**Minimum:**
+- 1x NVIDIA H100 GPU with confidential computing
+- AMD EPYC or Intel Xeon with confidential computing support
+- 32GB RAM per GPU
+- 500GB NVMe SSD
+
+**Recommended for production:**
+- 4x NVIDIA H100 GPUs
+- 128GB RAM per GPU
+- 2TB NVMe SSD
+- 25 Gbps network
+
+[View detailed hardware requirements →](/features/blackbox-encrypted/hardware-requirements)
+
+### Why must all GPUs be on the same server?
+
+For security. Multi-server GPU clusters would require network communication between machines, creating potential interception points. Single-server multi-GPU maintains security while enabling large model support:
+- Single attestation covers all GPUs
+- No network exposure between GPUs
+- Unified security boundary
+- Hardware isolation maintained
+
+### What infrastructure is supported?
+
+BlackboxAI Encrypted is designed for on-premise deployment on your own hardware:
+- Your own data center
+- Private cloud infrastructure
+- Air-gapped environments
+- Any location with compatible hardware (NVIDIA H100 GPUs with confidential computing)
+
+This gives you complete control over where your data is processed and stored.
+
+---
+
+## Technical Questions
+
+### What AI models are supported?
+
+BlackboxAI Encrypted supports various models:
+- GPT-4 and GPT-3.5
+- Claude (Opus, Sonnet, Haiku)
+- Llama 3 (8B, 30B, 70B)
+- Mistral and Mixtral
+- Custom fine-tuned models
+
+All models provide the same security guarantees.
+
+### Can I use my own fine-tuned models?
+
+Yes, with self-hosted deployment. You can:
+- Deploy custom models
+- Use proprietary fine-tuning
+- Maintain complete control
+- Keep model weights confidential
+
+### What's the performance impact of encryption?
+
+Minimal. Encryption/decryption adds ~1-5ms per message, which is negligible compared to AI inference time (seconds to minutes). Users typically don't notice any difference.
+
+### How does streaming work with encryption?
+
+Each chunk of the streaming response is encrypted independently with a unique nonce. The client decrypts chunks as they arrive, maintaining security while enabling real-time streaming.
+
+### Can I process files?
+
+Yes. Files are encrypted before upload and decrypted only in the secure GPU environment. Supported formats include:
+- PDF documents
+- CSV data files
+- Text files
+- Images (for vision models)
+- Code files
+
+### What's the maximum message size?
+
+Depends on the model:
+- GPT-4: Up to 128K tokens
+- Claude Opus: Up to 200K tokens
+- Llama 3: Up to 8K tokens
+
+Larger contexts require more GPU memory.
+
+### How many concurrent users can it handle?
+
+Depends on your configuration:
+- 1 GPU: 5-10 concurrent users
+- 2 GPUs: 10-25 concurrent users
+- 4 GPUs: 25-100 concurrent users
+- 8 GPUs: 100-200+ concurrent users
+
+Actual capacity varies by model size and query complexity.
+
+---
+
+## Compliance Questions
+
+### Is this HIPAA compliant?
+
+Yes. The technical controls meet HIPAA requirements:
+- End-to-end encryption of PHI
+- Access controls (cryptographic)
+- Audit trails (attestation records)
+- No data retention
+- Business Associate Agreement available
+
+[Learn more about HIPAA compliance →](/features/blackbox-encrypted/compliance#hipaa-healthcare)
+
+### Does this meet GDPR requirements?
+
+Yes. The architecture implements GDPR principles:
+- Data minimization (no retention)
+- Purpose limitation (inference only)
+- Privacy by design (built-in encryption)
+- Data subject rights (user controls data)
+- Accountability (audit trails)
+
+[Learn more about GDPR compliance →](/features/blackbox-encrypted/compliance#gdpr-european-union)
+
+### Do you have SOC 2 certification?
+
+Type II audit is in progress, expected completion Q2 2025. The architecture already implements SOC 2 controls for security, availability, processing integrity, confidentiality, and privacy.
+
+### Can I get compliance documentation for my auditors?
+
+Yes. We provide:
+- Technical architecture documentation
+- Security specifications
+- Attestation records
+- Compliance mapping documents
+- Audit support
+
+Contact compliance@blackbox.ai for materials.
+
+### What about data residency requirements?
+
+**On-Premise Deployment:**
+- Deploy on your own infrastructure in any location
+- Process data within your chosen jurisdiction
+- Meet any data residency requirement
+- Maintain complete control over data location
+
+---
+
+## Usage Questions
+
+### How do I get started?
+
+**On-Premise Deployment:**
+1. Review [hardware requirements](/features/blackbox-encrypted/hardware-requirements)
+2. Procure necessary hardware (NVIDIA H100 GPUs with confidential computing)
+3. Follow the [deployment guide](/features/blackbox-encrypted/self-hosted-deployment)
+4. Configure and deploy on your infrastructure
+5. Install client SDK and connect to your server
+
+### Do I need to change my code?
+
+Minimal changes required:
+
+```python
+# Before (regular API)
+from openai import OpenAI
+client = OpenAI(api_key="...")
+
+# After (encrypted)
+from blackbox_encrypted import EncryptedClient
+client = EncryptedClient(api_key="...")
+
+# Same API, automatic encryption
+response = client.chat(messages=[...])
+```
+
+### Can I use this with existing applications?
+
+Yes. The SDK is designed for easy integration:
+- OpenAI-compatible API
+- Drop-in replacement for existing code
+- Minimal code changes required
+- Same response format
+
+### What programming languages are supported?
+
+**Currently:**
+- Python (official SDK)
+
+**Coming Soon:**
+- JavaScript/TypeScript
+- Java
+- Go
+- C#
+
+**Workaround:**
+- Use REST API directly from any language
+
+### How do I verify attestation in my code?
+
+```python
+from blackbox_encrypted import EncryptedClient
+
+client = EncryptedClient(api_key="...")
+
+# Attestation verified automatically
+response = client.chat(messages=[...])
+
+# Check attestation details
+if response.attestation_verified:
+    print("✓ Secure environment verified")
+    print(f"GPU: {response.attestation.gpu_model}")
+else:
+    print("✗ Attestation failed - do not send sensitive data")
+```
+
+### Can I use this in Jupyter notebooks?
+
+Yes:
+
+```python
+# Install in notebook
+!pip install blackbox-encrypted
+
+from blackbox_encrypted import EncryptedClient
+client = EncryptedClient(api_key="...")
+
+# Use normally
+response = client.chat(messages=[...])
+print(response.content)
+```
+
+### How do I handle errors?
+
+```python
+from blackbox_encrypted import (
+    EncryptedClient,
+    AttestationError,
+    EncryptionError
+)
+
+try:
+    response = client.chat(messages=[...])
+except AttestationError as e:
+    print(f"Attestation failed: {e}")
+    # Do not send sensitive data
+except EncryptionError as e:
+    print(f"Encryption error: {e}")
+    # Check configuration
+except Exception as e:
+    print(f"Unexpected error: {e}")
+```
+
+---
+
+## Troubleshooting
+
+### Attestation verification fails
+
+**Possible causes:**
+- Confidential computing not enabled on GPU
+- Firmware version mismatch
+- Network issues preventing attestation
+- Stale attestation (too old)
+
+**Solutions:**
+1. Check GPU confidential computing mode
+2. Update GPU firmware
+3. Check network connectivity
+4. Reduce `max_attestation_age` setting
+
+### Slow performance
+
+**Possible causes:**
+- Network latency
+- Large model size
+- High concurrent load
+- Insufficient GPU memory
+
+**Solutions:**
+1. Check network latency to server
+2. Use smaller model if appropriate
+3. Scale up GPU count
+4. Optimize batch sizes
+
+### Connection errors
+
+**Possible causes:**
+- Incorrect endpoint URL
+- Firewall blocking connection
+- Invalid API key
+- Server not running (self-hosted)
+
+**Solutions:**
+1. Verify endpoint URL
+2. Check firewall rules
+3. Verify API key is correct
+4. Check server status
+
+### Out of memory errors
+
+**Possible causes:**
+- Model too large for GPU
+- Context window too large
+- Too many concurrent requests
+
+**Solutions:**
+1. Use smaller model
+2. Reduce context length
+3. Add more GPUs
+4. Limit concurrent requests
+
+---
+
+## Business Questions
+
+### What support is available?
+
+**Documentation & Resources:**
+- Comprehensive documentation
+- Deployment guides
+- Best practices
+- Technical specifications
+
+**Technical Support:**
+- Email support
+- Implementation assistance
+- Troubleshooting help
+- Security consultation
+
+**Enterprise Support:**
+- Dedicated support team
+- Custom SLA options
+- On-site assistance available
+- Training and workshops
+- Contact sales for details
+
+### Can I get a proof of concept?
+
+Yes. Contact sales@blackbox.ai for:
+- Free trial period
+- Proof of concept support
+- Technical consultation
+- Custom evaluation
+
+### Do you offer training?
+
+Yes. We provide:
+- Documentation and guides
+- Video tutorials
+- Webinars
+- Custom training (enterprise)
+- Best practices workshops
+
+### What's your roadmap?
+
+**Q1 2025:**
+- ✅ On-premise deployment
+- ✅ Python SDK
+- ✅ Hardware attestation
+
+**Q2 2025:**
+- SOC 2 Type II completion
+- ISO 27001 certification
+- JavaScript/TypeScript SDK
+- Additional model support
+
+**Q3 2025:**
+- Advanced monitoring features
+- Performance optimizations
+- Enhanced security features
+- Additional GPU support
+
+**Q4 2025:**
+- FedRAMP authorization
+- Additional language SDKs
+- Enhanced deployment tools
+- Extended compliance certifications
+
+---
+
+## Still Have Questions?
+
+### Resources
+
+<CardGroup cols={2}>
+  <Card title="Documentation" icon="book" href="/features/blackbox-encrypted/introduction">
+    Complete documentation
+  </Card>
+  <Card title="Security Architecture" icon="shield" href="/features/blackbox-encrypted/security-architecture">
+    Technical security details
+  </Card>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry examples
+  </Card>
+  <Card title="Compliance" icon="check-circle" href="/features/blackbox-encrypted/compliance">
+    Regulatory compliance
+  </Card>
+</CardGroup>
+
+### Contact Us
+
+**General Questions:**
+- Email: info@blackbox.ai
+- Website: [blackbox.ai](https://www.blackbox.ai)
+
+**Technical Support:**
+- Email: support@blackbox.ai
+- Documentation: [docs.blackbox.ai](https://docs.blackbox.ai)
+
+**Sales & Enterprise:**
+- Email: sales@blackbox.ai
+- Phone: Contact via website
+
+**Security & Compliance:**
+- Email: security@blackbox.ai
+- Compliance: compliance@blackbox.ai
+
+**Community:**
+- Forum: [community.blackbox.ai](https://community.blackbox.ai)
+- GitHub: [github.com/blackboxai](https://github.com/blackboxai)
+
+---
+
+**Can't find your answer?** Contact our support team—we're here to help!

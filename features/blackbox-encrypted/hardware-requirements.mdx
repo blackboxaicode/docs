@@ -1,0 +1,546 @@
+---
+title: "Hardware Requirements"
+description: "Detailed hardware specifications for BlackboxAI Encrypted deployment"
+---
+
+This guide provides detailed hardware specifications for deploying BlackboxAI Encrypted. Requirements vary based on your use case, model size, and performance needs.
+
+## GPU Requirements
+
+### NVIDIA H100 GPUs
+
+BlackboxAI Encrypted requires NVIDIA H100 GPUs with confidential computing support.
+
+#### H100 Specifications
+
+| Specification | Value |
+|--------------|-------|
+| **Architecture** | NVIDIA Hopper |
+| **CUDA Cores** | 16,896 |
+| **Tensor Cores** | 528 (4th Gen) |
+| **GPU Memory** | 80GB HBM3 |
+| **Memory Bandwidth** | 3.35 TB/s |
+| **TDP** | 700W |
+| **Confidential Computing** | ✅ Required |
+| **Form Factor** | PCIe or SXM5 |
+
+#### Why H100?
+
+- **Confidential Computing**: Hardware-encrypted memory and attestation
+- **Performance**: Fastest AI inference GPU available
+- **Memory**: 80GB enables large model deployment
+- **Efficiency**: Best performance per watt for AI workloads
+
+### GPU Configuration Options
+
+#### Single GPU Configuration
+
+**Best For:**
+- Small to medium models (up to 13B parameters)
+- Development and testing
+- Low to moderate throughput requirements
+- Cost-conscious deployments
+
+**Specifications:**
+- 1x NVIDIA H100 (80GB)
+- Supports models up to ~13B parameters
+- ~10-50 tokens/second (model dependent)
+- Power: 700W
+
+**Example Models:**
+- Llama 3 8B
+- Mistral 7B
+- GPT-3.5 equivalent
+- Claude Haiku equivalent
+
+#### Dual GPU Configuration
+
+**Best For:**
+- Medium models (13B-30B parameters)
+- Moderate throughput requirements
+- Production deployments
+- Balanced cost/performance
+
+**Specifications:**
+- 2x NVIDIA H100 (160GB total)
+- Supports models up to ~30B parameters
+- ~20-100 tokens/second
+- Power: 1,400W
+
+**Example Models:**
+- Llama 3 30B
+- Mixtral 8x7B
+- GPT-4 small variants
+
+#### Quad GPU Configuration
+
+**Best For:**
+- Large models (30B-70B parameters)
+- High throughput requirements
+- Enterprise deployments
+- Maximum performance
+
+**Specifications:**
+- 4x NVIDIA H100 (320GB total)
+- Supports models up to ~70B parameters
+- ~40-200 tokens/second
+- Power: 2,800W
+
+**Example Models:**
+- Llama 3 70B
+- GPT-4 equivalent
+- Claude Opus equivalent
+
+#### Eight GPU Configuration
+
+**Best For:**
+- Very large models (70B+ parameters)
+- Maximum throughput
+- Large-scale enterprise
+- Research applications
+
+**Specifications:**
+- 8x NVIDIA H100 (640GB total)
+- Supports models up to ~175B parameters
+- ~80-400 tokens/second
+- Power: 5,600W
+
+**Example Models:**
+- GPT-4 full
+- Largest open-source models
+- Custom fine-tuned models
+
+### Important: Single-Server Requirement
+
+**All GPUs must be on the same physical server** for security:
+
+✅ **Allowed:**
+```
+Single Server
+├── GPU 0: H100 (80GB)
+├── GPU 1: H100 (80GB)
+├── GPU 2: H100 (80GB)
+└── GPU 3: H100 (80GB)
+Total: 320GB on one server
+```
+
+❌ **Not Allowed:**
+```
+Server 1              Server 2
+├── GPU 0: H100       ├── GPU 2: H100
+└── GPU 1: H100       └── GPU 3: H100
+(Network between servers breaks security boundary)
+```
+
+**Why?**
+- Single attestation covers all GPUs
+- No network exposure between GPUs
+- Unified security boundary
+- Hardware isolation maintained
+
+## CPU Requirements
+
+### Processor Specifications
+
+#### Minimum Requirements
+
+**AMD EPYC (Recommended):**
+- AMD EPYC 7003 series or later
+- SEV-SNP support required
+- Minimum 16 cores
+- Base clock: 2.0 GHz+
+
+**Intel Xeon (Alternative):**
+- Intel Xeon Scalable 4th Gen or later
+- TDX (Trust Domain Extensions) support required
+- Minimum 16 cores
+- Base clock: 2.0 GHz+
+
+#### Recommended Configurations
+
+**For 1-2 GPUs:**
+- AMD EPYC 7443 (24 cores) or equivalent
+- Intel Xeon Gold 6430 (32 cores) or equivalent
+
+**For 4 GPUs:**
+- AMD EPYC 7543 (32 cores) or equivalent
+- Intel Xeon Platinum 8460Y (40 cores) or equivalent
+
+**For 8 GPUs:**
+- AMD EPYC 9554 (64 cores) or equivalent
+- Intel Xeon Platinum 8480+ (56 cores) or equivalent
+
+### Why Confidential Computing CPUs?
+
+Required features:
+- **Memory Encryption**: Encrypted system memory
+- **Secure Boot**: Verified boot process
+- **Attestation**: Platform attestation support
+- **Isolation**: VM isolation capabilities
+
+## Memory (RAM) Requirements
+
+### Minimum Requirements
+
+**Per GPU:**
+- 32GB RAM per GPU
+- DDR5 recommended (DDR4 acceptable)
+- ECC memory required
+
+**Examples:**
+- 1 GPU: 32GB RAM
+- 2 GPUs: 64GB RAM
+- 4 GPUs: 128GB RAM
+- 8 GPUs: 256GB RAM
+
+### Recommended Requirements
+
+**Per GPU:**
+- 64GB RAM per GPU for optimal performance
+- Allows for larger batch sizes
+- Better system responsiveness
+- Headroom for system operations
+
+**Examples:**
+- 1 GPU: 64GB RAM
+- 2 GPUs: 128GB RAM
+- 4 GPUs: 256GB RAM
+- 8 GPUs: 512GB RAM
+
+### Memory Type
+
+- **DDR5**: Recommended for new deployments
+- **DDR4**: Acceptable for existing infrastructure
+- **ECC**: Required for data integrity
+- **Speed**: 4800 MT/s or higher recommended
+
+## Storage Requirements
+
+### System Storage
+
+**Minimum:**
+- 500GB NVMe SSD
+- For OS, system files, and logs
+
+**Recommended:**
+- 1TB NVMe SSD
+- RAID 1 for redundancy
+- Enterprise-grade SSD
+
+### Model Storage
+
+**Requirements vary by model:**
+
+| Model Size | Storage Required |
+|-----------|------------------|
+| 7B parameters | ~15GB |
+| 13B parameters | ~30GB |
+| 30B parameters | ~60GB |
+| 70B parameters | ~140GB |
+| 175B parameters | ~350GB |
+
+**Recommended:**
+- 2TB NVMe SSD for models
+- Separate from system storage
+- High-speed for model loading
+
+### Total Storage Recommendation
+
+**For 1-2 GPUs:**
+- System: 1TB NVMe SSD
+- Models: 2TB NVMe SSD
+- Total: 3TB
+
+**For 4+ GPUs:**
+- System: 1TB NVMe SSD (RAID 1)
+- Models: 4TB NVMe SSD (RAID 1)
+- Total: 5TB usable (10TB raw)
+
+## Network Requirements
+
+### Network Interface
+
+**Minimum:**
+- 10 Gbps Ethernet
+- Single port acceptable
+
+**Recommended:**
+- 25 Gbps Ethernet or higher
+- Dual ports for redundancy
+- RDMA support (optional, for performance)
+
+### Bandwidth Requirements
+
+**Per Concurrent User:**
+- Average: 1-5 Mbps
+- Peak: 10-20 Mbps
+- Depends on model and response length
+
+**Examples:**
+- 10 concurrent users: 100 Mbps
+- 100 concurrent users: 1 Gbps
+- 1000 concurrent users: 10 Gbps
+
+### Network Latency
+
+**Client to Server:**
+- Acceptable: < 500ms
+- Good: < 100ms
+- Optimal: < 50ms
+
+**Impact:**
+- Higher latency affects user experience
+- Does not impact security
+- Consider CDN for global deployments
+
+## Power Requirements
+
+### Power Consumption
+
+**Per GPU:**
+- H100 TDP: 700W
+- Peak power: ~750W
+- Average load: 400-600W
+
+**Total System Power:**
+
+| Configuration | Typical | Peak |
+|--------------|---------|------|
+| 1 GPU | 1.2 kW | 1.5 kW |
+| 2 GPUs | 2.0 kW | 2.5 kW |
+| 4 GPUs | 3.5 kW | 4.5 kW |
+| 8 GPUs | 6.5 kW | 8.5 kW |
+
+### Power Infrastructure
+
+**Requirements:**
+- Redundant power supplies
+- UPS for clean power
+- PDU with monitoring
+- Adequate circuit capacity
+
+**Cooling:**
+- Data center cooling required
+- 1.5x power consumption for cooling
+- Hot aisle/cold aisle recommended
+- Temperature monitoring
+
+## Physical Requirements
+
+### Server Form Factor
+
+**Rack Mount:**
+- 2U for 1-2 GPUs
+- 4U for 4 GPUs
+- 8U for 8 GPUs
+
+**Space Requirements:**
+- Standard 19" rack
+- Adequate depth (36"+ recommended)
+- Cable management space
+- Maintenance access
+
+### Environmental
+
+**Temperature:**
+- Operating: 10°C to 35°C
+- Optimal: 18°C to 27°C
+- Humidity: 20% to 80% RH
+
+**Airflow:**
+- Front-to-back airflow
+- Minimum 200 CFM per GPU
+- Hot aisle containment recommended
+
+## Configuration Examples
+
+### Small Deployment (Development/Testing)
+
+**Hardware:**
+- 1x NVIDIA H100 (80GB)
+- AMD EPYC 7443 (24 cores)
+- 64GB DDR5 RAM
+- 1TB NVMe SSD (system)
+- 2TB NVMe SSD (models)
+- 10 Gbps network
+
+**Capacity:**
+- Models up to 13B parameters
+- 5-10 concurrent users
+- ~10-50 tokens/second
+
+**Cost:** ~$50,000
+
+### Medium Deployment (Production)
+
+**Hardware:**
+- 4x NVIDIA H100 (320GB total)
+- AMD EPYC 7543 (32 cores)
+- 256GB DDR5 RAM
+- 2TB NVMe SSD RAID 1 (system)
+- 4TB NVMe SSD RAID 1 (models)
+- 25 Gbps network
+
+**Capacity:**
+- Models up to 70B parameters
+- 50-100 concurrent users
+- ~40-200 tokens/second
+
+**Cost:** ~$200,000
+
+### Large Deployment (Enterprise)
+
+**Hardware:**
+- 8x NVIDIA H100 (640GB total)
+- AMD EPYC 9554 (64 cores)
+- 512GB DDR5 RAM
+- 2TB NVMe SSD RAID 1 (system)
+- 8TB NVMe SSD RAID 1 (models)
+- 100 Gbps network
+
+**Capacity:**
+- Models up to 175B parameters
+- 200+ concurrent users
+- ~80-400 tokens/second
+
+**Cost:** ~$400,000
+
+## On-Premise Deployment
+
+BlackboxAI Encrypted is designed for on-premise deployment on your own hardware infrastructure. This gives you:
+
+- **Complete Control**: Full ownership and management of hardware
+- **Data Sovereignty**: All data stays within your facility
+- **Customization**: Configure hardware to your exact specifications
+- **Security**: Physical security under your control
+- **Compliance**: Meet any data residency requirements
+
+## Procurement Guide
+
+### Where to Buy
+
+**Direct from NVIDIA:**
+- Enterprise customers
+- Volume discounts available
+- Support included
+
+**Server Vendors:**
+- Dell PowerEdge
+- HPE ProLiant
+- Supermicro
+- Lenovo ThinkSystem
+- Custom server builders
+
+### Lead Times
+
+**Current Market (2025):**
+- H100 GPUs: 3-6 months
+- Complete servers: 4-8 months
+- Custom configurations: Add 2-4 weeks
+
+**Recommendations:**
+- Order early and plan ahead
+- Work with vendors for priority delivery
+- Consider pre-configured systems for faster deployment
+- Plan for long lead times in procurement
+
+## Compatibility Matrix
+
+### Supported Configurations
+
+| GPUs | CPU Cores | RAM | Storage | Network | Status |
+|------|-----------|-----|---------|---------|--------|
+| 1x H100 | 16+ | 32GB+ | 500GB+ | 10Gbps | ✅ Supported |
+| 2x H100 | 24+ | 64GB+ | 1TB+ | 10Gbps | ✅ Supported |
+| 4x H100 | 32+ | 128GB+ | 2TB+ | 25Gbps | ✅ Recommended |
+| 8x H100 | 64+ | 256GB+ | 4TB+ | 25Gbps | ✅ Recommended |
+
+### Unsupported Configurations
+
+❌ **Multi-Server GPU Clusters:**
+- Security boundary broken
+- Network exposure
+- Not supported
+
+❌ **Non-H100 GPUs:**
+- A100: No confidential computing
+- V100: Too old
+- Consumer GPUs: Not supported
+
+❌ **Non-Confidential CPUs:**
+- Older AMD EPYC (pre-7003)
+- Older Intel Xeon (pre-4th Gen)
+- Consumer CPUs
+
+## Performance Expectations
+
+### Throughput by Configuration
+
+| Configuration | Small Model (7B) | Medium Model (30B) | Large Model (70B) |
+|--------------|------------------|-------------------|-------------------|
+| 1x H100 | 50 tokens/s | N/A | N/A |
+| 2x H100 | 100 tokens/s | 40 tokens/s | N/A |
+| 4x H100 | 200 tokens/s | 80 tokens/s | 50 tokens/s |
+| 8x H100 | 400 tokens/s | 160 tokens/s | 100 tokens/s |
+
+*Actual performance varies by model architecture and optimization*
+
+### Latency Expectations
+
+**Time to First Token:**
+- Small models: 50-200ms
+- Medium models: 100-400ms
+- Large models: 200-800ms
+
+**Token Generation:**
+- Depends on model size
+- Inversely proportional to throughput
+- Consistent within model
+
+## Upgrade Path
+
+### Starting Small
+
+**Phase 1: Single GPU**
+- Start with 1x H100
+- Validate use case
+- Build expertise
+
+**Phase 2: Scale Up**
+- Add GPUs to same server
+- Increase capacity
+- Maintain security
+
+**Phase 3: Scale Out**
+- Add more servers (separate deployments)
+- Load balance across servers
+- Each server maintains security
+
+### Future-Proofing
+
+**Considerations:**
+- Choose servers with expansion slots
+- Plan for power/cooling growth
+- Network infrastructure scalability
+- Storage expansion capability
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Deployment Guide" icon="server" href="/features/blackbox-encrypted/self-hosted-deployment">
+    Complete deployment instructions
+  </Card>
+  <Card title="Security Architecture" icon="shield" href="/features/blackbox-encrypted/security-architecture">
+    Understand security guarantees
+  </Card>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry-specific examples
+  </Card>
+  <Card title="Compliance" icon="check-circle" href="/features/blackbox-encrypted/compliance">
+    Regulatory compliance details
+  </Card>
+</CardGroup>
+
+---
+
+**Need help sizing your deployment?** Contact our solutions architects for a custom assessment.

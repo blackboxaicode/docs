@@ -1,0 +1,675 @@
+---
+title: "Security Architecture"
+description: "Deep dive into BlackboxAI Encrypted's security guarantees and implementation"
+---
+
+BlackboxAI Encrypted provides enterprise-grade security through a combination of cryptographic protocols, hardware-based attestation, and confidential computing. This document explains how these technologies work together to ensure your data remains private.
+
+## Security Principles
+
+### 1. Zero Trust Architecture
+
+We don't ask you to trust us—we provide cryptographic proof:
+
+- **Cryptographic Guarantees**: Mathematical proof of security, not policies
+- **Hardware Attestation**: Verifiable proof of secure environment
+- **End-to-End Encryption**: Data encrypted from client to secure GPU
+- **No Provider Access**: Cloud provider cannot decrypt your data
+
+### 2. Defense in Depth
+
+Multiple layers of security protection:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 1: Client-Side Encryption                             │
+│ • AES-256-GCM encryption before transmission                │
+│ • Keys generated locally, never transmitted                 │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 2: Transport Security                                 │
+│ • TLS 1.2+ with forward secrecy                            │
+│ • Certificate-based authentication                          │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 3: Hardware Attestation                               │
+│ • Cryptographic proof of secure environment                │
+│ • GPU firmware verification                                 │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 4: Confidential Computing                             │
+│ • Hardware-encrypted GPU memory                             │
+│ • Isolated execution environment                            │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 3. Minimal Data Exposure
+
+Reduce attack surface through data minimization:
+
+- **No Persistent Storage**: Conversations never written to disk
+- **Memory-Only Processing**: Data exists only in encrypted memory
+- **Immediate Cleanup**: Session data destroyed after use
+- **No Logs**: Conversation content never logged
+
+## Cryptographic Protocols
+
+### End-to-End Encryption
+
+#### AES-256-GCM (Galois/Counter Mode)
+
+**Why AES-256-GCM?**
+- Industry-standard authenticated encryption
+- Used by governments for classified information
+- Provides both confidentiality and integrity
+- Hardware-accelerated on modern CPUs
+
+**Security Properties:**
+- **Confidentiality**: Data unreadable without key
+- **Integrity**: Tampering detected automatically
+- **Authentication**: Proves message origin
+- **Performance**: Minimal overhead (~1-5ms per message)
+
+**Implementation:**
+```python
+# Encryption process (simplified)
+def encrypt_message(plaintext, shared_key):
+    # Generate random initialization vector
+    iv = generate_random_bytes(12)
+    
+    # Encrypt with AES-256-GCM
+    cipher = AES_GCM(key=shared_key, iv=iv)
+    ciphertext, auth_tag = cipher.encrypt_and_tag(plaintext)
+    
+    # Return encrypted data
+    return {
+        'iv': iv,
+        'ciphertext': ciphertext,
+        'auth_tag': auth_tag
+    }
+```
+
+#### Key Exchange: ECDH (Elliptic Curve Diffie-Hellman)
+
+**Why ECDH?**
+- Establishes shared secrets without transmitting keys
+- Perfect forward secrecy
+- Smaller keys than RSA with equivalent security
+- NIST-approved (SECP384R1 curve)
+
+**Security Properties:**
+- **Key Agreement**: Both parties derive same secret
+- **No Key Transmission**: Keys never sent over network
+- **Forward Secrecy**: Past sessions remain secure
+- **Computational Security**: ~192-bit security level
+
+**Key Exchange Process:**
+```
+Client                                    Server
+------                                    ------
+Generate keypair:
+  private_key_c, public_key_c
+                                          Generate keypair:
+                                            private_key_s, public_key_s
+
+        -------- public_key_c -------->
+        <------- public_key_s ---------
+
+Derive shared secret:                     Derive shared secret:
+  shared = ECDH(private_key_c,              shared = ECDH(private_key_s,
+                public_key_s)                             public_key_c)
+
+Both parties now have identical shared secret
+```
+
+#### Digital Signatures: ECDSA
+
+**Why ECDSA?**
+- Proves message authenticity
+- Prevents tampering and impersonation
+- Non-repudiation (sender cannot deny)
+- Efficient verification
+
+**Security Properties:**
+- **Authentication**: Proves sender identity
+- **Integrity**: Detects any modifications
+- **Non-Repudiation**: Cryptographic proof of origin
+
+**Signature Process:**
+```python
+# Signing (simplified)
+def sign_message(message, private_key):
+    # Hash the message
+    message_hash = SHA256(message)
+    
+    # Sign with ECDSA
+    signature = ECDSA_Sign(private_key, message_hash)
+    
+    return signature
+
+# Verification
+def verify_signature(message, signature, public_key):
+    message_hash = SHA256(message)
+    return ECDSA_Verify(public_key, message_hash, signature)
+```
+
+### Perfect Forward Secrecy
+
+Each session uses unique, ephemeral keys:
+
+**Key Properties:**
+- **Ephemeral**: Generated fresh for each session
+- **Never Reused**: Each session has unique keys
+- **Destroyed**: Keys deleted immediately after session
+- **Independent**: Compromise of one session doesn't affect others
+
+**What This Means:**
+If an attacker somehow obtained today's encryption keys, they could not:
+- Decrypt yesterday's conversations
+- Decrypt tomorrow's conversations
+- Derive keys from other sessions
+
+### Replay Attack Protection
+
+Cryptographic nonces prevent message replay:
+
+**How It Works:**
+```python
+# Each message includes a nonce
+message = {
+    'nonce': 1001,  # Increments with each message
+    'iv': random_bytes(12),
+    'ciphertext': encrypted_data,
+    'signature': signature
+}
+
+# Receiver verifies nonce
+if message.nonce <= last_received_nonce:
+    reject_message("Replay attack detected")
+```
+
+**Security Properties:**
+- **Uniqueness**: Each message has unique nonce
+- **Ordering**: Enforces message sequence
+- **Freshness**: Prevents old message replay
+- **Simplicity**: Efficient to verify
+
+## Hardware-Based Attestation
+
+### What is Attestation?
+
+Attestation provides cryptographic proof that:
+1. The GPU is genuine NVIDIA H100 hardware
+2. The firmware is unmodified and trustworthy
+3. Confidential computing is active
+4. The environment is isolated and secure
+
+### Attestation Process
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Step 1: Client Requests Attestation                         │
+│ • Client generates challenge nonce                          │
+│ • Sends attestation request to server                       │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 2: GPU Generates Attestation Report                    │
+│ • GPU measures firmware and configuration                   │
+│ • Creates report with measurements                          │
+│ • Signs report with hardware-protected key                  │
+│ • Includes client's challenge nonce                         │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 3: Server Returns Attestation                          │
+│ • Platform attestation (CPU/VM)                             │
+│ • GPU attestation (H100)                                    │
+│ • Cryptographic signatures                                  │
+│ • Timestamp and nonce                                       │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 4: Client Verifies Attestation                         │
+│ • Verify signatures (hardware keys)                         │
+│ • Check measurements match expected values                  │
+│ • Verify nonce matches (freshness)                          │
+│ • Confirm confidential computing active                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Attestation Components
+
+#### Platform Attestation
+
+Verifies the host system:
+- **CPU**: AMD SEV-SNP or Intel TDX measurements
+- **Firmware**: UEFI and bootloader verification
+- **VM**: Virtual machine isolation proof
+- **Memory**: Encrypted memory confirmation
+
+#### GPU Attestation
+
+Verifies the GPU environment:
+- **Hardware Identity**: Genuine NVIDIA H100 GPU
+- **Firmware Version**: Unmodified GPU firmware
+- **Security Mode**: Confidential computing enabled
+- **Isolation**: GPU memory encryption active
+
+### Trust Chain
+
+The attestation creates a chain of trust:
+
+```
+NVIDIA Root of Trust (Hardware)
+        ↓
+GPU Manufacturing (Key Injection)
+        ↓
+GPU Firmware (Signed by NVIDIA)
+        ↓
+Runtime Attestation (Current State)
+        ↓
+Client Verification (Your Device)
+```
+
+**Key Point**: You don't trust the cloud provider—you verify cryptographic proof from the hardware itself.
+
+### Attestation Verification
+
+Detailed verification process:
+
+```python
+def verify_attestation(attestation_report):
+    # 1. Verify report signature
+    if not verify_signature(
+        attestation_report.data,
+        attestation_report.signature,
+        attestation_report.public_key
+    ):
+        return False, "Invalid signature"
+    
+    # 2. Verify nonce (freshness)
+    if attestation_report.nonce != our_challenge_nonce:
+        return False, "Nonce mismatch - possible replay"
+    
+    # 3. Verify timestamp (not stale)
+    if time.now() - attestation_report.timestamp > MAX_AGE:
+        return False, "Attestation too old"
+    
+    # 4. Verify GPU measurements
+    if attestation_report.gpu_measurements != EXPECTED_MEASUREMENTS:
+        return False, "GPU firmware mismatch"
+    
+    # 5. Verify confidential computing enabled
+    if not attestation_report.confidential_mode:
+        return False, "Confidential computing not active"
+    
+    # 6. Verify platform measurements
+    if not verify_platform_measurements(attestation_report.platform):
+        return False, "Platform verification failed"
+    
+    return True, "Attestation verified"
+```
+
+## Confidential Computing
+
+### Hardware-Encrypted Memory
+
+NVIDIA H100 GPUs with confidential computing provide:
+
+**Memory Encryption:**
+- All GPU memory encrypted by hardware
+- Encryption keys managed by GPU chip
+- Keys never accessible to software
+- Automatic encryption/decryption
+
+**Isolation:**
+- Each workload in separate encrypted memory space
+- DMA (Direct Memory Access) attacks prevented
+- Side-channel protections active
+- Other users cannot access your data
+
+### Secure Execution Environment
+
+The confidential computing environment provides:
+
+**Hardware Isolation:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Physical Server                                              │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │ Confidential VM (Your Workload)                        │ │
+│  │                                                        │ │
+│  │  ┌──────────────────────────────────────────────────┐ │ │
+│  │  │ Encrypted GPU Memory                             │ │ │
+│  │  │ • Your data processed here                       │ │ │
+│  │  │ • Hardware-encrypted                             │ │ │
+│  │  │ • Isolated from host                             │ │ │
+│  │  └──────────────────────────────────────────────────┘ │ │
+│  └────────────────────────────────────────────────────────┘ │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │ Host System (Cloud Provider)                           │ │
+│  │ • Cannot access encrypted memory                       │ │
+│  │ • Cannot decrypt your data                             │ │
+│  │ • Cannot interfere with workload                       │ │
+│  └────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Security Boundaries:**
+- **Physical**: Hardware-enforced isolation
+- **Cryptographic**: Encrypted memory
+- **Attestation**: Verifiable security state
+- **Monitoring**: Tamper detection
+
+## Multi-GPU Security
+
+### Single-Server Requirement
+
+All GPUs must be on the same physical server:
+
+**Why This Matters:**
+- **Unified Security Domain**: Single attestation covers all GPUs
+- **No Network Exposure**: No inter-server communication
+- **Hardware Isolation**: All GPUs within same security boundary
+- **Consistent Encryption**: Same memory encryption across GPUs
+
+**Security Benefits:**
+```
+✅ Single Server (Secure)
+┌─────────────────────────────────────┐
+│ Server with 4x H100 GPUs            │
+│ • Single attestation                │
+│ • No network between GPUs           │
+│ • Unified security boundary         │
+│ • Hardware isolation maintained     │
+└─────────────────────────────────────┘
+
+❌ Multi-Server (Insecure)
+┌──────────────┐    Network    ┌──────────────┐
+│ Server 1     │◄──────────────►│ Server 2     │
+│ 2x H100 GPUs │   (Exposed)    │ 2x H100 GPUs │
+└──────────────┘                └──────────────┘
+• Network interception possible
+• Multiple attestations needed
+• Security boundary broken
+```
+
+### Model Distribution
+
+Large models can span multiple GPUs on the same server:
+
+**Tensor Parallelism:**
+- Model weights distributed across GPUs
+- All processing within secure boundary
+- No network exposure
+- Linear performance scaling
+
+**Example: 70B Parameter Model**
+```
+Server with 4x H100 GPUs
+├── GPU 0: Layers 1-20 (encrypted memory)
+├── GPU 1: Layers 21-40 (encrypted memory)
+├── GPU 2: Layers 41-60 (encrypted memory)
+└── GPU 3: Layers 61-80 (encrypted memory)
+
+All GPUs covered by single attestation
+All memory hardware-encrypted
+No data leaves secure boundary
+```
+
+## Data Flow Security
+
+### Complete Message Journey
+
+Let's trace a message through the system:
+
+**1. Client-Side (Your Device)**
+```python
+# You type a message
+plaintext = "Analyze this confidential report..."
+
+# Client generates encryption key
+session_key = generate_session_key()
+
+# Encrypt message
+iv = random_bytes(12)
+ciphertext, auth_tag = AES_GCM_encrypt(
+    plaintext, session_key, iv
+)
+
+# Sign encrypted message
+signature = ECDSA_sign(ciphertext, your_private_key)
+
+# Transmit encrypted data
+send({
+    'iv': iv,
+    'ciphertext': ciphertext,
+    'auth_tag': auth_tag,
+    'signature': signature
+})
+```
+
+**2. Network Transit**
+```
+Encrypted Data in Transit:
+• TLS 1.2+ encryption (additional layer)
+• No plaintext visible
+• Network observers see only:
+  - Encrypted blob
+  - Timestamp
+  - Size
+• Cannot decrypt without keys
+```
+
+**3. Cloud Provider Infrastructure**
+```
+Azure Infrastructure:
+• Receives encrypted data
+• Cannot decrypt (no keys)
+• Routes to confidential VM
+• Monitoring sees only metadata
+• Logs contain no plaintext
+```
+
+**4. Confidential VM**
+```
+Hardware-Isolated Environment:
+• Encrypted data enters VM
+• Attestation verified
+• Keys derived in secure enclave
+• Decryption in encrypted GPU memory
+```
+
+**5. Secure GPU Processing**
+```python
+# Inside encrypted GPU memory
+def process_in_secure_gpu(encrypted_message):
+    # Verify signature
+    if not verify_signature(encrypted_message):
+        reject()
+    
+    # Decrypt in secure memory
+    plaintext = AES_GCM_decrypt(
+        encrypted_message.ciphertext,
+        session_key,
+        encrypted_message.iv
+    )
+    
+    # Process with AI model (only here is plaintext visible)
+    response = ai_model.generate(plaintext)
+    
+    # Encrypt response
+    encrypted_response = AES_GCM_encrypt(response, session_key)
+    
+    # Destroy plaintext immediately
+    secure_delete(plaintext)
+    secure_delete(response)
+    
+    return encrypted_response
+```
+
+**6. Response Return**
+```
+Encrypted Response:
+• Encrypted in GPU
+• Transmitted over TLS
+• Cloud provider cannot decrypt
+• Returns to your device
+```
+
+**7. Client Receives Response**
+```python
+# Your device
+encrypted_response = receive()
+
+# Verify signature
+if not verify_signature(encrypted_response):
+    reject("Tampered response")
+
+# Decrypt
+plaintext_response = AES_GCM_decrypt(
+    encrypted_response.ciphertext,
+    session_key,
+    encrypted_response.iv
+)
+
+# Display to user
+print(plaintext_response)
+```
+
+**Key Insight**: Plaintext exists in only two places:
+1. Your device (under your control)
+2. Encrypted GPU memory (cryptographically verified)
+
+## Security Guarantees
+
+### What We Guarantee
+
+✅ **End-to-End Encryption**
+- Data encrypted on your device
+- Decrypted only in secure GPU
+- Cloud provider cannot access plaintext
+
+✅ **Hardware Attestation**
+- Cryptographic proof of secure environment
+- Verifiable before each session
+- Tamper detection
+
+✅ **Zero Data Retention**
+- No persistent storage
+- Memory-only processing
+- Immediate cleanup after sessions
+
+✅ **Perfect Forward Secrecy**
+- Unique keys per session
+- Past sessions remain secure
+- Future sessions protected
+
+✅ **Replay Attack Protection**
+- Nonce-based verification
+- Message ordering enforced
+- Old messages rejected
+
+✅ **Multi-GPU Security**
+- Single-server isolation
+- Unified security boundary
+- No network exposure
+
+### What We Don't Guarantee
+
+❌ **Client-Side Security**
+- Assumes your device is secure
+- Cannot protect against client malware
+- User responsible for device security
+
+❌ **Physical Security**
+- Assumes physical security of your device
+- Cannot prevent physical access attacks
+- User responsible for physical security
+
+❌ **Social Engineering**
+- Cannot prevent user from revealing information
+- User responsible for operational security
+
+❌ **Zero-Day Vulnerabilities**
+- Unknown vulnerabilities in dependencies
+- Continuous monitoring and updates
+- Responsible disclosure program
+
+❌ **Quantum Computing (Future)**
+- Current algorithms vulnerable to quantum computers
+- Post-quantum migration planned
+- Timeline: 5-10 years before threat
+
+## Threat Model
+
+### Threats Mitigated
+
+| Threat | Mitigation | Effectiveness |
+|--------|-----------|---------------|
+| Network Eavesdropping | TLS + E2E encryption | ✅ Complete |
+| Man-in-the-Middle | Attestation + signatures | ✅ Complete |
+| Cloud Provider Access | E2E encryption + confidential computing | ✅ Complete |
+| Insider Threats | Hardware isolation + encryption | ✅ Complete |
+| Server Compromise | Ephemeral keys + no persistent data | ✅ High |
+| Memory Dumps | Encrypted GPU memory | ✅ Complete |
+| Replay Attacks | Nonce-based protection | ✅ Complete |
+| Data Breaches | No data at rest | ✅ Complete |
+| Legal Requests | Provider has no plaintext data | ✅ Complete |
+| Firmware Tampering | Attestation detects modifications | ✅ Complete |
+
+### Threats Not Fully Mitigated
+
+| Threat | Status | Mitigation Plan |
+|--------|--------|-----------------|
+| Client-Side Malware | ⚠️ User responsibility | Security best practices |
+| Physical Client Access | ⚠️ User responsibility | Device encryption recommended |
+| Side-Channel Attacks | ⚠️ Partial mitigation | Hardware protections + monitoring |
+| Quantum Computing | ⚠️ Future threat | Post-quantum migration planned |
+| Zero-Day Vulnerabilities | ⚠️ Ongoing risk | Continuous updates + monitoring |
+
+## Compliance and Certifications
+
+### Current Compliance
+
+- **HIPAA**: Technical controls for PHI protection
+- **GDPR**: Data minimization and privacy by design
+- **SOC 2**: Security controls (in progress)
+- **ISO 27001**: Information security management (planned)
+
+### Audit Trail
+
+Attestation provides verifiable audit trail:
+- Cryptographic proof of security state
+- Timestamp of each verification
+- GPU and firmware versions
+- Security configuration
+
+[Learn more about compliance →](/features/blackbox-encrypted/compliance)
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry-specific security examples
+  </Card>
+  <Card title="Compliance" icon="check-circle" href="/features/blackbox-encrypted/compliance">
+    Regulatory compliance details
+  </Card>
+  <Card title="FAQ" icon="question-circle" href="/features/blackbox-encrypted/faq">
+    Security questions answered
+  </Card>
+  <Card title="Hardware Requirements" icon="server" href="/features/blackbox-encrypted/hardware-requirements">
+    Infrastructure specifications
+  </Card>
+</CardGroup>
+
+---
+
+**Questions about security?** Contact our security team at security@blackbox.ai

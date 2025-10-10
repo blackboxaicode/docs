@@ -1,0 +1,202 @@
+---
+title: "Introduction"
+description: "Enterprise-grade confidential AI inference with end-to-end encryption"
+---
+
+**Privacy-preserving AI inference where only you and the AI model can access your conversations.**
+
+BlackboxAI Encrypted delivers enterprise-grade confidential AI inference with end-to-end encryption, ensuring that your conversations remain completely private. Built on NVIDIA H100 GPUs with confidential computing, the system provides cryptographic guarantees that data is only accessible within the secure GPU environment.
+
+![BlackboxAI Encrypted Security](/images/desktop_screenshot_01.png)
+
+## Why BlackboxAI Encrypted?
+
+### The Privacy Challenge
+
+Traditional cloud AI services require you to trust that providers won't access your data. For organizations handling sensitive information—healthcare records, legal documents, financial data, or proprietary research—this trust-based model is insufficient.
+
+**BlackboxAI Encrypted replaces trust with proof.**
+
+### Cryptographic Guarantees, Not Promises
+
+Unlike conventional cloud AI that relies on policies and promises, BlackboxAI Encrypted provides **mathematical and hardware-based guarantees**:
+
+- **End-to-End Encryption**: Data is encrypted on your device and only decrypted inside a secure GPU environment
+- **Hardware Attestation**: Cryptographic proof that your data is processed in a genuine, uncompromised environment
+- **Secure GPU Access Only**: Data is only accessible within the secure GPU environment during processing
+- **No Data Retention**: Conversations exist only in memory during your session and are destroyed immediately after
+
+## Core Security Features
+
+### 🔒 Complete Conversation Privacy
+
+Your conversations are visible only to you and the AI model. All messages are encrypted on your device before transmission, and only your client and the secure GPU environment hold the decryption keys.
+
+### 🛡️ Hardware-Based Attestation
+
+Before each session, the system performs cryptographic verification to prove:
+- The AI model runs on genuine NVIDIA H100 GPUs in confidential computing mode
+- The GPU firmware and software stack are unmodified and trustworthy
+- Your workload is isolated in hardware-encrypted memory
+- Any attempt to compromise the system is cryptographically detectable
+
+### 🔐 Military-Grade Encryption
+
+- **AES-256-GCM**: Industry-standard authenticated encryption
+- **Perfect Forward Secrecy**: Each session uses unique keys that are destroyed after use
+- **Replay Attack Protection**: Cryptographic nonces prevent message replay
+- **Transport Security**: HTTPS/TLS 1.2+ with secure cipher suites
+
+### 🚫 Zero Data Retention
+
+- **No Persistent Storage**: Conversations are never stored on servers
+- **Memory-Only Processing**: All data exists only in encrypted GPU memory during inference
+- **Automatic Cleanup**: Session data is immediately destroyed when conversations end
+- **No Logs**: No conversation content is logged or retained
+
+## Deployment Model
+
+BlackboxAI Encrypted is designed for **self-hosted, on-premise deployment**:
+
+### Self-Hosted On-Premise Solution
+
+Deploy on your own infrastructure:
+- **Your Infrastructure**: Run on your own hardware in your data center
+- **Data Sovereignty**: Process data within your infrastructure boundaries
+- **Custom Configuration**: Tailor the setup to your specific requirements
+- **Air-Gapped Options**: Deploy in completely isolated environments
+- **No External Dependencies**: Operate without internet connectivity if needed
+
+[Learn more about deployment →](/features/blackbox-encrypted/self-hosted-deployment)
+
+## Multi-GPU Architecture
+
+For large AI models requiring substantial computational power, BlackboxAI Encrypted supports multiple GPUs while maintaining security:
+
+### Single-Server Requirement
+
+All GPUs processing your data must be on the same physical server. This ensures:
+- **Unified Security Domain**: All GPUs are covered by a single attestation
+- **No Network Exposure**: No communication between separate machines
+- **Hardware Isolation**: Memory encryption is consistent across all GPUs
+- **Performance**: Large models (70B+ parameters) can span multiple GPUs
+
+**Why This Matters**: Single-server multi-GPU (upto 256 GPU's) maintains security while enabling large model support.
+
+## Who Should Use BlackboxAI Encrypted?
+
+### Healthcare Organizations
+- HIPAA-compliant AI assistance with patient data
+- Clinical decision support without privacy violations
+- Medical research with confidential patient information
+
+### Legal Firms
+- Preserve attorney-client privilege while leveraging AI
+- Confidential document analysis and legal research
+- Case strategy development with sensitive information
+
+### Financial Institutions
+- Protect trading strategies and proprietary analysis
+- Confidential market research and forecasting
+- Regulatory compliance (GLBA, SEC requirements)
+
+### Enterprise Organizations
+- Strategic planning with confidential business information
+- Proprietary research and development
+- Competitive intelligence protection
+
+### Research Institutions
+- Unpublished research data analysis
+- Clinical trial data processing
+- Patent-sensitive research work
+
+## Key Benefits
+
+### For Security Teams
+- **Cryptographic Assurance**: Mathematical proof of security, not just policies
+- **Audit Trail**: Hardware attestation provides verifiable security records
+- **Compliance Ready**: Technical controls for HIPAA, GDPR, and other regulations
+- **Zero Trust Architecture**: Data only accessible in secure GPU environment
+
+### For Development Teams
+- **Simple Integration**: Easy-to-use SDK with minimal code changes
+- **Performance**: Minimal encryption overhead compared to AI inference time
+- **Scalability**: Support for models from 4B to 70B+ parameters
+- **Flexibility**: Works with various AI models and use cases
+
+### For Business Leaders
+- **Risk Mitigation**: Data only accessible in secure GPU environment
+- **Competitive Advantage**: Leverage AI without revealing proprietary information
+- **Regulatory Compliance**: Meet stringent data protection requirements
+- **Infrastructure Control**: Deploy on your own hardware and infrastructure
+
+## How It Works
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    YOUR DEVICE (Client)                      │
+│  • Generate encryption keys locally                          │
+│  • Verify server attestation                                │
+│  • Encrypt message with AES-256-GCM                         │
+│  • Sign with private key                                    │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │ HTTPS/TLS (Encrypted Transport)
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│         YOUR INFRASTRUCTURE (On-Premise Server)              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │  Confidential VM with H100 GPU(s)                      │ │
+│  │  • Decrypt in secure GPU enclave                       │ │
+│  │  • Process in encrypted GPU memory                     │ │
+│  │  • Generate AI response                                │ │
+│  │  • Encrypt response                                    │ │
+│  │  • Destroy session data                                │ │
+│  │  • Data only accessible in secure GPU                  │ │
+│  └────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+                            │
+                            │ HTTPS/TLS (Encrypted Response)
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│                    YOUR DEVICE (Client)                      │
+│  • Verify response signature                                │
+│  • Decrypt with shared key                                  │
+│  • Display response                                         │
+└─────────────────────────────────────────────────────────────┘
+```
+
+## Getting Started
+
+Ready to experience truly private AI inference on your own infrastructure?
+
+1. **Review Requirements**: Check hardware and infrastructure needs
+2. **Deploy Server**: Install BlackboxAI Encrypted on your hardware
+3. **Install Client SDK**: Simple SDK installation on client machines
+4. **Connect & Use**: Point clients to your server and start chatting
+
+<CardGroup cols={2}>
+  <Card title="Deployment Guide" icon="server" href="/features/blackbox-encrypted/self-hosted-deployment">
+    Complete setup and installation guide
+  </Card>
+  <Card title="Hardware Requirements" icon="microchip" href="/features/blackbox-encrypted/hardware-requirements">
+    GPU and infrastructure specifications
+  </Card>
+  <Card title="Security Architecture" icon="shield" href="/features/blackbox-encrypted/security-architecture">
+    Deep dive into our security guarantees
+  </Card>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry-specific examples and scenarios
+  </Card>
+</CardGroup>
+
+## Next Steps
+
+- [Start with deployment guide →](/features/blackbox-encrypted/self-hosted-deployment)
+- [Understand the security architecture →](/features/blackbox-encrypted/security-architecture)
+- [Review hardware requirements →](/features/blackbox-encrypted/hardware-requirements)
+- [Explore compliance features →](/features/blackbox-encrypted/compliance)
+
+---
+
+**Questions?** Check our [FAQ](/features/blackbox-encrypted/faq) or contact our team for enterprise inquiries.
