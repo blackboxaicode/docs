@@ -76,11 +76,7 @@
                                 "group": "BlackboxAI Encrypted",
                                 "pages": [
                                     "/features/blackbox-encrypted/introduction",
-                                    "/features/blackbox-encrypted/self-hosted-deployment",
-                                    "/features/blackbox-encrypted/self-hosted-deployment-old",
-                                    "/features/blackbox-encrypted/hardware-requirements",
                                     "/features/blackbox-encrypted/security-architecture",
-                                    "/features/blackbox-encrypted/use-cases",
                                     "/features/blackbox-encrypted/compliance",
                                     "/features/blackbox-encrypted/faq"
                                 ]

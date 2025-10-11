@@ -5,7 +5,7 @@ description: "Enterprise-grade confidential AI inference with end-to-end encrypt
 
 **Privacy-preserving AI inference where only you and the AI model can access your conversations.**
 
-BlackboxAI Encrypted delivers enterprise-grade confidential AI inference with end-to-end encryption, ensuring that your conversations remain completely private. Built on NVIDIA H100 GPUs with confidential computing, the system provides cryptographic guarantees that data is only accessible within the secure GPU environment.
+BlackboxAI Encrypted delivers enterprise-grade confidential AI inference with end-to-end encryption, ensuring that your conversations remain completely private. Built on NVIDIA GPU Confidential Computing, the system provides cryptographic guarantees that data is only accessible within the secure GPU environment.
 
 ![BlackboxAI Encrypted Security](/images/desktop_screenshot_01.png)
 
@@ -35,7 +35,7 @@ Your conversations are visible only to you and the AI model. All messages are en
 ### 🛡️ Hardware-Based Attestation
 
 Before each session, the system performs cryptographic verification to prove:
-- The AI model runs on genuine NVIDIA H100 GPUs in confidential computing mode
+- The AI model runs on genuine NVIDIA GPUs in confidential computing mode
 - The GPU firmware and software stack are unmodified and trustworthy
 - Your workload is isolated in hardware-encrypted memory
 - Any attempt to compromise the system is cryptographically detectable
@@ -146,7 +146,7 @@ All GPUs processing your data must be on the same physical server. This ensures:
 ┌─────────────────────────────────────────────────────────────┐
 │         YOUR INFRASTRUCTURE (On-Premise Server)              │
 │  ┌────────────────────────────────────────────────────────┐ │
-│  │  Confidential VM with H100 GPU(s)                      │ │
+│  │  Confidential VM with NVIDIA GPU(s)                    │ │
 │  │  • Decrypt in secure GPU enclave                       │ │
 │  │  • Process in encrypted GPU memory                     │ │
 │  │  • Generate AI response                                │ │
