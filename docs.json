@@ -77,7 +77,6 @@
                                 "pages": [
                                     "/features/blackbox-encrypted/introduction",
                                     "/features/blackbox-encrypted/security-architecture",
-                                    "/features/blackbox-encrypted/compliance",
                                     "/features/blackbox-encrypted/faq"
                                 ]
                             }
