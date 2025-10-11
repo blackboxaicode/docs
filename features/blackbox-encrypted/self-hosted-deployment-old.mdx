@@ -1,0 +1,759 @@
+---
+title: "Deployment Guide (Old)"
+description: "Deploy BlackboxAI Encrypted on your own infrastructure"
+---
+
+Deploy BlackboxAI Encrypted on your own on-premise infrastructure for maximum control, data sovereignty, and security. This guide covers everything from hardware requirements to production deployment.
+
+## Overview
+
+BlackboxAI Encrypted is designed for self-hosted, on-premise deployment on your own infrastructure. Deploy in your data center or in air-gapped environments with full cryptographic security guarantees.
+
+## Prerequisites
+
+### Hardware Requirements
+
+**Minimum Configuration:**
+- 1x NVIDIA H100 GPU with confidential computing support
+- AMD EPYC processor with SEV-SNP or Intel Xeon with TDX
+- 32GB RAM per GPU
+- 500GB NVMe SSD storage
+- 10Gbps network interface
+
+**Recommended Configuration:**
+- 4x NVIDIA H100 GPUs (for large models)
+- AMD EPYC 9004 series or Intel Xeon Scalable 4th Gen
+- 128GB RAM per GPU
+- 2TB NVMe SSD storage (RAID 1)
+- 25Gbps network interface
+- Redundant power supplies
+
+**Important**: All GPUs must be on the same physical server for security isolation.
+
+### Software Requirements
+
+- **Operating System**: Ubuntu 22.04 LTS or later
+- **CUDA**: Version 12.0 or later
+- **Docker**: Version 24.0 or later
+- **NVIDIA Container Toolkit**: Latest version
+- **Python**: 3.8 or later (for client SDK)
+
+### Network Requirements
+
+- **Inbound**: HTTPS (443) or custom port
+- **Outbound**: Internet access for updates (optional for air-gapped)
+- **Bandwidth**: Minimum 100 Mbps, recommended 1 Gbps
+- **Latency**: < 100ms for optimal user experience
+
+## Installation Steps
+
+### Step 1: System Preparation
+
+Update your system and install dependencies:
+
+```bash
+# Update system packages
+sudo apt update && sudo apt upgrade -y
+
+# Install required packages
+sudo apt install -y \
+    build-essential \
+    curl \
+    git \
+    wget \
+    ca-certificates \
+    gnupg \
+    lsb-release
+```
+
+### Step 2: Install NVIDIA Drivers
+
+Install NVIDIA drivers with confidential computing support:
+
+```bash
+# Add NVIDIA package repository
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | \
+    sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] \
+    https://nvidia.github.io/libnvidia-container/$distribution/$(ARCH) /" | \
+    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+
+# Install NVIDIA driver
+sudo apt update
+sudo apt install -y nvidia-driver-535-server
+
+# Reboot to load driver
+sudo reboot
+```
+
+After reboot, verify GPU detection:
+
+```bash
+nvidia-smi
+```
+
+You should see your H100 GPU(s) listed.
+
+### Step 3: Enable Confidential Computing
+
+Enable confidential computing mode on your GPUs:
+
+```bash
+# Check if confidential computing is supported
+sudo nvidia-smi -q | grep "Confidential Compute"
+
+# Enable confidential computing mode
+sudo nvidia-smi -i 0 --confidential-compute-mode=on
+
+# Verify mode is enabled
+sudo nvidia-smi -q -i 0 | grep "Confidential Compute Mode"
+# Should show: Enabled
+```
+
+For multiple GPUs:
+
+```bash
+# Enable on all GPUs
+for i in {0..3}; do
+    sudo nvidia-smi -i $i --confidential-compute-mode=on
+done
+```
+
+### Step 4: Install Docker
+
+Install Docker and NVIDIA Container Toolkit:
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Add your user to docker group
+sudo usermod -aG docker $USER
+
+# Install NVIDIA Container Toolkit
+sudo apt install -y nvidia-container-toolkit
+
+# Configure Docker to use NVIDIA runtime
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+
+# Verify installation
+docker run --rm --gpus all nvidia/cuda:12.0.0-base-ubuntu22.04 nvidia-smi
+```
+
+### Step 5: Download BlackboxAI Encrypted
+
+Download the self-hosted deployment package:
+
+```bash
+# Create installation directory
+mkdir -p ~/blackbox-encrypted
+cd ~/blackbox-encrypted
+
+# Download deployment package (replace with actual URL)
+wget https://releases.blackbox.ai/encrypted/latest/blackbox-encrypted-server.tar.gz
+
+# Extract package
+tar -xzf blackbox-encrypted-server.tar.gz
+cd blackbox-encrypted-server
+```
+
+### Step 6: Configure the Server
+
+Create your configuration file:
+
+```bash
+# Copy example configuration
+cp config.example.yaml config.yaml
+
+# Edit configuration
+nano config.yaml
+```
+
+Example configuration:
+
+```yaml
+# config.yaml
+server:
+  host: "0.0.0.0"
+  port: 8443
+  tls:
+    enabled: true
+    cert_file: "/etc/blackbox/certs/server.crt"
+    key_file: "/etc/blackbox/certs/server.key"
+
+gpu:
+  # GPU configuration
+  devices: [0, 1, 2, 3]  # GPU indices to use
+  memory_fraction: 0.9   # Fraction of GPU memory to use
+  
+security:
+  # Attestation configuration
+  attestation:
+    enabled: true
+    refresh_interval: 300  # Seconds
+    require_fresh: true
+    
+  # Encryption settings
+  encryption:
+    algorithm: "AES-256-GCM"
+    key_exchange: "ECDH-SECP384R1"
+    
+models:
+  # Model configuration
+  default_model: "llama-3-70b"
+  model_path: "/models"
+  
+  # Available models
+  available:
+    - name: "llama-3-70b"
+      path: "/models/llama-3-70b"
+      gpu_count: 4
+      max_tokens: 8192
+      
+    - name: "gpt-4"
+      path: "/models/gpt-4"
+      gpu_count: 2
+      max_tokens: 8192
+
+logging:
+  level: "INFO"
+  file: "/var/log/blackbox-encrypted/server.log"
+  
+monitoring:
+  enabled: true
+  prometheus_port: 9090
+```
+
+### Step 7: Generate TLS Certificates
+
+Generate self-signed certificates (or use your own):
+
+```bash
+# Create certificate directory
+sudo mkdir -p /etc/blackbox/certs
+
+# Generate self-signed certificate
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
+    -keyout /etc/blackbox/certs/server.key \
+    -out /etc/blackbox/certs/server.crt \
+    -subj "/C=US/ST=State/L=City/O=Organization/CN=blackbox-encrypted.local"
+
+# Set permissions
+sudo chmod 600 /etc/blackbox/certs/server.key
+sudo chmod 644 /etc/blackbox/certs/server.crt
+```
+
+For production, use certificates from a trusted CA.
+
+### Step 8: Download AI Models
+
+Download the AI models you want to use:
+
+```bash
+# Create models directory
+sudo mkdir -p /models
+
+# Download models (example with Llama 3)
+cd /models
+wget https://huggingface.co/meta-llama/Meta-Llama-3-70B/resolve/main/model.safetensors
+
+# Or use the model downloader script
+./scripts/download-models.sh --model llama-3-70b --output /models
+```
+
+### Step 9: Start the Server
+
+Start BlackboxAI Encrypted server:
+
+```bash
+# Using Docker Compose (recommended)
+docker-compose up -d
+
+# Or using Docker directly
+docker run -d \
+    --name blackbox-encrypted \
+    --gpus all \
+    -p 8443:8443 \
+    -v /etc/blackbox/certs:/certs:ro \
+    -v /models:/models:ro \
+    -v $(pwd)/config.yaml:/app/config.yaml:ro \
+    blackbox/encrypted-server:latest
+
+# Check logs
+docker logs -f blackbox-encrypted
+```
+
+### Step 10: Verify Installation
+
+Test the server is running:
+
+```bash
+# Check server health
+curl -k https://localhost:8443/health
+
+# Expected response:
+# {"status": "healthy", "attestation": "enabled", "gpus": 4}
+
+# Verify attestation endpoint
+curl -k https://localhost:8443/attestation
+
+# Should return attestation report
+```
+
+## Client Configuration
+
+### Install Client SDK
+
+On client machines:
+
+```bash
+pip install blackbox-encrypted
+```
+
+### Configure Client
+
+Point the client to your self-hosted server:
+
+```python
+from blackbox_encrypted import EncryptedClient
+
+client = EncryptedClient(
+    endpoint="https://your-server.example.com:8443",
+    api_key="your-api-key",  # Optional, configure authentication
+    verify_ssl=True,  # Set to False for self-signed certs in testing
+)
+
+# Test connection
+response = client.chat(
+    messages=[{"role": "user", "content": "Hello"}]
+)
+print(response.content)
+```
+
+## Advanced Configuration
+
+### Multi-GPU Setup
+
+For large models requiring multiple GPUs:
+
+```yaml
+# config.yaml
+gpu:
+  devices: [0, 1, 2, 3]  # Use 4 GPUs
+  
+models:
+  available:
+    - name: "llama-3-70b"
+      gpu_count: 4  # Distribute across all 4 GPUs
+      tensor_parallel: true
+      pipeline_parallel: false
+```
+
+### Load Balancing
+
+For high availability with multiple servers:
+
+```bash
+# Install HAProxy
+sudo apt install -y haproxy
+
+# Configure HAProxy
+sudo nano /etc/haproxy/haproxy.cfg
+```
+
+HAProxy configuration:
+
+```
+frontend blackbox_encrypted
+    bind *:443 ssl crt /etc/ssl/certs/blackbox.pem
+    default_backend blackbox_servers
+
+backend blackbox_servers
+    balance roundrobin
+    option httpchk GET /health
+    server server1 10.0.1.10:8443 check ssl verify none
+    server server2 10.0.1.11:8443 check ssl verify none
+    server server3 10.0.1.12:8443 check ssl verify none
+```
+
+### Authentication
+
+Configure API key authentication:
+
+```yaml
+# config.yaml
+authentication:
+  enabled: true
+  method: "api_key"
+  
+  # API keys (hash these in production!)
+  api_keys:
+    - key: "sk-abc123..."
+      name: "production-app"
+      rate_limit: 1000  # requests per hour
+      
+    - key: "sk-def456..."
+      name: "development"
+      rate_limit: 100
+```
+
+### Monitoring
+
+Enable Prometheus metrics:
+
+```yaml
+# config.yaml
+monitoring:
+  enabled: true
+  prometheus_port: 9090
+  metrics:
+    - request_count
+    - request_duration
+    - gpu_utilization
+    - attestation_verifications
+    - encryption_operations
+```
+
+Access metrics:
+
+```bash
+curl http://localhost:9090/metrics
+```
+
+### Logging
+
+Configure detailed logging:
+
+```yaml
+# config.yaml
+logging:
+  level: "DEBUG"  # DEBUG, INFO, WARNING, ERROR
+  file: "/var/log/blackbox-encrypted/server.log"
+  max_size: "100MB"
+  max_backups: 10
+  
+  # Log specific components
+  components:
+    attestation: "DEBUG"
+    encryption: "INFO"
+    gpu: "INFO"
+    api: "INFO"
+```
+
+## Air-Gapped Deployment
+
+For completely isolated environments:
+
+### Step 1: Prepare Offline Package
+
+On a connected machine:
+
+```bash
+# Download all dependencies
+./scripts/prepare-offline-package.sh --output offline-package.tar.gz
+
+# Transfer to air-gapped environment
+```
+
+### Step 2: Install in Air-Gapped Environment
+
+```bash
+# Extract package
+tar -xzf offline-package.tar.gz
+cd offline-package
+
+# Run offline installer
+sudo ./install-offline.sh
+
+# Configure without internet
+./configure-airgapped.sh
+```
+
+### Step 3: Disable External Connections
+
+```yaml
+# config.yaml
+network:
+  allow_outbound: false
+  
+attestation:
+  offline_mode: true
+  trust_local_measurements: true
+```
+
+## Security Hardening
+
+### Firewall Configuration
+
+```bash
+# Allow only necessary ports
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 8443/tcp  # HTTPS
+sudo ufw allow 22/tcp    # SSH (restrict to management network)
+sudo ufw enable
+```
+
+### System Hardening
+
+```bash
+# Disable unnecessary services
+sudo systemctl disable bluetooth
+sudo systemctl disable cups
+
+# Enable automatic security updates
+sudo apt install -y unattended-upgrades
+sudo dpkg-reconfigure -plow unattended-upgrades
+
+# Configure audit logging
+sudo apt install -y auditd
+sudo systemctl enable auditd
+```
+
+### Secure Configuration
+
+```yaml
+# config.yaml
+security:
+  # Require strong attestation
+  attestation:
+    require_fresh: true
+    max_age: 300
+    verify_chain: true
+    
+  # Strict encryption
+  encryption:
+    min_key_size: 384
+    allowed_algorithms: ["AES-256-GCM"]
+    
+  # Rate limiting
+  rate_limiting:
+    enabled: true
+    requests_per_minute: 60
+    burst: 10
+```
+
+## Backup and Recovery
+
+### Backup Configuration
+
+```bash
+# Backup script
+#!/bin/bash
+BACKUP_DIR="/backup/blackbox-encrypted"
+DATE=$(date +%Y%m%d_%H%M%S)
+
+# Backup configuration
+tar -czf $BACKUP_DIR/config_$DATE.tar.gz /etc/blackbox/
+
+# Backup models (if needed)
+# tar -czf $BACKUP_DIR/models_$DATE.tar.gz /models/
+
+# Backup logs
+tar -czf $BACKUP_DIR/logs_$DATE.tar.gz /var/log/blackbox-encrypted/
+
+# Keep only last 30 days
+find $BACKUP_DIR -name "*.tar.gz" -mtime +30 -delete
+```
+
+### Disaster Recovery
+
+```bash
+# Restore from backup
+tar -xzf config_backup.tar.gz -C /
+
+# Restart services
+docker-compose restart
+
+# Verify functionality
+curl -k https://localhost:8443/health
+```
+
+## Maintenance
+
+### Updates
+
+```bash
+# Download latest version
+wget https://releases.blackbox.ai/encrypted/latest/blackbox-encrypted-server.tar.gz
+
+# Stop current version
+docker-compose down
+
+# Backup current installation
+cp -r ~/blackbox-encrypted ~/blackbox-encrypted.backup
+
+# Extract new version
+tar -xzf blackbox-encrypted-server.tar.gz
+
+# Migrate configuration if needed
+./scripts/migrate-config.sh
+
+# Start new version
+docker-compose up -d
+
+# Verify
+docker logs -f blackbox-encrypted
+```
+
+### Health Checks
+
+```bash
+# Check GPU status
+nvidia-smi
+
+# Check confidential computing mode
+sudo nvidia-smi -q | grep "Confidential Compute Mode"
+
+# Check server health
+curl -k https://localhost:8443/health
+
+# Check attestation
+curl -k https://localhost:8443/attestation
+
+# Check logs
+tail -f /var/log/blackbox-encrypted/server.log
+```
+
+### Performance Tuning
+
+```yaml
+# config.yaml
+performance:
+  # GPU optimization
+  gpu:
+    memory_fraction: 0.95
+    allow_growth: true
+    
+  # Request handling
+  workers: 4
+  max_concurrent_requests: 100
+  request_timeout: 300
+  
+  # Caching
+  cache:
+    enabled: true
+    max_size: "10GB"
+    ttl: 3600
+```
+
+## Troubleshooting
+
+### GPU Not Detected
+
+```bash
+# Check GPU visibility
+nvidia-smi
+
+# Check Docker GPU access
+docker run --rm --gpus all nvidia/cuda:12.0.0-base-ubuntu22.04 nvidia-smi
+
+# Verify NVIDIA Container Toolkit
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+```
+
+### Attestation Failures
+
+```bash
+# Check confidential computing mode
+sudo nvidia-smi -q -i 0 | grep "Confidential Compute Mode"
+
+# Re-enable if needed
+sudo nvidia-smi -i 0 --confidential-compute-mode=on
+
+# Check attestation logs
+grep "attestation" /var/log/blackbox-encrypted/server.log
+```
+
+### Performance Issues
+
+```bash
+# Check GPU utilization
+nvidia-smi dmon
+
+# Check system resources
+htop
+
+# Check network latency
+ping -c 10 client-machine
+
+# Review logs for bottlenecks
+grep "slow" /var/log/blackbox-encrypted/server.log
+```
+
+### Connection Issues
+
+```bash
+# Check if server is listening
+sudo netstat -tlnp | grep 8443
+
+# Check firewall
+sudo ufw status
+
+# Test from client
+curl -k https://server-ip:8443/health
+
+# Check TLS certificate
+openssl s_client -connect server-ip:8443
+```
+
+## Production Checklist
+
+Before going to production:
+
+- [ ] Hardware meets minimum requirements
+- [ ] Confidential computing enabled on all GPUs
+- [ ] TLS certificates from trusted CA installed
+- [ ] Firewall configured and tested
+- [ ] Authentication enabled and tested
+- [ ] Monitoring and alerting configured
+- [ ] Backup procedures tested
+- [ ] Disaster recovery plan documented
+- [ ] Security hardening applied
+- [ ] Performance testing completed
+- [ ] Client SDK tested from production network
+- [ ] Documentation updated for your environment
+
+## Support
+
+### Self-Hosted Support
+
+- **Documentation**: [docs.blackbox.ai](https://docs.blackbox.ai)
+- **Email**: self-hosted-support@blackbox.ai
+- **Community**: [community.blackbox.ai](https://community.blackbox.ai)
+- **Enterprise Support**: Available with support contract
+
+### Support Contracts
+
+| Tier | Response Time | Support Channels | Cost |
+|------|---------------|------------------|------|
+| Community | Best effort | Forum, docs | Free |
+| Standard | 48 hours | Email | $2,000/year |
+| Premium | 24 hours | Email, chat | $5,000/year |
+| Enterprise | 4 hours | Email, chat, phone | Custom |
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card title="Hardware Requirements" icon="server" href="/features/blackbox-encrypted/hardware-requirements">
+    Detailed hardware specifications
+  </Card>
+  <Card title="Security Architecture" icon="shield" href="/features/blackbox-encrypted/security-architecture">
+    Understand the security model
+  </Card>
+  <Card title="Use Cases" icon="briefcase" href="/features/blackbox-encrypted/use-cases">
+    Industry-specific examples
+  </Card>
+  <Card title="FAQ" icon="question-circle" href="/features/blackbox-encrypted/faq">
+    Common questions and answers
+  </Card>
+</CardGroup>
+
+---
+
+**Need help with deployment?** Contact our professional services team for deployment assistance and training.
