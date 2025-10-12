@@ -385,7 +385,7 @@ All checks must pass for attestation to be considered valid.
 
 The complete Blackbox AI Encrypted protocol provides three fundamental security guarantees:
 
-#### 🔐 Authenticity
+#### Authenticity
 
 **What it means:** The client verifies that the inference server is genuine and running the expected, untampered code inside a TEE (Trusted Execution Environment).
 
@@ -401,7 +401,7 @@ The complete Blackbox AI Encrypted protocol provides three fundamental security 
 - Ensures you're connecting to a genuine secure system
 - Detects any tampering with the server software or firmware
 
-#### 🔒 Confidentiality
+#### Confidentiality
 
 **What it means:** Only the secure enclave can decrypt and process user data. Even the server operator or cloud provider cannot access the plaintext prompts or responses.
 
@@ -419,7 +419,7 @@ The complete Blackbox AI Encrypted protocol provides three fundamental security 
 - Even if long-term keys are compromised in the future, past conversations remain private (Perfect Forward Secrecy)
 - No one can eavesdrop on your AI conversations
 
-#### ✅ Integrity
+#### Integrity
 
 **What it means:** All messages are signed to prevent tampering while they travel between client and server. Any modification to the data is immediately detected.
 
