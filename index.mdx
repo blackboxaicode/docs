@@ -1,183 +1,797 @@
 ---
-title: "Welcome to BLACKBOX AI"
-description: "The Best AI Agent for Builders - Transform Ideas into Reality"
+title: "BLACKBOX AI Encrypted"
+description: ""
 ---
 
-![Screenshot 2025-09-28 at 21.10.50.png](/images/Screenshot2025-09-28at21.10.50.png)
+**Privacy-preserving AI inference where only you and the AI model can access your conversations.**
 
-## The Future of AI-Powered Development
+Blackbox AI Encrypted delivers military-grade confidential AI inference with end-to-end encryption, ensuring that your conversations remain completely private and secure. Built on NVIDIA GPU Confidential Computing, the system provides cryptographic guarantees that data is only accessible within the secure GPU environment.
 
-**BLACKBOX AI** is the world's most advanced AI coding ecosystem, designed to transform how developers build, create, and innovate. From simple code questions to complete application development, BLACKBOX AI empowers millions of developers worldwide to turn their ideas into reality faster than ever before.
 
-**"The best AI agent for builders"** - trusted by millions of developers globally.
+## Why Blackbox AI Encrypted?
 
-## Why BLACKBOX AI Leads the Industry
+### The Privacy Challenge
 
-### **Complete Development Ecosystem**
+Traditional cloud AI services require you to trust that providers won't access your data. For organizations handling sensitive information—healthcare records, legal documents, financial data, or proprietary research—this trust-based model is insufficient.
 
-- **End-to-End Solutions**: From initial concept to deployed application
-- **Multiple Platforms**: Web app, desktop, mobile, VS Code extension, and standalone IDE
-- **Universal Access**: Code anywhere, anytime, on any device
-- **Seamless Integration**: Works with your existing development workflow
+**Blackbox AI Encrypted replaces trust with proof.**
 
-### **Advanced AI Capabilities**
+### Cryptographic Guarantees, Not Promises
 
-- **300+ AI Models**: Access the largest collection of AI models from leading providers
-- **Multi-Modal Intelligence**: Text, image, video, and speech generation
-- **Real-Time Assistance**: Instant code completion, debugging, and optimization
-- **Context-Aware**: Understands your entire project and coding patterns
+Unlike conventional cloud AI that relies on policies and promises, Blackbox AI Encrypted provides **mathematical and hardware-based guarantees**:
 
-### **Unmatched Performance**
+- **End-to-End Encryption**: Data is encrypted on your device and only decrypted inside a secure GPU environment
+- **Hardware Attestation**: Cryptographic proof that your data is processed in an uncompromised environment
+- **Confidential Computing Mode**: GPUs run in a special "confidential mode" where everything—from model weights to user prompts—is processed inside an enclave which encrypts all memory and communication, and blocks any outside access—even from the cloud provider or datacenter
+- **Secure GPU Access Only**: Data is only accessible within the secure GPU environment during processing—no external access is possible
+- **No Data Retention**: Conversations exist only in memory during your session and are destroyed immediately after
 
-- **10x Faster Development**: Dramatically accelerate your coding workflow
-- **Instant Responses**: Real-time AI assistance without delays
-- **Smart Automation**: Automate repetitive tasks and focus on innovation
-- **Continuous Learning**: AI that adapts to your coding style and preferences
+We wrap this in an attested, encrypted tunnel, so that user data stays private from local to remote. The cloud provider and datacenter operators have no access to your plaintext data.
 
-## Who BLACKBOX AI Empowers
+## Core Security Features
 
-### **Students & Learners**
+### Complete Conversation Privacy
 
-Transform your learning journey with AI-powered education:
+Your conversations are visible only to you and the AI model. All messages are encrypted on your device before transmission, and only your client and the secure GPU environment hold the decryption keys.
 
-- **Instant Understanding**: Complex concepts explained in simple terms
-- **Interactive Learning**: Ask questions and get immediate, detailed answers
-- **Code Examples**: See working examples for any programming concept
-- **Skill Building**: Progress from beginner to expert with personalized guidance
+### Hardware-Based Attestation
 
-### **Individual Developers**
+Before each session, the system performs cryptographic verification to prove:
+- The AI model runs on NVIDIA GPUs in confidential computing mode
+- The GPU firmware and software stack are unmodified and trustworthy
+- Your workload is isolated in hardware-encrypted memory
+- Any attempt to compromise the system is cryptographically detectable
 
-Supercharge your personal projects and career growth:
+### Military-Grade Encryption
 
-- **Productivity Boost**: Write better code faster with intelligent assistance
-- **Bug Resolution**: Identify and fix issues before they become problems
-- **Feature Development**: Build new functionality with AI-generated code
-- **Technology Exploration**: Learn new languages and frameworks effortlessly
+- **AES-256-GCM**: Industry-standard authenticated encryption
+- **Perfect Forward Secrecy**: Each session uses unique keys that are destroyed after use
+- **Replay Attack Protection**: Cryptographic nonces prevent message replay
+- **Transport Security**: HTTPS/TLS 1.2+ with secure cipher suites
 
-### **Engineering Teams**
+### Zero Data Retention
 
-Enhance collaboration and accelerate team productivity:
+- **No Persistent Storage**: Conversations are never stored on servers
+- **Memory-Only Processing**: All data exists only in encrypted GPU memory during inference
+- **Automatic Cleanup**: Session data is immediately destroyed when conversations end
+- **No Logs**: No conversation content is logged or retained
 
-- **Code Quality**: Maintain consistent standards across your entire team
-- **Knowledge Sharing**: Democratize expertise and best practices
-- **Faster Onboarding**: New team members become productive immediately
-- **Collaborative Development**: Shared AI insights and recommendations
+## Who Should Use Blackbox AI Encrypted?
 
-### **Enterprise Organizations**
+### Healthcare Organizations
+- HIPAA-compliant AI assistance with patient data
+- Clinical decision support without privacy violations
+- Medical research with confidential patient information
 
-Scale innovation across your entire development organization:
 
-- **Military-Grade Security**: Secure, compliant AI solutions for large organizations
-- **Custom Integration**: Tailored solutions that fit your existing infrastructure
-- **Team Management**: Centralized control and analytics for development teams
-- **Innovation at Scale**: Empower thousands of developers with cutting-edge AI
+### Military & Defense
+- Classified information analysis with appropriate clearance levels
+- Strategic planning and operational security
+- Intelligence analysis with sensitive data
+- Secure communications for defense applications
 
-## Comprehensive Platform Suite
+### Legal Firms
+- Preserve attorney-client privilege while leveraging AI
+- Confidential document analysis and legal research
+- Case strategy development with sensitive information
 
-### [**Web Application**](/features/web-app)
+### Financial Institutions
+- Protect trading strategies and proprietary analysis
+- Confidential market research and forecasting
+- Regulatory compliance (GLBA, SEC requirements)
 
-Your central hub for AI-powered development:
+### Enterprise Organizations
+- Strategic planning with confidential business information
+- Proprietary research and development
+- Competitive intelligence protection
 
-- **Universal Access**: Code from any modern browser, anywhere
-- **Complete Toolset**: Chat, app building, API access, and more
-- **Multi-Panel Interface**: Work with multiple AI capabilities simultaneously
-- **Instant Deployment**: Launch applications directly from the web interface
+### Research Institutions
+- Unpublished research data analysis
+- Clinical trial data processing
+- Patent-sensitive research work
 
-### [**Desktop Application**](/features/desktop-app)
+## How It Works
 
-Native performance for intensive development work:
+### Step 1: Your Device (Client)
+- Generate encryption keys locally
+- Verify server attestation
+- Encrypt message with AES-256-GCM
+- Sign with private key
 
-- **Full-Featured Environment**: Complete development suite with AI integration
-- **Offline Capabilities**: Continue working even without internet connection
-- **System Integration**: Deep integration with your operating system
-- **High Performance**: Optimized for demanding development workflows
+**↓ HTTPS/TLS (Encrypted Transport) ↓**
 
-### [**Mobile Applications**](/features/mobile-app)
+### Step 2: BlackboxAI Secure Infrastructure
+**Confidential VM with NVIDIA GPU(s):**
+- Decrypt in secure GPU enclave
+- Process in encrypted GPU memory
+- Generate AI response
+- Encrypt response
+- Destroy session data
+- Data only accessible in secure GPU
 
-AI coding assistance in your pocket:
+**↓ HTTPS/TLS (Encrypted Response) ↓**
 
-- **On-the-Go Development**: Code and learn anywhere, anytime
-- **Voice Interaction**: Hands-free coding assistance and learning
-- **Quick Solutions**: Instant answers to coding questions
-- **Seamless Sync**: Continue conversations across all devices
+### Step 3: Your Device (Client)
+- Verify response signature
+- Decrypt with shared key
+- Display response
 
-### [**VS Code Extension**](/features/vscode-agent)
+**Key Point:** Your plaintext data only exists in two places:
+1. Your device (under your control)
+2. Encrypted GPU memory (cryptographically verified)
 
-AI-powered coding directly in your favorite editor:
+# Security Architecture
+## Deep dive into Blackbox AI Encrypted's security guarantees and implementation
+---
 
-- **4.2 Million+ Installs**: The most trusted AI coding extension
-- **Native Integration**: Feels like a built-in VS Code feature
-- **Real-Time Assistance**: Code completion and suggestions as you type
-- **Project Understanding**: AI that knows your entire codebase
+Blackbox AI Encrypted provides military-grade security through a combination of cryptographic protocols, hardware-based attestation, and confidential computing. This document explains how these technologies work together to ensure your data remains private.
 
-### [**BLACKBOX AI IDE**](/features/blackbox-ide)
 
-The ultimate AI-native development environment:
+## Secure Chat Protocol
 
-- **Complete IDE**: Full development environment infused with AI
-- **Intelligent Features**: Every tool enhanced with artificial intelligence
-- **Advanced Debugging**: AI-powered error detection and resolution
-- **Project Management**: Comprehensive file and project handling
+The complete security protocol combines multiple layers of protection to ensure end-to-end security:
 
-### [**Robocoder Platform**](/features/robocoder)
+<img src="/images/blackbox-encrypted/system_diagram.png" alt="Secure Chat Protocol" style={{width: '100%', marginTop: '1rem', marginBottom: '1rem'}} />
 
-Transform ideas into applications without coding:
+*Complete security architecture showing the flow from client to secure GPU environment.*
 
-- **End-to-End Development**: From concept to deployed application
-- **Visual Development**: Watch your app build in real-time
-- **No-Code to Pro-Code**: Suitable for all skill levels
-- **Instant Deployment**: Launch applications with one click
+This protocol ensures that your data remains encrypted and secure throughout the entire communication pipeline, with cryptographic verification at each step.
 
-### [**API Platform**](/api-reference/introduction)
 
-Integrate BLACKBOX AI into your own applications:
+## Security Principles
 
-- **300+ Models**: Access the world's largest AI model library
-- **OpenAI Compatible**: Drop-in replacement for existing integrations
-- **Multiple Modalities**: Chat, image, video, and speech generation
-- **Enterprise Scale**: Built for applications of any size
+### 1. Zero Trust Architecture
 
-## Getting Started is Simple
+We don't ask you to trust us—we provide cryptographic proof:
 
-### **1. Choose Your Platform**
+- **Cryptographic Guarantees**: Mathematical proof of security, not policies
+- **Hardware Attestation**: Verifiable proof of secure environment
+- **End-to-End Encryption**: Data encrypted from client to secure GPU
+- **No Provider Access**: Cloud provider cannot decrypt your data
 
-Select the BLACKBOX AI platform that best fits your workflow:
+### 2. Defense in Depth
 
-- **Quick Start**: [Web App](https://www.blackbox.ai) for immediate access
-- **Power Users**: Desktop app for intensive development
-- **VS Code Users**: Extension for seamless editor integration
-- **Mobile**: Apps for coding on the go
+Multiple layers of security protection:
 
-### **2. Start Building**
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 1: Client-Side Encryption                             │
+│ • AES-256-GCM encryption before transmission                │
+│ • Keys generated locally, never transmitted                 │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 2: Transport Security                                 │
+│ • TLS 1.2+ with forward secrecy                             │
+│ • Certificate-based authentication                          │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 3: Hardware Attestation                               │
+│ • Cryptographic proof of secure environment                 │
+│ • GPU firmware verification                                 │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Layer 4: Confidential Computing                             │
+│ • Hardware-encrypted GPU memory                             │
+│ • Isolated execution environment                            │
+└─────────────────────────────────────────────────────────────┘
+```
 
-Begin with any type of project:
+### 3. Minimal Data Exposure
 
-- **Ask Questions**: Get instant help with coding problems
-- **Generate Code**: Create functions, classes, and entire applications
-- **Debug Issues**: Identify and resolve problems quickly
-- **Learn Technologies**: Explore new languages and frameworks
+Reduce attack surface through data minimization:
 
-### **3. Scale Your Impact**
+- **No Persistent Storage**: Conversations never written to disk
+- **Memory-Only Processing**: Data exists only in encrypted memory
+- **Immediate Cleanup**: Session data destroyed after use
+- **No Logs**: Conversation content never logged
 
-Grow from individual productivity to team collaboration:
+## Cryptographic Protocols
 
-- **Personal Projects**: Build faster and learn continuously
-- **Team Collaboration**: Share insights and maintain quality
-- **Enterprise Adoption**: Scale AI across your organization
-- **API Integration**: Embed AI into your own products
+### End-to-End Encryption
 
-## Join the AI Development Revolution
+#### AES-256-GCM (Galois/Counter Mode)
 
-BLACKBOX AI isn't just a tool-it's a complete transformation of how software gets built. Whether you're writing your first line of code or architecting enterprise systems, BLACKBOX AI provides the intelligence, tools, and platforms you need to succeed.
+**Why AES-256-GCM?**
+- Industry-standard authenticated encryption
+- Used by governments for classified information
+- Provides both confidentiality and integrity
+- Hardware-accelerated on modern CPUs
 
-### **Ready to Transform Your Development Workflow?**
+**Security Properties:**
+- **Confidentiality**: Data unreadable without key
+- **Integrity**: Tampering detected automatically
+- **Authentication**: Proves message origin
+- **Performance**: Minimal overhead (~10-50ms per message)
 
-**Start your journey today:**
+#### Key Exchange: ECDH (Elliptic Curve Diffie-Hellman)
 
-- [**Try the Web App**](https://www.blackbox.ai) - No installation required
-- [**Explore the Quickstart Guide**](/quickstart) - Get up and running in minutes
-- [**Access the API**](/api-reference) - Integrate AI into your applications
+**Why ECDH?**
+- Establishes shared secrets without transmitting keys
+- Perfect forward secrecy
+- Smaller keys than RSA with equivalent security
+- NIST-approved (SECP384R1 curve)
+
+**Security Properties:**
+- **Key Agreement**: Both parties derive same secret
+- **No Key Transmission**: Keys never sent over network
+- **Forward Secrecy**: Past sessions remain secure
+- **Computational Security**: ~192-bit security level
+
+**Key Exchange Process:**
+```
+Client                                    Server
+------                                    ------
+Generate keypair:
+  private_key_c, public_key_c
+                                          Generate keypair:
+                                            private_key_s, public_key_s
+
+        -------- public_key_c -------->
+        <------- public_key_s ---------
+
+Derive shared secret:                     Derive shared secret:
+  shared = ECDH(private_key_c,              shared = ECDH(private_key_s,
+                public_key_s)                             public_key_c)
+
+Both parties now have identical shared secret
+```
+
+#### Digital Signatures: ECDSA
+
+**Why ECDSA?**
+- Proves message authenticity
+- Prevents tampering and impersonation
+- Non-repudiation (sender cannot deny)
+- Efficient verification
+
+**Security Properties:**
+- **Authentication**: Proves sender identity
+- **Integrity**: Detects any modifications
+- **Non-Repudiation**: Cryptographic proof of origin
+
+**Signature Process:**
+- **Signing**: Hash the message with SHA-256, then sign with ECDSA using private key
+- **Verification**: Hash the message, verify signature using public key
+
+### Perfect Forward Secrecy
+
+Each session uses unique, ephemeral keys:
+
+**Key Properties:**
+- **Ephemeral**: Generated fresh for each session
+- **Never Reused**: Each session has unique keys
+- **Destroyed**: Keys deleted immediately after session
+- **Independent**: Compromise of one session doesn't affect others
+
+**What This Means:**
+If an attacker somehow obtained today's encryption keys, they could not:
+- Decrypt yesterday's conversations
+- Decrypt tomorrow's conversations
+- Derive keys from other sessions
+
+### Replay Attack Protection
+
+Cryptographic nonces prevent message replay:
+
+**How It Works:**
+- Each message includes a nonce that increments with each message
+- Message structure includes: nonce, IV, ciphertext, and signature
+- Receiver verifies nonce is greater than last received nonce
+- If nonce is old or duplicate, message is rejected as replay attack
+
+**Security Properties:**
+- **Uniqueness**: Each message has unique nonce
+- **Ordering**: Enforces message sequence
+- **Freshness**: Prevents old message replay
+- **Simplicity**: Efficient to verify
+
+## Hardware-Based Attestation
+
+### What is Attestation?
+
+Attestation provides cryptographic proof that:
+1. The GPU is NVIDIA GPU Confidential Computing hardware
+2. The firmware is unmodified and trustworthy
+3. Confidential computing is active
+4. The environment is isolated and secure
+
+### Attestation Process
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Step 1: Client Requests Attestation                         │
+│ • Client generates challenge nonce                          │
+│ • Sends attestation request to server                       │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 2: GPU Generates Attestation Report                    │
+│ • GPU measures firmware and configuration                   │
+│ • Creates report with measurements                          │
+│ • Signs report with hardware-protected key                  │
+│ • Includes client's challenge nonce                         │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 3: Server Returns Attestation                          │
+│ • Platform attestation (CPU/VM)                             │
+│ • GPU attestation (H100)                                    │
+│ • Cryptographic signatures                                  │
+│ • Timestamp and nonce                                       │
+└─────────────────────────────────────────────────────────────┘
+                            ↓
+┌─────────────────────────────────────────────────────────────┐
+│ Step 4: Client Verifies Attestation                         │
+│ • Verify signatures (hardware keys)                         │
+│ • Check measurements match expected values                  │
+│ • Verify nonce matches (freshness)                          │
+│ • Confirm confidential computing active                     │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Attestation Components
+
+#### Platform Attestation
+
+Verifies the host system:
+- **CPU**: AMD SEV-SNP or Intel TDX measurements
+- **Firmware**: UEFI and bootloader verification
+- **VM**: Virtual machine isolation proof
+- **Memory**: Encrypted memory confirmation
+
+#### GPU Attestation
+
+Verifies the GPU environment:
+- **Hardware Identity**: NVIDIA GPU Confidential Computing
+- **Firmware Version**: Unmodified GPU firmware
+- **Security Mode**: Confidential computing enabled
+- **Isolation**: GPU memory encryption active
+
+### Trust Chain
+
+The attestation creates a chain of trust:
+
+```
+NVIDIA Root of Trust (Hardware)
+        ↓
+GPU Manufacturing (Key Injection)
+        ↓
+GPU Firmware (Signed by NVIDIA)
+        ↓
+Runtime Attestation (Current State)
+        ↓
+Client Verification (Your Device)
+```
+
+**Key Point**: You don't trust the cloud provider—you verify cryptographic proof from the hardware itself.
+
+### Attestation Verification
+
+Detailed verification process:
+
+1. **Verify Report Signature**: Validate cryptographic signature using public key
+2. **Verify Nonce**: Confirm nonce matches challenge (prevents replay attacks)
+3. **Verify Timestamp**: Ensure attestation is recent (not stale)
+4. **Verify GPU Measurements**: Check GPU firmware matches expected values
+5. **Verify Confidential Computing**: Confirm confidential mode is active
+6. **Verify Platform Measurements**: Validate host platform security state
+
+All checks must pass for attestation to be considered valid.
+
+### Security Guarantees Provided by the Protocol
+
+The complete Blackbox AI Encrypted protocol provides three fundamental security guarantees:
+
+#### Authenticity
+
+**What it means:** The client verifies that the inference server is genuine and running the expected, untampered code inside a TEE (Trusted Execution Environment).
+
+**How it works:**
+- Hardware attestation proves the server identity using cryptographically signed reports
+- Keys burnt into the GPU chip during manufacturing cannot be forged
+- The client verifies the attestation before sending any data
+- Digital signatures (ECDSA) on all messages prove sender identity
+
+**Protection provided:**
+- Prevents attackers from impersonating the server
+- Prevents man-in-the-middle attacks
+- Ensures you're connecting to a genuine secure system
+- Detects any tampering with the server software or firmware
+
+#### Confidentiality
+
+**What it means:** Only the secure enclave can decrypt and process user data. Even the server operator or cloud provider cannot access the plaintext prompts or responses.
+
+**How it works:**
+- End-to-end encryption using AES-256-GCM
+- Ephemeral key exchange (ECDH) - a new key for every session
+- Data decrypted only inside the hardware-encrypted GPU memory
+- All memory and communication encrypted by the confidential computing hardware
+- Outside access blocked—even from cloud provider or datacenter operators
+
+**Protection provided:**
+- Your conversations remain private from all third parties
+- Cloud provider cannot read your data
+- Datacenter operators cannot access your prompts or responses
+- Even if long-term keys are compromised in the future, past conversations remain private (Perfect Forward Secrecy)
+- No one can eavesdrop on your AI conversations
+
+#### Integrity
+
+**What it means:** All messages are signed to prevent tampering while they travel between client and server. Any modification to the data is immediately detected.
+
+**How it works:**
+- Digital signatures (ECDSA with SHA-256) on every message
+- Cryptographic nonces (counters) ensure message ordering
+- Authentication tags verify data hasn't been modified
+- All decryption and verification happens inside the secure enclave
+
+**Protection provided:**
+- Prevents message tampering during transmission
+- Detects if messages are modified by attackers
+- Prevents replay attacks (old messages can't be resent)
+- Prevents message reordering attacks
+- Ensures data integrity from your device to the secure GPU
+
+**Summary:** These three guarantees work together to create a complete security system where you can verify the server is genuine (Authenticity), your data stays private (Confidentiality), and no one can tamper with your messages (Integrity).
 
 ---
 
-_The best AI agent for builders. Transform your ideas into reality._
+## Performance & Latency
+
+Blackbox AI Encrypted delivers military-grade security with minimal performance impact.
+
+### Attestation Overhead
+
+The initial security verification introduces a one-time overhead at the beginning of each chat session:
+
+**Initial CPU+GPU Attestation: 2-6 seconds**
+
+This fixed overhead combines:
+- Remote attestation verification
+- Local cryptographic checks  
+- Communication with the attestation endpoints
+- NVIDIA GPU attestation verification
+
+**Key Points:**
+- **One-time cost**: Attestation happens once per session, not per message
+- **Security guarantee**: This overhead provides cryptographic proof of security
+- **Amortized impact**: For longer conversations, the per-message cost is negligible
+
+### Message Encryption Performance
+
+Once the session is established, encryption and decryption costs are minimal:
+
+**Message encryption and decryption costs are negligible.** As theory predicts, they scale with context length at very large payload sizes and add only milliseconds latency.
+
+<div style={{display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '1rem', marginBottom: '1rem'}}>
+  <img src="/images/blackbox-encrypted/encryption.png" alt="Encryption latencies" style={{width: '49%'}} />
+  <img src="/images/blackbox-encrypted/decryption.png" alt="Decryption latencies" style={{width: '49%'}} />
+</div>
+
+### Real Performance Impact
+
+The real performance impact comes from **kernel-launch frequency and PCIe transfers**:
+
+- Each kernel launched by the CPU requires data to be encrypted and decrypted between calls
+- These input/output (I/O) costs can accumulate—but how much depends on the workload
+
+<img src="/images/blackbox-encrypted/table.png" alt="Performance comparison table" style={{width: '100%', marginTop: '1rem', marginBottom: '1rem'}} />
+
+*Timing of basic operations between standard and secure GPUs.*
+
+---
+
+## Confidential Computing
+
+### NVIDIA H100 GPU Architecture
+
+Blackbox AI Encrypted leverages **NVIDIA H100 Tensor Core GPUs** with Confidential Computing capabilities to provide hardware-level security for AI workloads. The H100 is NVIDIA's flagship data center GPU, specifically designed with built-in confidential computing features that create a hardware-enforced trusted execution environment (TEE).
+
+**Why H100 for Confidential AI:**
+The H100 GPU includes dedicated security processors and cryptographic engines that enable real-time encryption and decryption of data in GPU memory. This means your prompts and AI responses are processed entirely within hardware-encrypted memory that even the cloud provider cannot access. The GPU's Confidential Computing mode uses AES-256 encryption with keys that are generated and managed entirely within the GPU chip itself—these keys never leave the hardware and cannot be extracted by software, administrators, or even physical attacks on the server.
+
+**Key Security Features:**
+- **Hardware Root of Trust**: Cryptographic keys burned into silicon during manufacturing
+- **Memory Encryption Engine**: Dedicated hardware for real-time AES-256 encryption of all GPU memory
+- **Secure Boot & Attestation**: Cryptographically signed firmware with remote attestation support
+- **Isolation Guarantees**: Hardware-enforced separation between workloads and from the host system
+- **Performance**: Maintains near-native GPU performance even with encryption enabled
+
+The H100's confidential computing capabilities make it possible to run AI inference on sensitive data in the cloud with the same security guarantees as running on your own hardware. For detailed technical specifications, see the [NVIDIA H100 Confidential Computing documentation](https://images.nvidia.com/aem-dam/en-zz/Solutions/data-center/HCC-Whitepaper-v1.0.pdf).
+
+### Hardware-Encrypted Memory
+
+NVIDIA GPUs with confidential computing provide:
+
+**Memory Encryption:**
+- All GPU memory encrypted by hardware
+- Encryption keys managed by GPU chip
+- Keys never accessible to software
+- Automatic encryption/decryption
+
+**Isolation:**
+- Each workload in separate encrypted memory space
+- DMA (Direct Memory Access) attacks prevented
+- Side-channel protections active
+- Other users cannot access your data
+
+### Secure Execution Environment
+
+The confidential computing environment provides:
+
+**Hardware Isolation:**
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Physical Server                                              │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │ Confidential VM (Your Workload)                        │ │
+│  │                                                        │ │
+│  │  ┌──────────────────────────────────────────────────┐ │ │
+│  │  │ Encrypted GPU Memory                             │ │ │
+│  │  │ • Your data processed here                       │ │ │
+│  │  │ • Hardware-encrypted                             │ │ │
+│  │  │ • Isolated from host                             │ │ │
+│  │  └──────────────────────────────────────────────────┘ │ │
+│  └────────────────────────────────────────────────────────┘ │
+│                                                              │
+│  ┌────────────────────────────────────────────────────────┐ │
+│  │ Host System (Cloud Provider)                           │ │
+│  │ • Cannot access encrypted memory                       │ │
+│  │ • Cannot decrypt your data                             │ │
+│  │ • Cannot interfere with workload                       │ │
+│  └────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Security Boundaries:**
+- **Physical**: Hardware-enforced isolation
+- **Cryptographic**: Encrypted memory
+- **Attestation**: Verifiable security state
+- **Monitoring**: Tamper detection
+
+## Data Flow Security
+
+### Complete Message Journey
+
+Let's trace a message through the system:
+
+**1. Client-Side (Your Device)**
+- User types a message
+- Client generates session encryption key
+- Message is encrypted with AES-256-GCM using random IV
+- Encrypted message is signed with ECDSA
+- Encrypted data transmitted with IV, ciphertext, auth tag, and signature
+
+**2. Network Transit**
+```
+Encrypted Data in Transit:
+• TLS 1.2+ encryption (additional layer)
+• No plaintext visible
+• Network observers see only:
+  - Encrypted blob
+  - Timestamp
+  - Size
+• Cannot decrypt without keys
+```
+
+**3. BlackboxAI Secure Infrastructure**
+```
+Secure Cloud Infrastructure:
+• Receives encrypted data
+• Cannot decrypt (no keys)
+• Routes to confidential VM
+• Monitoring sees only metadata
+• Logs contain no plaintext
+```
+
+**4. Confidential VM**
+```
+Hardware-Isolated Environment:
+• Encrypted data enters VM
+• Attestation verified
+• Keys derived in secure enclave
+• Decryption in encrypted GPU memory
+```
+
+**5. Secure GPU Processing**
+Inside encrypted GPU memory:
+- Verify message signature
+- Decrypt message in secure memory using session key
+- Process with AI model
+- Generate AI response
+- Encrypt response with session key
+- Destroy plaintext and response immediately
+- Return encrypted response
+
+**6. Response Return**
+```
+Encrypted Response:
+• Encrypted in GPU
+• Transmitted over TLS
+• Cloud provider cannot decrypt
+• Returns to your device
+```
+
+**7. Client Receives Response**
+On your device:
+- Receive encrypted response
+- Verify response signature
+- Decrypt using session key
+- Display response to user
+
+**Key Insight**: Plaintext exists in only two places:
+1. Your device (under your control)
+2. Encrypted GPU memory (cryptographically verified)
+
+## Security Guarantees
+
+### What We Guarantee
+
+**End-to-End Encryption**
+- Data encrypted on your device
+- Decrypted only in secure GPU
+- Cloud provider cannot access plaintext
+
+**Hardware Attestation**
+- Cryptographic proof of secure environment
+- Verifiable before each session
+- Tamper detection
+
+**Zero Data Retention**
+- No persistent storage
+- Memory-only processing
+- Immediate cleanup after sessions
+
+**Perfect Forward Secrecy**
+- Unique keys per session
+- Past sessions remain secure
+- Future sessions protected
+
+**Replay Attack Protection**
+- Nonce-based verification
+- Message ordering enforced
+- Old messages rejected
+
+
+### Threats Mitigated
+
+| Threat | Mitigation | Effectiveness |
+|--------|-----------|---------------|
+| Network Eavesdropping | TLS + E2E encryption | ✅ Complete |
+| Man-in-the-Middle | Attestation + signatures | ✅ Complete |
+| Cloud Provider Access | E2E encryption + confidential computing | ✅ Complete |
+| Insider Threats | Hardware isolation + encryption | ✅ Complete |
+| Server Compromise | Ephemeral keys + no persistent data | ✅ High |
+| Memory Dumps | Encrypted GPU memory | ✅ Complete |
+| Replay Attacks | Nonce-based protection | ✅ Complete |
+| Data Breaches | No data at rest | ✅ Complete |
+| Legal Requests | Provider has no plaintext data | ✅ Complete |
+| Firmware Tampering | Attestation detects modifications | ✅ Complete |
+
+
+**Questions about security?** Contact our security team for more information.
+
+
+# FAQ
+## Frequently asked questions about Blackbox AI Encrypted
+
+Common questions about Blackbox AI Encrypted's security and usage.
+
+## General Questions
+
+### What is Blackbox AI Encrypted?
+
+Blackbox AI Encrypted is an military-grade confidential AI inference service that provides end-to-end encryption and hardware-based attestation. It ensures that only you and the AI model can access your conversations—not the cloud provider, not system administrators, and not any third party.
+
+### How is this different from regular cloud AI services?
+
+**Traditional Cloud AI:**
+- Trust-based security (policies and promises)
+- Provider can access your data
+- Data may be logged or retained
+- No cryptographic guarantees
+
+**Blackbox AI Encrypted:**
+- Cryptographic security (mathematical proof)
+- Provider cannot access your data
+- No data retention (memory-only)
+- Hardware attestation provides verification
+
+### Is this really secure, or just marketing?
+
+The security is based on mathematics (cryptography) and hardware (confidential computing), not marketing claims. Independent security researchers can verify the claims. We provide cryptographic proof, not promises.
+
+---
+
+## Security Questions
+
+### Can anyone access my data during processing?
+
+**No.** Your data is encrypted on your device before transmission and can only be decrypted inside the secure GPU environment. Data is only accessible within the secure GPU during processing—no external access is possible, even with full system access.
+
+### How do I know the system is actually secure?
+
+Before each session, you receive **hardware attestation**—cryptographic proof that:
+- The GPU is NVIDIA Confidential Computing hardware
+- The firmware is unmodified
+- Confidential computing is active
+- The environment is isolated and secure
+
+This isn't trust—it's verifiable proof signed by hardware keys that cannot be forged.
+
+### What if someone hacks the server?
+
+Even with complete server access, attackers would only obtain encrypted data. Without your encryption keys (which never leave your device or the secure GPU), the data is unreadable. Additionally:
+- Keys are ephemeral (destroyed after each session)
+- No persistent data to steal
+- Hardware isolation prevents memory access
+- Tampering is detected by attestation
+
+### Is my conversation history stored?
+
+**No.** Conversations exist only in encrypted memory during your session and are destroyed immediately after. There are no logs, backups, or copies of your conversations.
+
+### What encryption algorithms do you use?
+
+- **Symmetric Encryption**: AES-256-GCM (military-grade)
+- **Key Exchange**: ECDH with SECP384R1 curve
+- **Digital Signatures**: ECDSA with SHA-256
+- **Transport**: TLS 1.2+ with forward secrecy
+
+All algorithms are industry-standard, peer-reviewed, and NIST-approved.
+
+### What is hardware attestation?
+
+Hardware attestation is cryptographic proof from the GPU itself that:
+1. It's NVIDIA GPU Confidential Computing hardware
+2. The firmware is unmodified
+3. Confidential computing is enabled
+4. The environment is secure
+
+The attestation is signed with keys burned into the GPU chip during manufacturing—these keys cannot be extracted or forged.
+
+### Can you explain "confidential computing"?
+
+Confidential computing uses hardware features to:
+- Encrypt GPU memory
+- Isolate workloads from the host system
+- Prevent unauthorized access
+- Provide cryptographic attestation
+
+Even the cloud provider cannot access data in confidential computing environments.
+
+---
+
+## Technical Questions
+
+### What's the performance impact of encryption?
+
+The performance impact is minimal and depends on the model size:
+
+**Attestation (one-time per session):** 2-6 seconds at the beginning of each chat session
+
+**Message encryption/decryption:** Negligible—adds only milliseconds of latency (e.g., 1-5ms).
+
+For detailed performance analysis and benchmarks, see the [Performance & Latency section](/features/blackbox-encrypted/security-architecture#performance--latency).
+
+### How does streaming work with encryption?
+
+Each chunk of the streaming response is encrypted independently with a unique nonce. The client decrypts chunks as they arrive, maintaining security while enabling real-time streaming.
+
+### Are files encrypted?
+
+Yes. Files are encrypted before upload and decrypted only in the secure GPU environment. Supported formats include:
+- PDF documents
+- CSV data files
+- Text files
+- Images (for vision models)
+- Code files
+
+---
+
+**Can't find your answer?** Contact our support team—we're here to help!

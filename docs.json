@@ -12,104 +12,7 @@
     "navigation": {
         "tabs": [
             {
-                "tab": "Guides",
-                "groups": [
-                    {
-                        "group": "Getting started",
-                        "pages": ["index", "quickstart"]
-                    },
-                    {
-                        "group": "Features",
-                        "pages": [
-                            "/features/web-app",
-                            {
-                                "group": "VS Code Agent",
-                                "pages": [
-                                    "/features/vscode-agent/introduction",
-                                    "/features/vscode-agent/getting-started",
-                                    "/features/vscode-agent/key-features",
-                                    "/features/vscode-agent/orchestration",
-                                    "/features/vscode-agent/best-practices",
-                                    "/features/vscode-agent/voice-mode",
-                                    "/features/vscode-agent/vsc-marketplace-readme"
-                                    
-                                ]
-                            },
-                            {
-                                "group": "Desktop Agent",
-                                "pages": [
-                                    "/features/desktop-agent/introduction",
-                                    "/features/desktop-agent/getting-started",
-                                    "/features/desktop-agent/key-features",
-                                    "/features/desktop-agent/lets-build",
-                                    "/features/desktop-agent/manage-extensions",
-                                    "/features/desktop-agent/end-to-end-encryption"
-                                ]
-                            },
-							"/features/mobile-app",
-                            {
-                                "group": "Robocoder",
-                                "pages": [
-                            "/features/robocoder/introduction",
-                            "/features/robocoder/getting-started",
-                            "/features/robocoder/git-integration",
-                            "/features/robocoder/key-features",
-                            "/features/robocoder/stripe-integration",
-                            "/features/robocoder/best-practices"
-                            ]
-                            },
-							"/features/autonomous-agent",
-							"/features/blackbox-ide",
-                            {
-                                "group": "BLACKBOX CLI",
-                                "pages": [
-                                    "/features/blackbox-cli/introduction",
-                                    "/features/blackbox-cli/getting-started",
-                                    "/features/blackbox-cli/key-features",
-                                    "/features/blackbox-cli/common-use-cases",
-                                    "/features/blackbox-cli/commands-reference"
-                                ]
-                            },
-                            "features/blackbox-cloud",
-                            "features/blackbox-logger",
-                            "features/blackbox-encrypted"
-                        ]
-                    }
-                ]
-            },
-            {
-                "tab": "API reference",
-                "groups": [
-                    {
-                        "group": "API documentation",
-                        "pages": [
-                            "api-reference/introduction",
-                            "api-reference/authentication",
-                            "api-reference/requests",
-                            "api-reference/responses",
-                            "api-reference/parameters",
-                            "api-reference/prompt-caching",
-                            "api-reference/errors",
-                            "api-reference/chat",
-                            "api-reference/image",
-                            "api-reference/video",
-                            "api-reference/tool-calling",
-                            "api-reference/sample-usage"
-                        ]
-                    },
-                    {
-                        "group": "Models",
-                        "pages": [
-                            "api-reference/models/chat-models",
-                            "api-reference/models/image-models",
-                            "api-reference/models/video-models"
-                        ]
-                    }
-                ]
-            },
-            {
-                "tab": "Changelog",
-                "pages": ["changelog/changelog" ]
+                "tab": "Documentation"
             }
         ]
     },
@@ -122,19 +25,7 @@
         "light": "/logo/dark-logo.svg",
         "dark": "/logo/light-logo.svg"
     },
-    "navbar": {
-        "links": [
-            {
-                "label": "API Keys",
-                "href": "https://www.blackbox.ai/dashboard"
-            }
-        ],
-        "primary": {
-            "type": "button",
-            "label": "Home",
-            "href": "https://www.blackbox.ai"
-        }
-    },
+    "navbar": {},
     "contextual": {
         "options": [
             "copy",
