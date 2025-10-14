@@ -153,31 +153,45 @@ We don't ask you to trust us—we provide cryptographic proof:
 
 Multiple layers of security protection:
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 1: Client-Side Encryption                             │
-│ • AES-256-GCM encryption before transmission                │
-│ • Keys generated locally, never transmitted                 │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 2: Transport Security                                 │
-│ • TLS 1.2+ with forward secrecy                             │
-│ • Certificate-based authentication                          │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 3: Hardware Attestation                               │
-│ • Cryptographic proof of secure environment                 │
-│ • GPU firmware verification                                 │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Layer 4: Confidential Computing                             │
-│ • Hardware-encrypted GPU memory                             │
-│ • Isolated execution environment                            │
-└─────────────────────────────────────────────────────────────┘
-```
+<div style={{fontFamily: 'monospace', margin: '2rem 0', lineHeight: '1.6'}}>
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Layer 1: Client-Side Encryption
+    <br />
+    • AES-256-GCM encryption before transmission
+    <br />
+    • Keys generated locally, never transmitted
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Layer 2: Transport Security
+    <br />
+    • TLS 1.2+ with forward secrecy
+    <br />
+    • Certificate-based authentication
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Layer 3: Hardware Attestation
+    <br />
+    • Cryptographic proof of secure environment
+    <br />
+    • GPU firmware verification
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem'}}>
+    Layer 4: Confidential Computing
+    <br />
+    • Hardware-encrypted GPU memory
+    <br />
+    • Isolated execution environment
+  </div>
+</div>
 
 ### 3. Minimal Data Exposure
 
@@ -300,37 +314,57 @@ Attestation provides cryptographic proof that:
 
 ### Attestation Process
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│ Step 1: Client Requests Attestation                         │
-│ • Client generates challenge nonce                          │
-│ • Sends attestation request to server                       │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Step 2: GPU Generates Attestation Report                    │
-│ • GPU measures firmware and configuration                   │
-│ • Creates report with measurements                          │
-│ • Signs report with hardware-protected key                  │
-│ • Includes client's challenge nonce                         │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Step 3: Server Returns Attestation                          │
-│ • Platform attestation (CPU/VM)                             │
-│ • GPU attestation (H100)                                    │
-│ • Cryptographic signatures                                  │
-│ • Timestamp and nonce                                       │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│ Step 4: Client Verifies Attestation                         │
-│ • Verify signatures (hardware keys)                         │
-│ • Check measurements match expected values                  │
-│ • Verify nonce matches (freshness)                          │
-│ • Confirm confidential computing active                     │
-└─────────────────────────────────────────────────────────────┘
-```
+<div style={{fontFamily: 'monospace', margin: '2rem 0', lineHeight: '1.6'}}>
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Step 1: Client Requests Attestation
+    <br />
+    • Client generates challenge nonce
+    <br />
+    • Sends attestation request to server
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Step 2: GPU Generates Attestation Report
+    <br />
+    • GPU measures firmware and configuration
+    <br />
+    • Creates report with measurements
+    <br />
+    • Signs report with hardware-protected key
+    <br />
+    • Includes client's challenge nonce
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem', marginBottom: '0.5rem'}}>
+    Step 3: Server Returns Attestation
+    <br />
+    • Platform attestation (CPU/VM)
+    <br />
+    • GPU attestation (H100)
+    <br />
+    • Cryptographic signatures
+    <br />
+    • Timestamp and nonce
+  </div>
+  
+  <div style={{textAlign: 'center', margin: '0.5rem 0'}}>↓</div>
+  
+  <div style={{border: '1px solid #666', padding: '1rem'}}>
+    Step 4: Client Verifies Attestation
+    <br />
+    • Verify signatures (hardware keys)
+    <br />
+    • Check measurements match expected values
+    <br />
+    • Verify nonce matches (freshness)
+    <br />
+    • Confirm confidential computing active
+  </div>
+</div>
 
 ### Attestation Components
 
@@ -524,29 +558,38 @@ NVIDIA GPUs with confidential computing provide:
 The confidential computing environment provides:
 
 **Hardware Isolation:**
-```
-┌─────────────────────────────────────────────────────────────┐
-│ Physical Server                                              │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │ Confidential VM (Your Workload)                        │ │
-│  │                                                        │ │
-│  │  ┌──────────────────────────────────────────────────┐ │ │
-│  │  │ Encrypted GPU Memory                             │ │ │
-│  │  │ • Your data processed here                       │ │ │
-│  │  │ • Hardware-encrypted                             │ │ │
-│  │  │ • Isolated from host                             │ │ │
-│  │  └──────────────────────────────────────────────────┘ │ │
-│  └────────────────────────────────────────────────────────┘ │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐ │
-│  │ Host System (Cloud Provider)                           │ │
-│  │ • Cannot access encrypted memory                       │ │
-│  │ • Cannot decrypt your data                             │ │
-│  │ • Cannot interfere with workload                       │ │
-│  └────────────────────────────────────────────────────────┘ │
-└─────────────────────────────────────────────────────────────┘
-```
+
+<div style={{fontFamily: 'monospace', margin: '2rem 0', lineHeight: '1.6'}}>
+  <div style={{border: '1px solid #666', padding: '1rem'}}>
+    Physical Server
+    <br /><br />
+    
+    <div style={{border: '1px solid #666', padding: '1rem', marginLeft: '1rem', marginBottom: '1rem'}}>
+      Confidential VM (Your Workload)
+      <br /><br />
+      
+      <div style={{border: '1px solid #666', padding: '1rem', marginLeft: '1rem'}}>
+        Encrypted GPU Memory
+        <br />
+        • Your data processed here
+        <br />
+        • Hardware-encrypted
+        <br />
+        • Isolated from host
+      </div>
+    </div>
+    
+    <div style={{border: '1px solid #666', padding: '1rem', marginLeft: '1rem'}}>
+      Host System (Cloud Provider)
+      <br />
+      • Cannot access encrypted memory
+      <br />
+      • Cannot decrypt your data
+      <br />
+      • Cannot interfere with workload
+    </div>
+  </div>
+</div>
 
 **Security Boundaries:**
 - **Physical**: Hardware-enforced isolation
