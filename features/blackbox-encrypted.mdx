@@ -12,7 +12,7 @@ Blackbox AI Encrypted delivers military-grade confidential AI inference with end
 
 ### The Privacy Challenge
 
-Traditional cloud AI services require you to trust that providers won't access your data. For organizations handling sensitive information—healthcare records, legal documents, financial data, or proprietary research—this trust-based model is insufficient.
+Traditional cloud AI services require you to trust that providers won't access your data. For organizations handling sensitive information like healthcare records, legal documents, financial data, or proprietary research, this trust-based model is insufficient.
 
 **Blackbox AI Encrypted replaces trust with proof.**
 
@@ -26,7 +26,7 @@ Unlike conventional cloud AI that relies on policies and promises, Blackbox AI E
 - **Secure GPU Access Only**: Data is only accessible within the secure GPU environment during processing—no external access is possible
 - **No Data Retention**: Conversations exist only in memory during your session and are destroyed immediately after
 
-We wrap this in an attested, encrypted tunnel, so that user data stays private from local to remote. The cloud provider and datacenter operators have no access to your plaintext data.
+We wrap this in an attested, encrypted tunnel to ensure user data remains private from local to remote. The cloud provider and data center operators have no access to your plaintext data.
 
 ## Core Security Features
 
@@ -277,7 +277,7 @@ Each session uses unique, ephemeral keys:
 **Key Properties:**
 - **Ephemeral**: Generated fresh for each session
 - **Never Reused**: Each session has unique keys
-- **Destroyed**: Keys deleted immediately after session
+- **Destroyed**: Keys are deleted immediately after each session
 - **Independent**: Compromise of one session doesn't affect others
 
 **What This Means:**
@@ -344,7 +344,7 @@ Attestation provides cryptographic proof that:
     <br />
     • Platform attestation (CPU/VM)
     <br />
-    • GPU attestation (H100)
+    • GPU attestation (e.g., H100)
     <br />
     • Cryptographic signatures
     <br />
@@ -444,7 +444,7 @@ The complete Blackbox AI Encrypted protocol provides three fundamental security 
 - Ephemeral key exchange (ECDH) - a new key for every session
 - Data decrypted only inside the hardware-encrypted GPU memory
 - All memory and communication encrypted by the confidential computing hardware
-- Outside access blocked—even from cloud provider or datacenter operators
+Outside access blocked—even from cloud provider or data center operators
 
 **Protection provided:**
 - Your conversations remain private from all third parties
@@ -729,7 +729,7 @@ Common questions about Blackbox AI Encrypted's security and usage.
 
 ### What is Blackbox AI Encrypted?
 
-Blackbox AI Encrypted is an military-grade confidential AI inference service that provides end-to-end encryption and hardware-based attestation. It ensures that only you and the AI model can access your conversations—not the cloud provider, not system administrators, and not any third party.
+Blackbox AI Encrypted is a military-grade confidential AI inference service that provides end-to-end encryption and hardware-based attestation. It ensures that only you and the AI model can access your conversations—not the cloud provider, not system administrators, and not any third party.
 
 ### How is this different from regular cloud AI services?
 

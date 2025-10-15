@@ -181,7 +181,7 @@ logger.error({ error: err.message }, 'Failed to create users table');
 logger.error({ error: err }, "Failed to recover database connection");
 
 // Log a critical error with status
-logger.error({status: "critical"}, { error: err }, "Failed to initialize database");
+logger.error("Failed to initialize database", { status: "critical", error: err });
 
 // Simple error logging
 logger.error("Attempted to query users but database is not connected");
