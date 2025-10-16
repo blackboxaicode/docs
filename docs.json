@@ -74,6 +74,15 @@
                             "features/blackbox-logger",
                             "features/blackbox-encrypted"
                         ]
+                    },
+                    {
+                        "group": "Comparisons",
+                        "pages": [
+                            "/features/blackbox-vs-copilot",
+                            "/features/blackbox-vs-cursor",
+                            "/features/blackbox-cli-vs-claude-code",
+                            "/features/code-completions-blackbox-vs-cursor"
+                        ]
                     }
                 ]
             },
