@@ -1,0 +1,64 @@
+---
+title: "BLACKBOX AI Cloud Voice"
+description: "Integrate BLACKBOX AI Remote Agent with Voice for hands-free task management."
+---
+
+BLACKBOX AI Remote Agent introduces Voice support, allowing you to interact with remote cloud agents directly via phone calls. This feature provides a convenient, hands-free way to assign tasks to agents without needing to access the web platform manually. Simply make a call to the designated mobile number and tell the agent details like the repository name, branch, and task, and the agent will handle the rest autonomously.
+
+### Setup Process
+
+To enable Voice support, follow these steps:
+
+1. **Access Blackbox Cloud**  
+   Navigate to [cloud.blackbox.ai](https://cloud.blackbox.ai) and log in using your Google or GitHub account.
+
+2. **Add GitHub Personal Access Token**  
+   Access your profile menu and navigate to the "Manage API Keys" section.  
+   ![Profile Menu](/images/blackbox-cloud/cloud_profile_menu.png)  
+   Add your GitHub personal access token. 
+   
+   You can create one at [Github tokens](https://github.com/settings/tokens). Ensure the token has repository access to allow the agent to perform tasks on your behalf.  
+   ![Create GitHub PAT](/images/blackbox-cloud/cloud_create_git_pat.png)  
+   ![Manage GitHub Key](/images/blackbox-cloud/cloud_manage_git_key.png)
+
+3. **Add Mobile Number**  
+   In the "SMS Notification" section under "Manage API Keys," enter your mobile number. This is the mobile number that you can use to interact with the agent and this also allows you to receive notifications about task progress and completion.
+
+Once configured, you're ready to use the Voice feature. Simply call the agent's mobile number **(+19xxxxxxxxx)** from your configured mobile number to start giving tasks to the remote agent.
+
+<Note>
+  **International Calling**: Make sure ISD (International Subscriber Dialing) is enabled on your mobile number to make calls to the US number of the agent if you are not in the US or Canada.
+</Note>
+
+### How It Works
+
+Using Voice is straightforward and mirrors the manual process of selecting a repository, branch, and entering a task on the Blackbox Cloud platform:
+
+- **Make a Call**: Provide the details in your call, including the repository name, branch name, and the specific task you want the agent to perform. For example: "Hi can you add the user authentication feature in my your_repo_name on the branch main" The voice agent is clever enough to correctly under stand the task, repo or the branch name (you can simply sat web app chat even if you repo name is web_app_chat), ensuring accurate execution.
+
+- **Agent Execution**: The agent receives the input, processes it remotely, and executes the task just as if you had entered it manually on the site. This includes code changes, testing, and generating pull requests. You can confirm in the UI that the task has been started with the exact details you provided.  
+  ![Voice Task Started](/images/blackbox-cloud/cloud_sms_voice_started_task.png)
+
+- **Convenience and Flexibility**: This feature is ideal for on-the-go task assignment, voice-activated workflows, or situations where accessing a browser isn't feasible. It maintains the same level of automation and control as the web interface, ensuring tasks are completed efficiently without manual oversight.
+
+This integration enhances accessibility, making Blackbox Cloud even more versatile for developers who prefer voice-based interactions.
+
+## Next Steps
+
+Now that you've learned about Voice Support, explore these related features to enhance your Blackbox Cloud experience:
+
+<CardGroup>
+  <Card title="Blackbox Cloud" icon="cloud" href="./blackbox-cloud.mdx">
+    Discover the full capabilities of Blackbox Cloud for remote AI-powered development.
+  </Card>
+
+  <Card title="BLACKBOX AI Cloud SMS" icon="message" href="./blackbox-cloud-sms.mdx">
+    Interact with agents via SMS for hands-free task management.
+  </Card>
+
+  <Card title="Slack Integration" icon="slack" href="./slack-integration.mdx">
+    Manage tasks seamlessly via Slack channels.
+  </Card>
+</CardGroup>
+
+This integration enhances accessibility, making Blackbox Cloud even more versatile for developers who prefer voice-based interactions.
