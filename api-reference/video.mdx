@@ -22,6 +22,17 @@ Its similar to the chat POST request - just that `response.choices.message.conte
 
 <ParamField body="messages" type="array" required>
   An array of message objects. For image generation, provide a single message with role "user" and content as the descriptive text prompt.
+
+  <Expandable title="Message Object">
+    <ParamField body="role" type="string" required>
+      The role of the message author. One of `system`, `user`, `assistant`, or `tool`.
+    </ParamField>
+    
+    <ParamField body="content" type="string" required>
+      The prompt for the video generation.
+    </ParamField>
+  </Expandable>
+
 </ParamField>
 
 
