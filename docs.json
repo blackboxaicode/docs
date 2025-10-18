@@ -124,12 +124,7 @@
                 "pages": ["changelog/changelog" ]
             }
         ]
-    },
-    "api": {
-        "playground": {
-            "display": "simple"
-        }
-    },  
+    }, 
     "logo": {
         "light": "/logo/dark-logo.svg",
         "dark": "/logo/light-logo.svg"

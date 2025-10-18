@@ -96,39 +96,120 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+  "/plants/{id}": {
+    "delete": {
+      "description": "Deletes a single plant based on the ID supplied",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ID of plant to delete",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
           }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
+        }
+      ],
+      "responses": {
+        "204": {
+          "description": "Plant deleted",
+          "content": {}
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
               }
             }
           }
         }
       }
     }
+  },
+  "/images": {
+    "post": {
+      "description": "Creates a new image based on a prompt",
+      "security": [
+        {
+          "bearerAuth": []
+        }
+      ],
+      "requestBody": {
+        "description": "Details for the new image",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NewImage"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "200": {
+          "description": "Image response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Image"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "/chat/completions": {
+    "post": {
+      "description": "Generate images from text",
+      "requestBody": {
+        "description": "Request to generate an image",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ImageRequest"
+            }
+          }
+        },
+        "required": true
+      },
+      "responses": {
+        "200": {
+          "description": "Image generation response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImageResponse"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Error"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   },
   "webhooks": {
     "/plant/webhook": {
@@ -190,6 +271,48 @@
           }
         ]
       },
+      "Image": {
+        "required": [
+          "id",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Identification number of the image",
+            "type": "integer",
+            "format": "int64"
+          },
+          "url": {
+            "description": "The URL of the generated image",
+            "type": "string"
+          },
+          "prompt": {
+            "description": "The prompt used for generating the image",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
+      "NewImage": {
+        "required": [
+          "prompt"
+        ],
+        "type": "object",
+        "properties": {
+          "prompt": {
+            "description": "The descriptive text prompt for generating the image",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
       "Error": {
         "required": [
           "error",
@@ -203,6 +326,92 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "ImageRequest": {
+        "type": "object",
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The model to use for image generation, e.g., blackboxai/black-forest-labs/flux-pro"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The descriptive text prompt for generating the image"
+          }
+        },
+        "required": ["model", "prompt"]
+      },
+      "ImageResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "created": {
+            "type": "integer"
+          },
+          "model": {
+            "type": "string"
+          },
+          "object": {
+            "type": "string"
+          },
+          "system_fingerprint": {
+            "type": "string"
+          },
+          "choices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "finish_reason": {
+                  "type": "string"
+                },
+                "index": {
+                  "type": "integer"
+                },
+                "message": {
+                  "type": "object",
+                  "properties": {
+                    "content": {
+                      "type": "string",
+                      "description": "URL of the generated image"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "tool_calls": {
+                      "type": "string"
+                    },
+                    "function_call": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "completion_tokens": {
+                "type": "integer"
+              },
+              "prompt_tokens": {
+                "type": "integer"
+              },
+              "total_tokens": {
+                "type": "integer"
+              },
+              "completion_tokens_details": {
+                "type": "string"
+              },
+              "prompt_tokens_details": {
+                "type": "string"
+              }
+            }
           }
         }
       }

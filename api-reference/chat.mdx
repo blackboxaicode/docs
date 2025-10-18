@@ -1,15 +1,14 @@
 ---
 title: 'Create Chat Completion'
-api: 'POST /chat/completions'
-description: 'Send a chat completion request to a selected model'
-
+api: 'POST https://api.blackbox.ai/chat/completions'
+description: 'Send a chat completion request. Find your [API Key](https://www.blackbox.ai/dashboard).'
 ---
 
 
 ## Headers
 
 <ParamField header="Authorization" type="string" required>
-  Bearer authentication of the form `Bearer <token>`, where token is your auth token.
+  API Key of the from `Bearer <api_key>`, where token is your auth token.
 </ParamField>
 
 ## Request

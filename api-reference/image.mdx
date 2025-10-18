@@ -1,11 +1,26 @@
 ---
 title: "Create Image"
-api: "POST /chat/completions"
-description: "Generate images from text"
+api: "POST https://api.blackbox.ai/chat/completions"
+description: "Generate images from text. Find your [API Key](https://www.blackbox.ai/dashboard)."
 ---
 
 This endpoint allows you to generate a high-quality image based on a descriptive text prompt. 
 Its similar to the chat POST request - just that `response.choices.message.content` contains the URL for image generated
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  API Key of the from `Bearer <api_key>`, where token is your auth token.
+</ParamField>
+
+## Request
+
+<ParamField body="model" type="string" required>
+  The model to use for image generation, e.g., "blackboxai/black-forest-labs/flux-pro"
+</ParamField>
+
+<ParamField body="messages" type="array" required>
+  An array of message objects. For image generation, provide a single message with role "user" and content as the descriptive text prompt.
+</ParamField>
 
 ### Tips for Better Results
 - Be specific and descriptive in your prompts.
