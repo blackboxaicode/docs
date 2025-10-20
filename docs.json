@@ -21,7 +21,6 @@
                     {
                         "group": "Features",
                         "pages": [
-                            "/features/web-app",
                             {
                                 "group": "VS Code Agent",
                                 "pages": [
@@ -35,6 +34,23 @@
                                     
                                 ]
                             },
+                            "/features/blackbox-ide",
+                            "features/blackbox-cloud",
+                            {
+                                "group": "BLACKBOX CLI",
+                                "pages": [
+                                    "/features/blackbox-cli/introduction",
+                                    "/features/blackbox-cli/getting-started",
+                                    "/features/blackbox-cli/key-features",
+                                    "/features/blackbox-cli/common-use-cases",
+                                    "/features/blackbox-cli/commands-reference"
+                                ]
+                            },
+                            "features/blackbox-cloud-sms",
+                            "features/blackbox-cloud-voice",
+                            "features/blackbox-cloud-slack",
+                            "features/blackbox-logger",
+                            "features/blackbox-encrypted",
                             {
                                 "group": "Desktop Agent",
                                 "pages": [
@@ -46,6 +62,7 @@
                                     "/features/desktop-agent/end-to-end-encryption"
                                 ]
                             },
+                            "/features/web-app",
 							"/features/mobile-app",
                             {
                                 "group": "Robocoder",
@@ -58,24 +75,7 @@
                             "/features/robocoder/best-practices"
                             ]
                             },
-							"/features/autonomous-agent",
-							"/features/blackbox-ide",
-                            {
-                                "group": "BLACKBOX CLI",
-                                "pages": [
-                                    "/features/blackbox-cli/introduction",
-                                    "/features/blackbox-cli/getting-started",
-                                    "/features/blackbox-cli/key-features",
-                                    "/features/blackbox-cli/common-use-cases",
-                                    "/features/blackbox-cli/commands-reference"
-                                ]
-                            },
-                            "features/blackbox-cloud",
-                            "features/blackbox-cloud-sms",
-                            "features/blackbox-cloud-voice",
-                            "features/blackbox-cloud-slack",
-                            "features/blackbox-logger",
-                            "features/blackbox-encrypted"
+							"/features/autonomous-agent"
                         ]
                     },
                     {
