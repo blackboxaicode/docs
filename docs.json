@@ -49,6 +49,7 @@
                             "features/blackbox-cloud-sms",
                             "features/blackbox-cloud-voice",
                             "features/blackbox-cloud-slack",
+                            "features/blackbox-cloud-multi-agent",
                             "features/blackbox-logger",
                             "features/blackbox-encrypted",
                             {

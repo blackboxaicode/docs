@@ -150,30 +150,11 @@ Work flexibly from any location or device:
 
 This ensures uninterrupted productivity regardless of your environment.
 
-## Multi-Agent Parallel Execution
+### Multi-Agent Parallel Execution
 
-Blackbox Cloud introduces advanced multi-agent capabilities, allowing you to select multiple agents for the same task and run them in parallel. This feature enables experimentation with different AI agents using the same prompt simultaneously, have the AI agent judge the code implementation, helping you identify the best and least error-prone implementation.
+Blackbox Cloud also supports multi-agent capabilities, allowing you to select multiple agents for the same task and run them in parallel. This feature enables experimentation with different AI agents using the same prompt simultaneously, with an AI judge evaluating implementations to identify the best and least error-prone solution.
 
-![Multi-Agent Selection](/images/blackbox-cloud/cloud_multiagent_select.png)
-
-- **Parallel Execution**: Run multiple agents concurrently on the same task to compare approaches and outcomes.
-- **Side-by-Side Logs**: View execution logs of all agents in real-time, providing transparency into each agent's process.
-![Multi-Agent Execution Logs](/images/blackbox-cloud/cloud_multiagent_exec_log.png)
-- **AI Judge Evaluation**: Once all agents complete their implementations, an AI judge analyzes the code changes, evaluates quality, and selects the optimal solution.
-![Multi-Agent Comparison](/images/blackbox-cloud/cloud_multiagent_compare.png)
-- **Automated PR Creation**: The best agent's changes are automatically used to create a pull request for the task.
-![Best Agent PR](/images/blackbox-cloud/cloud_multiagent_pr_of_best.png)
-
-This functionality empowers users to leverage diverse agent strengths, ensuring higher quality code through comparative analysis and intelligent selection.
-
-### To use this feature:
-1. Check the "Multi Agent" checkbox at the bottom left of the task input text area.
-2. Select the agents you wish to use for the task.
-3. Provide your task prompt as usual, then observe multiple agents working in parallel on the same task. Once all agents complete their implementations, an AI judge will evaluate and compare the results, automatically selecting the best agent's work to create the final pull request.
-
-<Note>
-  **Important**: Ensure you have API keys configured for all selected AI agents in your profile settings. Learn [more](/features/blackbox-cloud#getting-started).
-</Note>
+For detailed information and setup instructions, see the [Multi-Agent Execution documentation](/features/blackbox-cloud-multi-agent).
 
 
 ## Benefits
@@ -197,6 +178,10 @@ This functionality empowers users to leverage diverse agent strengths, ensuring 
 Now that you've learned about Blackbox Cloud, explore these related features to enhance your development workflow:
 
 <CardGroup>
+  <Card title="Multi-Agent Execution" icon="zap" href="./blackbox-cloud-multi-agent">
+    Run multiple agents in parallel with AI judge evaluation.
+  </Card>
+
   <Card title="Slack Integration" icon="slack" href="./blackbox-cloud-slack">
     Manage tasks seamlessly via Slack channels.
   </Card>

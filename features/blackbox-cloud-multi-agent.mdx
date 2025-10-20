@@ -1,0 +1,100 @@
+---
+title: "Multi-Agent Execution"
+description: "Run multiple agents in parallel for the same task with AI judge evaluation in BLACKBOX AI Cloud."
+---
+
+BLACKBOX AI Cloud introduces Multi-Agent Execution, allowing you to select multiple agents for the same task and run them in parallel. This advanced feature enables experimentation with different AI agents using the same prompt simultaneously, with an AI judge evaluating the implementations to select the best and least error-prone solution. Perfect for teams and developers seeking optimal code quality through comparative analysis.
+
+   ![Multi-Agent Selection](/images/blackbox-cloud/cloud_multiagent_select.png)
+
+
+## Overview
+
+Multi-Agent Execution empowers users to leverage diverse agent strengths by running multiple agents concurrently on identical tasks. View execution logs side by side in real-time, and let an AI judge analyze all implementations to automatically select the optimal solution. The best agent's changes are then used to create the final pull request, ensuring higher quality code through intelligent selection.
+
+This feature is ideal for:
+- Comparing different AI agent approaches on complex tasks
+- Ensuring error-free implementations through parallel validation
+- Optimizing code quality with automated evaluation of multiple approaches and using the best fit one
+
+## Setup Process
+
+To enable Multi-Agent Execution in Blackbox Cloud:
+
+1. **Access Blackbox Cloud**  
+   Navigate to [cloud.blackbox.ai](https://cloud.blackbox.ai) and log in using your Google or GitHub account.
+
+2. **Configure API Keys**  
+   Ensure you have API keys configured for all AI agents you wish to use. Access your profile settings to add and manage API keys from providers like OpenAI, Anthropic, Google, etc.  
+   ![Manage API Key](/images/blackbox-cloud/cloud_manage_repo_api_key.png)
+
+3. **Select Repository and Branch**  
+   Choose the repository and branch you want to work on from your connected Git repositories.  
+   ![Select Git Repository](/images/blackbox-cloud/cloud_git_repo_select.png)
+
+4. **Enable Multi-Agent Mode**  
+   In the task input area, check the "Multi Agent" checkbox at the bottom left to activate parallel execution mode.  
+   ![Multi-Agent Selection](/images/blackbox-cloud/cloud_multiagent_select.png)
+
+## How It Works
+
+Multi-Agent Execution follows a streamlined process to ensure optimal results:
+
+- **Agent Selection**: Choose multiple agents from available options (Blackbox CLI, Cloud Code, Codeex, etc.) for parallel execution on the same task.
+
+- **Parallel Processing**: All selected agents work simultaneously on your provided prompt, each generating their own implementation approach.
+
+- **Real-Time Monitoring**: View execution logs of all agents side by side, providing full transparency into each agent's process and progress.  
+  ![Multi-Agent Execution Logs](/images/blackbox-cloud/cloud_multiagent_exec_log.png)
+
+- **AI Judge Evaluation**: Once all agents complete their implementations, an AI judge analyzes the code changes, comparing quality, efficiency, and error-proneness.  
+  ![Multi-Agent Comparison](/images/blackbox-cloud/cloud_multiagent_compare.png)
+
+- **Automated Selection**: The AI judge selects the optimal implementation, and those changes are automatically used to create the final pull request.  
+  ![Best Agent PR](/images/blackbox-cloud/cloud_multiagent_pr_of_best.png)
+
+- **Quality Assurance**: This comparative approach ensures the best possible code quality and reduces the likelihood of errors in the final implementation.
+
+## Benefits
+
+- **Enhanced Quality**: AI judge evaluation ensures the best implementation is selected
+- **Parallel Efficiency**: Multiple agents work simultaneously, speeding up the evaluation process
+- **Comparative Analysis**: View different approaches to identify optimal solutions
+- **Error Reduction**: Parallel validation helps catch and avoid implementation errors
+- **Transparency**: Real-time logs provide full visibility into agent processes
+
+## Sample Usage
+
+Here are practical examples of using Multi-Agent Execution:
+
+- **Complex Feature Implementation**: Run multiple agents on "Implement user authentication with OAuth integration" to compare different security approaches and select the most robust solution.
+
+- **API Development**: Execute "Create REST API endpoints for user management" with different agents to evaluate various architectural patterns and choose the most scalable implementation.
+
+- **Bug Fixing**: Use "Fix memory leak in data processing module" across agents to identify the most effective and least error-prone fix.
+
+- **Refactoring Tasks**: Apply "Optimize database queries for better performance" with multiple agents to compare optimization strategies and select the most efficient solution.
+
+## Next Steps
+
+Now that you've learned about BLACKBOX AI Cloud Multi-Agent Execution, explore these related features to enhance your Blackbox Cloud experience:
+
+<CardGroup>
+  <Card title="Blackbox Cloud" icon="cloud" href="./blackbox-cloud">
+    Discover the full capabilities of Blackbox Cloud for remote AI-powered development.
+  </Card>
+
+  <Card title="Slack Integration" icon="slack" href="./blackbox-cloud-slack">
+    Manage tasks seamlessly via Slack channels.
+  </Card>
+
+  <Card title="BLACKBOX AI Cloud Voice" icon="phone" href="./blackbox-cloud-voice">
+    Interact with agents via voice calls for hands-free task management.
+  </Card>
+
+  <Card title="BLACKBOX AI Cloud SMS" icon="message" href="./blackbox-cloud-sms">
+    Interact with agents via SMS for hands-free task management.
+  </Card>
+</CardGroup>
+
+Multi-Agent Execution transforms how you approach complex development tasks by leveraging the collective intelligence of multiple AI agents, ensuring consistently high-quality results.
