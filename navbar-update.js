@@ -1,6 +1,7 @@
 // This is a hack to work around the global navbar configuration limitation
 // It updates the navbar button href based on the current page path so that we can have a page level or a goroup level control on the navbar button href
-
+// To add or update paths simply add the docs path as key and desired href link as value.
+// Keep in mind that the path is matched using STARTSWITH so more specific paths should be added BEFORE less specific ones.
 
 
 // Configuration object mapping paths to their corresponding href URLs
@@ -8,11 +9,10 @@ const PATH_HREF_CONFIG = {
   '/features/vscode-agent/': 'https://marketplace.visualstudio.com/items?itemName=Blackboxapp.blackbox',
   '/features/blackbox-cloud': 'https://cloud.blackbox.ai/',
   '/features/robocoder': 'https://build.blackbox.ai/'
-  // Add more path-to-href mappings here as needed
-  // Example: '/features/another-path': 'https://example.com',
+  // '/features/another-path': 'https://example.com',
 };
 
-// Default href to use when no path matches
+// Set default to web app home page.f
 const DEFAULT_HREF = 'https://www.blackbox.ai';
 
 // Function to update navbar button href based on current page
