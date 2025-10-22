@@ -9,6 +9,7 @@
     },
     "favicon": "/favicon.svg",
     "customCSS": "/custom.css",
+    "customScripts": ["/navbar-update.js"],
     "navigation": {
         "tabs": [
             {
@@ -139,7 +140,7 @@
         ],
         "primary": {
             "type": "button",
-            "label": "Home",
+            "label": "Get Started",
             "href": "https://www.blackbox.ai"
         }
     },
