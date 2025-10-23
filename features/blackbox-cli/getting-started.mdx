@@ -6,9 +6,9 @@ This quickstart guide will have you using AI-powered coding assistance in just a
 
 Make sure you have:
 
-- A terminal or command prompt open
-- A code project to work with (optional)
-- A [BLACKBOX AI](https://www.blackbox.ai) account to login
+* A terminal or command prompt open
+* A code project to work with (optional)
+* A [BLACKBOX AI](https://www.blackbox.ai) account to login
 
 ## 1. Install BLACKBOX CLI
 
@@ -17,6 +17,8 @@ Make sure you have:
 ```bash
 curl -fsSL https://shell.blackbox.ai/api/scripts/blackbox-cli-v2/download.sh | bash
 ```
+
+![Installation Command](/images/blackbox-cli/blackbox_cli-install-command.png)
 
 ### For Windows (PowerShell)
 
@@ -37,11 +39,13 @@ blackbox configure
 
 Select the configuration that you wish to change. For the initial setup, select **Configure Providers**.
 
+![Configuration Step](/images/blackbox-cli/blackbox_cli-configure-step.png)
+
 ### Choose Model Provider
 
 Select your preferred AI model provider from the available options. BLACKBOX CLI supports multiple providers to give you flexibility.
 
-![Screenshot 2025-10-22 at 22.43.51.png](/images/Screenshot2025-10-22at22.43.51.png)
+![Select Model Provider](/images/blackbox-cli/blackbox_cli-select-model-provider.png)
 
 ### Enter API Key
 
@@ -51,15 +55,11 @@ Provide your BLACKBOX API key when prompted. You can get your API key from the [
 - Copy your API key
 - Paste it in the terminal when prompted
 
-![Screenshot 2025-10-22 at 22.44.56.png](/images/Screenshot2025-10-22at22.44.56.png)
-
 ### Select Your Model
 
 Choose the specific AI model you want to use from your chosen provider. You can select from the best closed-source or open-source models available. Look at the full list of BLACKBOX AI supported models [Here](/api-reference/models/chat-models#available-chat-models).
 
-![Screenshot 2025-10-22 at 22.45.06.png](/images/Screenshot2025-10-22at22.45.06.png)
-
-![Screenshot 2025-10-22 at 22.45.56.png](/images/Screenshot2025-10-22at22.45.56.png)
+![Select Model](/images/blackbox-cli/blackbox_cli-select-model.png)
 
 <Note>
   You can reconfigure your settings at any time by running `blackbox configure` again.
@@ -70,10 +70,12 @@ Choose the specific AI model you want to use from your chosen provider. You can 
 Open a new terminal window and start an interactive chat session:
 
 ```bash
-blackbox
+blackbox session
+# or use the short alias
+blackbox s
 ```
 
-![Screenshot 2025-10-22 at 22.46.46.png](/images/Screenshot2025-10-22at22.46.46.png)
+![Start Agent](/images/blackbox-cli/blackbox_cli-start-agent.png)
 
 You'll see the BLACKBOX CLI prompt ready for your commands:
 
@@ -175,10 +177,10 @@ Now let's enhance existing code. Try these improvement tasks:
 
 BLACKBOX CLI will:
 
-- Analyze your existing code
-- Suggest and implement improvements
-- Maintain code functionality while enhancing features
-- Explain the changes made
+* Analyze your existing code
+* Suggest and implement improvements
+* Maintain code functionality while enhancing features
+* Explain the changes made
 
 ## 7. Debug and troubleshoot
 
@@ -202,10 +204,10 @@ BLACKBOX CLI excels at finding and fixing issues:
 
 BLACKBOX CLI will:
 
-- Identify the root cause of issues
-- Provide detailed explanations
-- Implement fixes automatically
-- Test solutions to ensure they work
+* Identify the root cause of issues
+* Provide detailed explanations
+* Implement fixes automatically
+* Test solutions to ensure they work
 
 ## 8. Explore advanced features
 
@@ -249,16 +251,16 @@ Discover more powerful capabilities of BLACKBOX CLI:
 
 Here are the most important commands for daily use:
 
-| Command              | What it does                     | Example                              |
-| -------------------- | -------------------------------- | ------------------------------------ |
-| `blackbox session`   | Start interactive chat session   | `blackbox session` or `blackbox s`   |
-| `blackbox configure` | Configure settings and providers | `blackbox configure`                 |
-| `blackbox project`   | Open last project directory      | `blackbox project` or `blackbox p`   |
-| `blackbox projects`  | List recent project directories  | `blackbox projects` or `blackbox ps` |
-| `blackbox run`       | Execute commands from file       | `blackbox run instructions.txt`      |
-| `blackbox info`      | Display system information       | `blackbox info`                      |
-| `blackbox update`    | Update CLI to latest version     | `blackbox update`                    |
-| Ctrl+C               | Exit interactive session         | `exit`                               |
+| Command                    | What it does                      | Example                                    |
+| -------------------------- | --------------------------------- | ------------------------------------------ |
+| `blackbox session`         | Start interactive chat session   | `blackbox session` or `blackbox s`        |
+| `blackbox configure`       | Configure settings and providers  | `blackbox configure`                       |
+| `blackbox project`         | Open last project directory      | `blackbox project` or `blackbox p`        |
+| `blackbox projects`        | List recent project directories   | `blackbox projects` or `blackbox ps`      |
+| `blackbox run`             | Execute commands from file        | `blackbox run instructions.txt`           |
+| `blackbox info`            | Display system information       | `blackbox info`                            |
+| `blackbox update`          | Update CLI to latest version      | `blackbox update`                          |
+| Ctrl+C           | Exit interactive session         | `exit`                                     |
 
 ## Pro tips for beginners
 
@@ -268,6 +270,7 @@ Here are the most important commands for daily use:
 
     Try: "fix the login bug where users see a blank screen after entering wrong credentials"
   </Accordion>
+
   <Accordion title="Use step-by-step instructions">
     Break complex tasks into steps:
 
@@ -283,6 +286,7 @@ Here are the most important commands for daily use:
     > 3. make the entire site mobile-responsive
     ```
   </Accordion>
+
   <Accordion title="Start with simple projects">
     Begin with manageable projects and build complexity:
 
@@ -294,6 +298,7 @@ Here are the most important commands for daily use:
     > build a basic blog template with multiple pages
     ```
   </Accordion>
+
   <Accordion title="Ask for explanations">
     Learn while you build:
 
@@ -315,6 +320,7 @@ Now that you've learned the basics, explore more advanced features:
   <Card title="Key Features" icon="star" href="/features/blackbox-cli/key-features">
     Explore all capabilities and use cases
   </Card>
+
   <Card title="Common Use Cases" icon="code" href="/features/blackbox-cli/common-use-cases">
     See practical examples and workflows
   </Card>
@@ -322,6 +328,6 @@ Now that you've learned the basics, explore more advanced features:
 
 ## Getting help
 
-- **Natural Language**: Simply ask "how do I..." or "help me with..."
-- **Documentation**: Browse these guides for comprehensive information
-- **Dashboard**: Visit your [BLACKBOX Dashboard](https://www.blackbox.ai/dashboard) for account management
+* **Natural Language**: Simply ask "how do I..." or "help me with..."
+* **Documentation**: Browse these guides for comprehensive information
+* **Dashboard**: Visit your [BLACKBOX Dashboard](https://www.blackbox.ai/dashboard) for account management
