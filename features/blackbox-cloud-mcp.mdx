@@ -1,0 +1,116 @@
+---
+title: "BLACKBOX AI MCP"
+description: "Integrate with remote agents via Model Context Protocol (MCP) to Blackbox CLI for seamless terminal-based task management and execution."
+---
+
+## Overview
+
+BLACKBOX AI MCP (Model Context Protocol) enables direct interaction with remote agents through the Blackbox CLI in your terminal. This integration allows you to assign tasks, monitor progress, retrieve execution details, and control remote agents effortlessly from the command line. By connecting your CLI to the Blackbox Cloud MCP server, you gain the full power of remote agents without leaving your development environment.
+
+![Start Task](/images/blackbox-cloud/cloud_mcp_start_task.png)
+
+
+The MCP integration enables the CLI agent to orchestrate multiple sub-tasks and parallel tasks, including creation, stopping, merging changes, and coordinating remote agents to achieve final goals.
+
+This feature is ideal for developers who prefer terminal workflows, enabling natural language commands to manage tasks, query agent capabilities, and execute complex operations on remote repositories.
+
+## Getting Started
+
+To set up MCP integration with Blackbox Cloud, follow these steps:
+
+1. **Access MCP Token Section**  
+   Navigate to [cloud.blackbox.ai](https://cloud.blackbox.ai), log in, and go to your profile settings. Locate the "MCP Token" section.  
+   ![MCP Token Section](/images/blackbox-cloud/cloud_mcp_token_create.png)
+
+2. **Generate or Regenerate Token**  
+   Click the generate button to create a new MCP token or regenerate an existing one for security.  
+   ![Generate Token](/images/blackbox-cloud/cloud_mcp_token_gen_button.png)
+
+3. **Copy the Command**  
+   Copy the pre-generated command or use the token in the following format. This command connects your Blackbox CLI to the MCP server.  
+   ![Token Command View](/images/blackbox-cloud/cloud_mcp_token_command_view.png)
+
+4. **Connect MCP Server in Terminal**  
+   Open your terminal and run the command you have copied from MCP Setup Command or the following command:  
+   ```
+   blackbox mcp add remote-code https://cloud.blackbox.ai/api/mcp -t http -H "Authorization: Bearer <Your_Token_here>"
+   ```  
+   Replace `<Your_Token_here>` with your actual token.  
+   ![Add MCP Command](/images/blackbox-cloud/cloud_mcp_add_command.png)
+
+5. **Verify Connection**  
+   Start a new Blackbox CLI instance by running `blackbox`. You should see "using 1:MCP server" in the terminal, indicating a successful connection.  
+   ![MCP Connected](/images/blackbox-cloud/cloud_mcp_added.png)
+
+With the MCP server connected, you can now interact with remote agents directly from your CLI.
+
+## How It Works
+
+Once connected, use natural language commands in the Blackbox CLI to control remote agents. The MCP integration supports querying tools, managing tasks, and executing operations seamlessly.
+
+- **Explore Available Tools**  
+  Ask the CLI: `"print all the remote-code tools"` to list all available tools and their capabilities.  
+  ![Ask Capabilities](/images/blackbox-cloud/cloud_mcp_ask_capabilities.png)
+
+- **View Existing Tasks**  
+  Query your tasks by saying: `"Get all my tasks"` to retrieve a list of current and past tasks.  
+  ![Get Tasks](/images/blackbox-cloud/cloud_mcp_get_tasks.png)
+
+- **Start a New Task**  
+  Initiate tasks naturally, e.g., `"Start a new task on test_chat repo on main branch to add a stripe integration to handle payments."` Specify the repository and branch in natural language. The task will be created and executed remotely.  
+  ![Start Task](/images/blackbox-cloud/cloud_mcp_start_task.png)
+  You can verify the same via UI
+  ![View Task UI](/images/blackbox-cloud/cloud_mcp_view_task_ui.png)
+
+- **Monitor Task Progress**  
+  Tasks run autonomously on the remote agent. Check status and details via CLI queries or view them in the Blackbox Cloud UI.  
+
+This hands-free interaction brings the power of remote agents directly into your terminal workflow.
+
+## Key Features
+
+- **Terminal-Based Control**: Manage remote agents without switching to a browser.
+- **Natural Language Commands**: Issue tasks and queries conversationally.
+- **Real-Time Monitoring**: Get live updates on task status and execution details.
+- **Seamless Integration**: Connects directly to Blackbox Cloud for authenticated access.
+- **Tool Discovery**: Dynamically list and utilize available remote tools.
+- **Task Orchestration**: Enable the CLI agent to start, create, and manage one-to-many sub-tasks or parallel tasks, orchestrating them to achieve final goals through task creation, stopping, and merging changes.
+
+## Benefits
+
+- **Efficiency**: Execute tasks from your preferred terminal environment.
+- **Flexibility**: Handle complex operations with simple voice-like commands.
+- **Productivity**: Monitor and control multiple tasks without context switching.
+- **Automated Task Management**: Let the CLI handle task orchestration and management instead of manual oversight.
+- **Security**: Token-based authentication ensures secure remote access.
+
+## Use Cases
+
+- **Task Assignment**: Quickly assign development tasks to remote agents.
+- **Status Monitoring**: Check progress on ongoing implementations.
+- **Tool Exploration**: Discover and leverage remote agent capabilities.
+- **Repository Management**: Perform operations on specific repos and branches via CLI.
+
+## Next Steps
+
+Explore related Blackbox Cloud features to expand your remote development capabilities:
+
+<CardGroup>
+  <Card title="Blackbox Cloud" icon="cloud" href="./blackbox-cloud">
+    Learn about the full remote agent platform.
+  </Card>
+
+  <Card title="Blackbox CLI" icon="terminal" href="./blackbox-cli/introduction">
+    Dive deeper into terminal-native development.
+  </Card>
+
+  <Card title="Multi-Agent Execution" icon="zap" href="./blackbox-cloud-multi-agent">
+    Run multiple agents in parallel.
+  </Card>
+
+  <Card title="Slack Integration" icon="slack" href="./blackbox-cloud-slack">
+    Manage tasks via Slack.
+  </Card>
+</CardGroup>
+
+MCP integration transforms your CLI into a powerful hub for remote agent control, streamlining workflows and enhancing productivity.

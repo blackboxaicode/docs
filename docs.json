@@ -50,6 +50,7 @@
                             "features/blackbox-cloud-voice",
                             "features/blackbox-cloud-slack",
                             "features/blackbox-cloud-multi-agent",
+                            "features/blackbox-cloud-mcp",
                             "features/blackbox-logger",
                             "features/blackbox-encrypted",
                             {
