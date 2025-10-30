@@ -1,0 +1,116 @@
+---
+title: "Full Self Coding"
+description: "Connect to your production servers and let AI agents autonomously monitor, debug, and fix errors in real-time with comprehensive testing."
+---
+
+## Overview
+
+Full Self Coding is an advanced autonomous feature that connects directly to your production servers, continuously monitoring logs and detecting errors in real-time. When issues are identified, AI agents automatically implement fixes, run comprehensive tests, and ensure stability before deployment - all with minimal human intervention.
+
+This feature transforms your development workflow by enabling proactive error resolution, allowing you to maintain stable production environments while your AI agents work autonomously in the background.
+
+## How It Works
+
+The Full Self Coding system operates through a continuous monitoring and resolution cycle:
+
+1.  **Server Connection:** Connect the agent to your production servers with secure, authenticated access.
+2.  **Real-Time Monitoring:** The agent continuously fetches and analyzes server logs in the background, identifying errors and exceptions as they occur.
+3.  **Error Detection:** When errors are detected, they are immediately surfaced to both the agent and the user with full context and stack traces.
+4.  **Agent Selection:** Choose from different specialized agents optimized for various types of tasks and error scenarios.
+5.  **Autonomous Implementation:** The selected agent analyzes the error, plans a solution, and implements the necessary code changes.
+6.  **Comprehensive Testing:** Before considering the task complete, the agent runs a suite of tests including:
+    - Unit tests for affected components
+    - Integration tests to verify system interactions
+    - Regression tests to ensure no new issues were introduced
+    - Build verification to confirm the codebase compiles successfully
+7.  **Stability Confirmation:** Only after all tests pass does the agent mark the implementation as stable and ready for review or deployment.
+8.  **Continuous Operation:** The agent continues monitoring for new errors, creating a self-healing production environment.
+
+## Key Features
+
+### Background Server Monitoring
+- Persistent connection to production servers
+- Real-time log streaming and analysis
+- Automatic error detection and classification
+- Non-intrusive operation that doesn't impact server performance
+
+### Multi-Agent Support
+Choose from specialized agents based on your needs:
+- **Debugging Agent:** Optimized for error analysis and root cause identification
+- **Performance Agent:** Focuses on optimization and resource utilization issues
+- **Security Agent:** Specialized in identifying and fixing security vulnerabilities
+- **General Purpose Agent:** Handles a wide variety of tasks and error types
+
+### Comprehensive Testing Pipeline
+Every implementation goes through rigorous validation:
+- Automated test generation for new fixes
+- Execution of existing test suites
+- Build and compilation verification
+- Performance benchmarking
+- Code quality checks
+
+### Real-Time Visibility
+- Live error feed showing detected issues
+- Agent execution logs and decision-making process
+- Test results and coverage reports
+- Implementation status tracking
+
+## Common Use Cases
+
+-   **Production Error Resolution:** "Monitor the production API server and automatically fix any 500 errors that occur."
+-   **Performance Degradation:** "Watch for slow query warnings and optimize database calls that exceed 2 seconds."
+-   **Memory Leak Detection:** "Monitor memory usage patterns and fix any leaks detected in the Node.js services."
+-   **Security Patching:** "Scan logs for security exceptions and automatically patch vulnerabilities."
+-   **Dependency Issues:** "Detect and resolve package compatibility errors in the microservices architecture."
+
+## Getting Started
+
+1.  **Configure Server Connection:**
+    - Navigate to the "Full Self Coding" section in your BLACKBOX AI dashboard
+    - Add your production server credentials and log file paths
+    - Configure firewall rules to allow agent access
+
+2.  **Select Monitoring Parameters:**
+    - Define which logs to monitor (application logs, system logs, error logs)
+    - Set error severity thresholds for automatic intervention
+    - Configure notification preferences
+
+3.  **Choose Your Agent:**
+    - Select the agent type that best matches your needs
+    - Configure agent permissions and allowed operations
+    - Set testing requirements and validation criteria
+
+4.  **Launch Background Monitoring:**
+    - Activate the agent to begin monitoring
+    - Watch the real-time error feed for detected issues
+    - Review agent implementations and test results
+
+5.  **Review and Deploy:**
+    - Examine the fixes implemented by the agent
+    - Verify all tests passed successfully
+    - Approve changes for deployment or enable auto-deployment
+
+## Best Practices
+
+-   **Start with Non-Critical Environments:** Test the Full Self Coding feature on staging or development servers before connecting to production.
+-   **Define Clear Test Requirements:** Ensure comprehensive test coverage to validate agent implementations effectively.
+-   **Set Appropriate Thresholds:** Configure error severity levels to prevent the agent from making changes for minor warnings.
+-   **Monitor Agent Activity:** Regularly review agent logs and implementations to understand the types of fixes being applied.
+-   **Maintain Human Oversight:** While the agent operates autonomously, establish a review process for critical production changes.
+-   **Configure Rollback Procedures:** Ensure you have automated rollback capabilities if an agent implementation causes unexpected issues.
+
+## Security Considerations
+
+-   Server credentials are encrypted end-to-end
+-   Agent access can be restricted to specific directories and operations
+-   All implementations are logged and auditable
+-   Optional approval workflows before deployment
+-   Automatic session timeout and credential rotation
+
+## Requirements
+
+-   Active BLACKBOX AI subscription with Full Self Coding enabled
+-   Server access with appropriate permissions (read logs, write code, run tests)
+-   Supported server operating systems: Linux, macOS, Windows Server
+-   Minimum required access: SSH or remote access protocol
+-   Git repository connection for version control
