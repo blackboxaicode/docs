@@ -1,0 +1,56 @@
+---
+title: "Full Self Coding"
+description: "Connect production servers, stream logs in real time, route errors to an agent, select which agent tackles incidents, and auto‑verify fixes with tests for stable deployments."
+---
+
+## Overview
+
+Full Self Coding lets you connect your production servers so the agent can watch services in the background, surface live errors, and proactively help resolve them. You can choose which agent to run for each incident or task, and the agent validates every change with testing to confirm the implementation is stable before handoff.
+
+## Key Capabilities
+
+- Production server integration: securely connect one or more servers/services for continuous monitoring
+- Real‑time log streaming: ingest logs and exceptions as they happen for instant visibility
+- Incident surfacing: auto‑detect errors and forward context directly into the agent’s workspace
+- Agent selection: choose from different agents (e.g., coding, debugging, review) per task/incident
+- Background operation: runs continuously and keeps collecting telemetry without blocking your work
+- Automatic verification: runs tests and sanity checks on each implementation to confirm stability
+
+## How It Works
+
+1. Connect servers: authorize access to your production servers and specify the services to watch.
+2. Configure sources: select log files, aggregators, or error channels to stream into the agent.
+3. Pick agents: choose which agent(s) should triage, implement, or review fixes for incidents.
+4. Receive incidents: new errors and stack traces appear in real time with linked context.
+5. Implement and verify: the agent applies changes, runs tests, and reports stability results.
+6. Review and merge: you approve changes once tests pass and stability is confirmed.
+
+## Testing and Stability
+
+For each implemented task, the agent:
+
+- Runs available unit, integration, and/or end‑to‑end tests when present
+- Performs basic smoke checks and lints where applicable
+- Iterates on failures by inspecting logs and re‑running targeted tests
+- Summarizes results with clear pass/fail signals before requesting approval
+
+## Best Practices
+
+- Start read‑only: begin with observability only; enable write access after verification
+- Scope credentials: limit server and repo permissions to the minimum required
+- Use branches: route fixes through short‑lived branches and code review
+- Gate to prod: require passing tests and human approval before deployment
+
+## Common Use Cases
+
+- Production error triage with automatic context collection
+- Hotfix implementation with agent‑assisted testing
+- Regression monitoring after a deployment
+- Background log analysis to proactively detect issues
+
+## Requirements
+
+- Access to your production environment and log/error sources
+- Repository access for the agent to propose changes and run tests
+- Optional CI integration for full test coverage and gating
+
