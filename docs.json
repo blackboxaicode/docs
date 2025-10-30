@@ -77,7 +77,8 @@
                             "/features/robocoder/best-practices"
                             ]
                             },
-							"/features/autonomous-agent"
+							"/features/autonomous-agent",
+							"/features/full-self-coding"
                         ]
                     },
                     {
