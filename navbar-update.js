@@ -6,9 +6,9 @@
 
 // Configuration object mapping paths to their corresponding href URLs
 const PATH_HREF_CONFIG = {
-  // '/features/vscode-agent/': 'https://marketplace.visualstudio.com/items?itemName=Blackboxapp.blackbox',
-  // '/features/blackbox-cloud': 'https://cloud.blackbox.ai/',
-  // '/features/robocoder': 'https://build.blackbox.ai/'
+  '/features/vscode-agent/': 'https://marketplace.visualstudio.com/items?itemName=Blackboxapp.blackbox',
+  '/features/blackbox-cloud': 'https://cloud.blackbox.ai/',
+  '/features/robocoder': 'https://build.blackbox.ai/'
   // '/features/another-path': 'https://example.com',
 };
 
