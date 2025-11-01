@@ -95,6 +95,14 @@
                 "tab": "API reference",
                 "groups": [
                     {
+                        "group": "Models",
+                        "pages": [
+                            "api-reference/models/chat-models",
+                            "api-reference/models/image-models",
+                            "api-reference/models/video-models"
+                        ]
+                    },
+                    {
                         "group": "API documentation",
                         "pages": [
                             "api-reference/introduction",
@@ -109,14 +117,6 @@
                             "api-reference/video",
                             "api-reference/tool-calling",
                             "api-reference/sample-usage"
-                        ]
-                    },
-                    {
-                        "group": "Models",
-                        "pages": [
-                            "api-reference/models/chat-models",
-                            "api-reference/models/image-models",
-                            "api-reference/models/video-models"
                         ]
                     }
                 ]
